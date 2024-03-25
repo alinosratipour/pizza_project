@@ -1,0 +1,31 @@
+{
+    "name": "pizzashop",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "prisma:generate": "prisma generate",
+      "prisma:migrate": "prisma migrate dev",
+      "start": "node dist/index.js",
+      "dev": "nodemon --exec ts-node src/index.ts",
+      "build": "tsc --skipLibCheck",
+      "seed": "ts-node src/seeds/seedBasePrice.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@prisma/client": "^5.4.1",
+      "apollo-server-express": "^3.12.1",
+      "cors": "^2.8.5",
+      "dotenv": "^16.3.1",
+      "express": "^4.18.2"
+    },
+    "devDependencies": {
+      "@types/node": "^20.8.2",
+      "nodemon": "^3.0.1",
+      "prisma": "^5.4.1",
+      "ts-node": "^10.9.2",
+      "typescript": "^5.2.2"
+    }
+  }

@@ -1,0 +1,17 @@
+# Node.js dependencies
+back-end/node_modules
+front-end/node_modules
+
+
+# TypeScript build output
+dist/
+
+# macOS system files
+.DS_Store
+
+# IDE files
+.idea/
+.vscode/
+
+**/.env
+

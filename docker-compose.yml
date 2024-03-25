@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  backend:
+    build:
+      context: ./back-end
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_NAME}
+    volumes:
+      - ./back-end:/src
+    networks:
+      - backend-network
+    command: bash -c "npm run prisma:generate && npx prisma migrate dev && npm run seed && npm start"
+
+  frontend:
+    build:
+      context: ./front-end
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front-end:/app
+    networks:
+      - backend-network
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend-network
+
+networks:
+  backend-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
