@@ -1,0 +1,40 @@
+.topping-container {
+  font-size: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  text-align: center;
+}
+
+.box {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: var(--green);
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+  font-weight: 600;
+  font-family: var(--font-roboto-condensed);
+  &.selected {
+    background-color: #ffcccc;
+    text-decoration: line-through;
+  
+  }
+
+}
+
+// .selected {
+//   background-color: #ffcccc;
+//   text-decoration: line-through;
+//   //display: none;
+// }
+
+.ExtraTopping {
+  background-color: #e9b108;
+  color: #000000;
+  font-weight: 600;
+  font-family: var(--font-roboto-condensed);
+}

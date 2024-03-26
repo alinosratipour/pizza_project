@@ -1,8 +1,8 @@
 # Use an official Node.js runtime as the base image
-FROM node:14-alpine
+FROM node:16
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /src
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
@@ -17,10 +17,11 @@ COPY tsconfig.json .
 COPY . .
 
 # Build TypeScript code without type checking
-RUN npm install -g typescript && tsc --skipLibCheck
+#RUN npm install -g typescript && tsc --skipLibCheck
+RUN npm install -g typescript && tsc --skipLibCheck --noEmit
 
 # Expose port 3000 to allow external access to the frontend
-EXPOSE 3000
+EXPOSE 5000
 
 # Command to run the application
 CMD ["npm", "start"]

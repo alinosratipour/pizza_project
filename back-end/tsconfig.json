@@ -13,7 +13,7 @@
     "sourceMap": true,
     "lib": ["esnext"],
     "skipLibCheck": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
   },
   "include": ["src/**/*.ts", "src/seeds/seedPizza.ts"],
 

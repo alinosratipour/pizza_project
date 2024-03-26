@@ -1,0 +1,22 @@
+# Ignore Node.js modules (npm dependencies)
+node_modules/
+
+# Ignore development-specific directories
+*.log
+*.pid
+*.seed
+*.md
+
+# Ignore npm debug log
+npm-debug.log
+
+# Ignore the .git directory (if your project uses Git)
+.git/
+
+# Ignore any Docker-specific files that may be generated
+Dockerfile
+.dockerignore
+
+# Ignore any build artifacts
+/build/
+/dist/

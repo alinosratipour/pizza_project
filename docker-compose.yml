@@ -5,7 +5,7 @@ services:
     build:
       context: ./back-end
     ports:
-      - "4000:4000"
+      - "5000:5000"
     environment:
       - NODE_ENV=development
       - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_NAME}
@@ -13,6 +13,8 @@ services:
       - ./back-end:/src
     networks:
       - backend-network
+    depends_on:
+      - postgres
     command: bash -c "npm run prisma:generate && npx prisma migrate dev && npm run seed && npm start"
 
   frontend:

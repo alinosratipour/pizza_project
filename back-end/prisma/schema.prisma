@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+   binaryTargets = ["native", "windows"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pizza {
+  id_pizza        Int              @id @default(autoincrement())
+  name            String
+  top_quantity    Int
+  description     String?
+  image           String?
+  pizzaPrice      PizzaPrice[]
+  toppingsOnPizza ToppingOnPizza[]
+}
+
+model Size {
+  id_size       Int            @id @default(autoincrement())
+  p_size        String
+  price_topping Float
+  basePrice     BasePrice[]
+  pizzaPrice    PizzaPrice[]
+  toppings      ToppingPrice[] @relation("ToppingPriceSize")
+}
+
+model Base {
+  id_base        Int         @id @default(autoincrement())
+  name           String
+  increase_price Int
+  basePrice      BasePrice[]
+}
+
+// This is price of pizza base for example 
+// Stuff crust has differnt price on each size
+
+model BasePrice {
+  id         Int   @id @default(autoincrement())
+  id_size    Int
+  id_base    Int
+  price_base Float
+  size       Size  @relation(fields: [id_size], references: [id_size])
+  base       Base  @relation(fields: [id_base], references: [id_base])
+}
+
+model ToppingPrice {
+  id            Int   @id @default(autoincrement())
+  id_topping    Int
+  id_size       Int
+  price_topping Float?
+  size          Size  @relation("ToppingPriceSize", fields: [id_size], references: [id_size])
+   topping       Toppings @relation(fields: [id_topping], references: [id])
+}
+
+
+model ToppingOnPizza {
+  id          Int      @id @default(autoincrement())
+  id_pizza    Int
+  idf_topping Int
+  pizza       Pizza    @relation(fields: [id_pizza], references: [id_pizza])
+  topping     Toppings? @relation(fields: [idf_topping], references: [id])
+}
+
+model Toppings {
+  id     Int              @id @default(autoincrement())
+  name   String
+  pizzas ToppingOnPizza[]
+  toppingPrice    ToppingPrice[]
+}
+ 
+model PizzaPrice {
+  id       Int   @id @default(autoincrement())
+  id_size  Int
+  id_pizza Int
+  price    Float
+  size     Size  @relation(fields: [id_size], references: [id_size])
+  pizza    Pizza @relation(fields: [id_pizza], references: [id_pizza])
+}
