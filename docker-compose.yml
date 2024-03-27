@@ -4,17 +4,19 @@ services:
   backend:
     build:
       context: ./back-end
+      dockerfile: Dockerfile  
     ports:
       - "5000:5000"
-    environment:
-      - NODE_ENV=development
-      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_NAME}
-    volumes:
-      - ./back-end:/src
-    networks:
-      - backend-network
     depends_on:
       - postgres
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+    volumes:
+      - ./back-end:/src
+      - ./.env:/src/.env  # Mount .env file into the container at /src/.env
+    networks:
+      - backend-network
     command: bash -c "npm run prisma:generate && npx prisma migrate dev && npm run seed && npm start"
 
   frontend:
@@ -29,14 +31,17 @@ services:
 
   postgres:
     image: postgres:latest
-    ports:
-      - "5432:5432"
+    env_file:
+      - .env
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+     
     networks:
       - backend-network
 
