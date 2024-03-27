@@ -13,8 +13,8 @@ services:
       - NODE_ENV=development
       - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
     volumes:
-      - ./back-end:/src
-      - ./.env:/src/.env  # Mount .env file into the container at /src/.env
+      - ./back-end:/app
+      - ./.env:/app/.env  # Mount .env file into the container at /src/.env
     networks:
       - backend-network
     command: bash -c "npm run prisma:generate && npx prisma migrate dev && npm run seed && npm start"

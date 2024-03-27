@@ -20,9 +20,7 @@ async function startServer() {
   const PORT = process.env.PORT || 5000;
 
   app.listen(PORT, () => {
-    console.log(
-      `Server running at http://localhost:${PORT}${server.graphqlPath}`
-    );
+    console.log(`running at http://localhost:${PORT}${server.graphqlPath}`);
   });
 }
 
