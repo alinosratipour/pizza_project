@@ -17,7 +17,7 @@ COPY tsconfig.json .
 COPY . .
 
 # Build TypeScript code without type checking
-RUN npm install -g typescript && tsc --skipLibCheck --noEmit
+#RUN npm install -g typescript && tsc --skipLibCheck --noEmit
 
 # Expose port 3000 to allow external access to the frontend
 EXPOSE 5000

@@ -1,14 +1,18 @@
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
-import { PrismaClient } from "@prisma/client"; // Import Prisma Client
-import typeDefs from "./resolvers/schema"; // Import your GraphQL type definitions
-import resolvers from "./resolvers"; // Import your resolvers
-const prisma = new PrismaClient(); // Initialize Prisma Client
+import { PrismaClient } from "@prisma/client";
+import typeDefs from "./resolvers/schema";
+import resolvers from "./resolvers";
+import dotenv from "dotenv"; // Import dotenv package
+
+dotenv.config(); // Load environment variables from .env file
+
+const prisma = new PrismaClient();
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => ({ prisma }), // Provide Prisma Client to Apollo Server context
+  context: () => ({ prisma }),
 });
 
 const app = express();
