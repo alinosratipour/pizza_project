@@ -1,39 +1,40 @@
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-async function main() {
-  // Get the existing sizes and their IDs
-  const existingSizes = await prisma.size.findMany();
-  const sizeIds = existingSizes.map((size) => size.id); // @ts-ignore
-  // Assuming existingSizes is an array of objects with a different structure
-  //const sizeIds = existingSizes.map((size) => size.id_size); // Assuming id_size is the correct property
 
-  // Get the existing toppings
-  const existingToppings = await prisma.toppings.findMany();
+export async function seedToppingPrice() {
+  try {
+    // Get the existing sizes and their IDs
+    const existingSizes = await prisma.size.findMany();
+    const sizeIds = existingSizes.map((size) => size.id_size);
 
-  // Update the toppings to connect them to the sizes and add prices
-  for (const topping of existingToppings) {
-    const sizeConnections = sizeIds.map((sizeId) => ({
-      size: { connect: { id: sizeId } as any }, // Type assertion
-      price_topping: 0, // Update the pricing logic here
-    }));
+    // Get the existing toppings
+    const existingToppings = await prisma.toppings.findMany();
 
-    await prisma.toppings.update({
-      where: { id: topping.id },
-      data: {
-        toppingPrice: {
-          create: sizeConnections,
-        },
-      },
-    });
-    console.log(`Updated topping: ${topping.name}`);
+    // Loop through each existing topping
+    for (const topping of existingToppings) {
+      // Create topping price records for each existing size
+      const toppingPrices = sizeIds.map((id_size) => ({
+        id_topping: topping.id,
+        id_size: id_size,
+        price_topping: 0, // Set your desired default price here
+      }));
+
+      // Create topping price records in the database
+      await prisma.toppingPrice.createMany({
+        data: toppingPrices,
+      });
+
+      console.log(`Topping prices seeded for topping: ${topping.name}`);
+    }
+  } catch (error) {
+    console.error("Error seeding topping prices:", error);
+    throw error;
+  } finally {
+    // Disconnect from the database
+    await prisma.$disconnect();
   }
 }
 
-main()
-  .catch((e) => {
-    throw e;
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+// Call the seeding function
+seedToppingPrice().catch((error) => console.error(error));

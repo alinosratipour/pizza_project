@@ -12,7 +12,7 @@ const toppingOnPizzaData = [
  
 ];
 
-async function main() {
+export async function seedToppingsOnPizza() {
   const createToppingOnPizza = toppingOnPizzaData.map(async (data) => {
     return prisma.toppingOnPizza.create({
       data: {
@@ -26,7 +26,7 @@ async function main() {
   console.log('ToppingOnPizza records created successfully');
 }
 
-main()
+seedToppingsOnPizza()
   .catch((e) => {
     throw e;
   })

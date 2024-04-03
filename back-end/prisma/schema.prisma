@@ -55,7 +55,7 @@ model ToppingPrice {
   id_size       Int
   price_topping Float?
   size          Size  @relation("ToppingPriceSize", fields: [id_size], references: [id_size])
-   topping       Toppings @relation(fields: [id_topping], references: [id])
+  topping       Toppings @relation(fields: [id_topping], references: [id])
 }
 
 

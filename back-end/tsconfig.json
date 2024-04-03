@@ -13,9 +13,9 @@
     "sourceMap": true,
     "lib": ["esnext"],
     "skipLibCheck": true,
-    "noImplicitAny": false,
+    "noImplicitAny": false
   },
-  "include": ["src/**/*.ts", "src/seeds/seedPizza.ts"],
+  "include": ["src/**/*.ts"],
 
   "exclude": ["node_modules"]
 }

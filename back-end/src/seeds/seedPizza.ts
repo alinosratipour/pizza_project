@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-async function seedPizza() {
+export async function seedPizza() {
   try {
     // Define an array of pizza data to insert
     const pizzaData = [

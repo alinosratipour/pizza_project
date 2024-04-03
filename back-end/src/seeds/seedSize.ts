@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-async function seedSize() {
+export async function seedSize() {
   try {
     // Define an array of size data to insert
     const sizeData = [

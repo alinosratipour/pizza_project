@@ -4,7 +4,7 @@ const { PrismaClient } = require('@prisma/client');
 // Create an instance of PrismaClient
 const prisma = new PrismaClient();
 
-async function seedPizzaPrices() {
+export async function seedPizzaPrice() {
   try {
     // Define an array of pizza prices with sizes and pizza IDs
     const pizzaPrices = [
@@ -200,4 +200,4 @@ async function seedPizzaPrices() {
 }
 
 // Call the seedPizzaPrices function to start seeding
-seedPizzaPrices();
+seedPizzaPrice();
