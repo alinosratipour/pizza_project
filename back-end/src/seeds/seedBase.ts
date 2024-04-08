@@ -5,6 +5,8 @@ const prisma = new PrismaClient();
 
 export async function seedBase() {
   try {
+    console.log("Starting base seeding...");
+    
     // Define an array of base data to insert
     const baseData = [
       {
@@ -31,5 +33,8 @@ export async function seedBase() {
     console.error("Error seeding base data:", error);
   } finally {
     await prisma.$disconnect();
+    console.log("Disconnected from database");
   }
 }
+
+//seedBase();

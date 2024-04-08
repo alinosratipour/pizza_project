@@ -1,6 +1,6 @@
 // seedBasePrice.ts
-import { PrismaClient } from '@prisma/client';
-import { seedBase } from './seedBase'; // Import seedBase function
+import { PrismaClient } from "@prisma/client";
+import { seedBase } from "./seedBase"; // Import seedBase function
 
 const prisma = new PrismaClient();
 
@@ -22,10 +22,12 @@ export async function seedBasePrice() {
       data: dataToSeed,
     });
 
-    console.log('Seeded data:', seededData);
+    console.log("Base Prices Sedded Successfully:", seededData);
   } catch (error) {
-    console.error('Error seeding data:', error);
+    console.error("Error seeding data:", error);
   } finally {
     await prisma.$disconnect();
   }
 }
+
+seedBasePrice();

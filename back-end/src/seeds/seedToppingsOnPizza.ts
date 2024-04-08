@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-
+import { seedPizza } from "./seedPizza"; 
 const prisma = new PrismaClient();
 
 const toppingOnPizzaData = [
@@ -13,6 +13,7 @@ const toppingOnPizzaData = [
 ];
 
 export async function seedToppingsOnPizza() {
+  await seedPizza();
   const createToppingOnPizza = toppingOnPizzaData.map(async (data) => {
     return prisma.toppingOnPizza.create({
       data: {

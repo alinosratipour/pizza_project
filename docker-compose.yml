@@ -16,7 +16,6 @@ services:
       - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
     volumes:
       - ./back-end:/app
-      - .env:/app/.env 
     networks:
       - backend-network
     command: bash -c "npm run prisma:generate && npx prisma migrate dev && npm run seed && npm start"

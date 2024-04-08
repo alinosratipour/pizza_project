@@ -19,7 +19,7 @@ export async function seedSize() {
           price_topping: 7.0,
         },
         {
-          p_size: 'Xlarge', // Should match the casing in your Prisma schema
+          p_size: 'Xlarge', 
           price_topping: 8.0,
         },
       ];
@@ -37,4 +37,4 @@ export async function seedSize() {
   }
 }
 
-seedSize();
+
