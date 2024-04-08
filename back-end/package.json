@@ -10,6 +10,7 @@
     "build": "tsc --skipLibCheck",
     "seed": "ts-node src/seeds/seed.ts",
     "start": "ts-node src/index.ts"
+    
   },
   "keywords": [],
   "author": "",

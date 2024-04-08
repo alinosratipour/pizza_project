@@ -6,6 +6,8 @@ front-end/node_modules
 # TypeScript build output
 dist/
 
+seed.flag
+
 # macOS system files
 .DS_Store
 

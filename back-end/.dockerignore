@@ -13,6 +13,8 @@ npm-debug.log
 
 # Ignore the .git directory (if your project uses Git)
 .git/
+seed.flag
+
 
 # Ignore any Docker-specific files that may be generated
 Dockerfile

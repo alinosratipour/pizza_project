@@ -26,6 +26,11 @@ export async function seedPizzaPrices() {
         id_pizza: 1,
         price: 12.99,
       },
+      {
+        id_size: 4,
+        id_pizza: 1,
+        price: 18.99,
+      },
 
       {
         id_size: 1, // Size ID
