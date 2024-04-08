@@ -30,6 +30,15 @@ model Size {
   toppings      ToppingPrice[] @relation("ToppingPriceSize")
 }
 
+model PizzaPrice {
+  id       Int   @id @default(autoincrement())
+  id_size  Int
+  id_pizza Int
+  price    Float
+  size     Size  @relation(fields: [id_size], references: [id_size])
+  pizza    Pizza @relation(fields: [id_pizza], references: [id_pizza])
+}
+
 model Base {
   id_base        Int         @id @default(autoincrement())
   name           String
@@ -74,11 +83,3 @@ model Toppings {
   toppingPrice    ToppingPrice[]
 }
  
-model PizzaPrice {
-  id       Int   @id @default(autoincrement())
-  id_size  Int
-  id_pizza Int
-  price    Float
-  size     Size  @relation(fields: [id_size], references: [id_size])
-  pizza    Pizza @relation(fields: [id_pizza], references: [id_pizza])
-}

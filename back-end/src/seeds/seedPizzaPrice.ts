@@ -1,11 +1,14 @@
 // Import PrismaClient
-const { PrismaClient } = require('@prisma/client');
-
+const { PrismaClient } = require("@prisma/client");
+import { seedSize } from "./seedSize";
 // Create an instance of PrismaClient
 const prisma = new PrismaClient();
 
-export async function seedPizzaPrice() {
+export async function seedPizzaPrices() {
+ // await new Promise(resolve => setTimeout(resolve, 2000));
+
   try {
+    await seedSize();
     // Define an array of pizza prices with sizes and pizza IDs
     const pizzaPrices = [
       {
@@ -56,7 +59,6 @@ export async function seedPizzaPrice() {
         price: 12.99,
       },
 
-
       {
         id_size: 1, // Size ID
         id_pizza: 4, // Pizza ID
@@ -72,7 +74,6 @@ export async function seedPizzaPrice() {
         id_pizza: 4,
         price: 12.99,
       },
-
 
       {
         id_size: 1, // Size ID
@@ -90,7 +91,6 @@ export async function seedPizzaPrice() {
         price: 12.99,
       },
 
-
       {
         id_size: 1, // Size ID
         id_pizza: 6, // Pizza ID
@@ -106,9 +106,6 @@ export async function seedPizzaPrice() {
         id_pizza: 6,
         price: 12.99,
       },
-
-
-
 
       {
         id_size: 1, // Size ID
@@ -126,8 +123,6 @@ export async function seedPizzaPrice() {
         price: 12.99,
       },
 
-
-
       {
         id_size: 1, // Size ID
         id_pizza: 8, // Pizza ID
@@ -143,7 +138,6 @@ export async function seedPizzaPrice() {
         id_pizza: 8,
         price: 12.99,
       },
-
 
       {
         id_size: 1, // Size ID
@@ -161,7 +155,6 @@ export async function seedPizzaPrice() {
         price: 12.99,
       },
 
-
       {
         id_size: 1, // Size ID
         id_pizza: 10, // Pizza ID
@@ -177,22 +170,15 @@ export async function seedPizzaPrice() {
         id_pizza: 10,
         price: 12.99,
       },
-
-
-
-      // Add more pizza prices as needed
     ];
 
-    // Use Prisma to create the pizza prices in the database
-    for (const pizzaPrice of pizzaPrices) {
-      await prisma.pizzaPrice.create({
-        data: pizzaPrice,
-      });
-    }
+    const data = await prisma.pizzaPrice.createMany({
+      data: pizzaPrices,
+    });
 
-    console.log('Pizza prices seeded successfully');
+    console.log("Pizza prices seeded successfully", data);
   } catch (error) {
-    console.error('Error seeding pizza prices:', error);
+    console.error("Error seeding pizza prices:", error);
   } finally {
     // Disconnect the Prisma client to release the connection pool
     await prisma.$disconnect();
@@ -200,4 +186,4 @@ export async function seedPizzaPrice() {
 }
 
 // Call the seedPizzaPrices function to start seeding
-seedPizzaPrice();
+seedPizzaPrices();

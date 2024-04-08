@@ -1,9 +1,10 @@
 import { PrismaClient } from "@prisma/client";
-
+import { seedToppings } from "./seedToppings";
 const prisma = new PrismaClient();
 
 export async function seedToppingPrice() {
   try {
+   await seedToppings()
     // Get the existing sizes and their IDs
     const existingSizes = await prisma.size.findMany();
     const sizeIds = existingSizes.map((size) => size.id_size);
