@@ -18,7 +18,8 @@ services:
       - ./back-end:/app
     networks:
       - backend-network
-    command: bash -c "npm run prisma:generate && npx prisma migrate dev && npm run seed && npm start"
+    #command: bash -c "npm run prisma:generate && npx prisma migrate dev && npm run seed && npm start"
+    command: bash -c './seed.sh'
 
   frontend:
     build:

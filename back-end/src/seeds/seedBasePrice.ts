@@ -11,10 +11,18 @@ export async function seedBasePrice() {
 
     // Define your data to seed here
     const dataToSeed = [
-      { id_size: 4, id_base: 1, price_base: 4.0 },
-      { id_size: 4, id_base: 2, price_base: 5.0 },
-      { id_size: 4, id_base: 3, price_base: 6.0 },
-      // Add more data as needed
+      { id_size: 1, id_base: 1, price_base: 0.0 },
+      { id_size: 1, id_base: 2, price_base: 0.0 },
+      { id_size: 1, id_base: 3, price_base: 1.0 },
+      { id_size: 2, id_base: 1, price_base: 0.0 },
+      { id_size: 2, id_base: 2, price_base: 0.0 },
+      { id_size: 2, id_base: 3, price_base: 2.0 },
+      { id_size: 3, id_base: 1, price_base: 0.0 },
+      { id_size: 3, id_base: 2, price_base: 0.0 },
+      { id_size: 3, id_base: 3, price_base: 3.0 },
+      { id_size: 4, id_base: 1, price_base: 0.0 },
+      { id_size: 4, id_base: 2, price_base: 0.0 },
+      { id_size: 4, id_base: 3, price_base: 0.4 },
     ];
 
     // Seed the data into the database
