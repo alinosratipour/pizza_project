@@ -7,6 +7,10 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
+# Change ownership of the working directory to the 'node' user
+RUN chown -R node:node /app
+
+USER node
 # Install dependencies
 RUN npm install
 
