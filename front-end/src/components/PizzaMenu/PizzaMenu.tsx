@@ -44,6 +44,7 @@ const PizzaMenu = () => {
     selectedToppings,
   });
 
+
   const openAddPizzaModal = (pizza: Pizza | null) => {
     setSelectedPizza(pizza);
     setSelectedSize(undefined);

@@ -12,13 +12,16 @@ const handleBasketClick = () => {
   console.log("Basket clicked!");
 };
 
+
 const TopNavBar: React.FC<TopNavBarProps> = () => {
   const { basket } = useBasketContext();
+
+  const totalQuantity = basket.reduce((total, item) => total + item.quantity, 0);
   return (
     <div className="top-navbar">
       <h1 className="brand">Pizza Shop</h1>
 
-      <span className="badge">{basket.length}</span>
+      <span className="badge">{totalQuantity}</span>
       <FaShoppingBasket className="basket-icon" onClick={handleBasketClick} />
     </div>
   );
