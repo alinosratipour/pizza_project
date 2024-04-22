@@ -1,5 +1,5 @@
 // NavBar.tsx
-import React, { useState } from "react";
+import React from "react";
 import { FaShoppingBasket } from "react-icons/fa";
 
 import "./NavBar.scss";
@@ -9,7 +9,6 @@ interface TopNavBarProps {
 }
 
 const TopNavBar: React.FC<TopNavBarProps> = () => {
-  
   return (
     <div className="top-navbar">
       <h1 className="brand">Pizza Shop</h1>

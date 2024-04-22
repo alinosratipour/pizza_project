@@ -15,7 +15,14 @@
 .basket-container {
   display: none;
 }
-
+.container {
+  display: flex;
+justify-content: center;
+align-items: center;
+}
+.pizza-items-container {
+  margin-top: 27px;
+}
 @media (min-width: 768px) and (max-width: 1023px) {
   .pizza-items-container {
     grid-template-columns: repeat(2, 1fr);
@@ -63,11 +70,11 @@
     overflow-y: auto;
     position: relative;
   }
-  
+
   .basket-content {
-    flex: 1; 
+    flex: 1;
   }
-  
+
   .basketFooter {
     position: sticky;
     background-color: #ffffff;
@@ -82,6 +89,4 @@
     width: 100%;
     z-index: 1; /* Ensure the footer appears above the content */
   }
-  
-  
 }

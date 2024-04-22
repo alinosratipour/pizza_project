@@ -63,7 +63,7 @@ const PizzaMenu = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <div className="pizza-menu-container">
         <div className="pizza-items-container">
           {pizzaData &&
