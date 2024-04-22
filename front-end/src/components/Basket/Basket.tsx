@@ -49,13 +49,7 @@ function Basket({
   }, [basket]);
 
   const handleSaveChanges = (updatedItem: BasketItem) => {
-    // const toppingsTotal = updatedItem.toppings
-    //   ? updatedItem.toppings.reduce((total, topping) => {
-    //       const toppingTotal = (topping.price || 0) * (topping.quantity || 1);
-    //       return total + toppingTotal;
-    //     }, 0)
-    //   : 0;
-
+   
     const updatedBasket = basket.map((item) =>
       item.id_pizza === updatedItem.id_pizza
         ? {
@@ -147,6 +141,7 @@ function Basket({
                 </div>
 
                 <hr></hr>
+                
               </li>
             ))}
           </ul>

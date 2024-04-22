@@ -11,11 +11,22 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   margin: auto;
+
+ 
 }
+
 .basket-container {
   display: none;
 }
-
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+.pizza-items-container {
+  margin-top: 27px;
+}
 @media (min-width: 768px) and (max-width: 1023px) {
   .pizza-items-container {
     grid-template-columns: repeat(2, 1fr);
@@ -35,7 +46,7 @@
 }
 
 @include responsive-Pizza-Menu-styles;
-@media (min-width: 1676px) {
+@media (min-width: 1024px) {
   .pizza-items-container {
     grid-template-columns: repeat(3, 1fr);
     column-gap: 16px;
@@ -45,17 +56,18 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 70%;
+    width: 100%;
     margin: auto;
     padding: 0px;
+    
   }
   .basket-container {
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
     max-height: 500px;
-    min-width: 28%;
-    max-width: 28%;
+    min-width: 23%;
+    max-width: 23%;
     border-radius: 8px;
     margin-top: 30px;
     margin-right: 50px;
@@ -63,11 +75,11 @@
     overflow-y: auto;
     position: relative;
   }
-  
+
   .basket-content {
-    flex: 1; 
+    flex: 1;
   }
-  
+
   .basketFooter {
     position: sticky;
     background-color: #ffffff;
@@ -82,6 +94,4 @@
     width: 100%;
     z-index: 1; /* Ensure the footer appears above the content */
   }
-  
-  
 }

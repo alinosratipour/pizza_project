@@ -1,4 +1,3 @@
-// NavBar.scss
 .top-navbar {
   display: flex;
   align-items: center;
@@ -17,22 +16,51 @@
 .basket-icon {
   display: none;
 }
-
+.badge{
+  display: none;
+}
 // Styles for smaller screens
 @media (max-width: 768px) {
   .basket-icon {
     display: block;
-
-    font-size: 2rem;
+    cursor: pointer;
+    font-size: 3rem;
     margin-right: 20px;
+  }
+
+  .badge {
+    position: absolute;
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    right:20px;
+    top:30px;
+    font-weight: 900;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .basket-icon {
     display: block;
-
-    font-size: 2rem;
+    cursor: pointer;
+    font-size: 3rem;
     margin-right: 20px;
+  }
+ 
+  .badge {
+    position: absolute;
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    right:20px;
+    top:30px;
   }
 }
