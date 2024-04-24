@@ -6,6 +6,8 @@ import useQuantity from "../Hooks/useQuantityHook";
 import Button from "../UI-Liberary/Button/Button";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { GrSubtractCircle } from "react-icons/gr";
+import { CgCloseO } from "react-icons/cg";
+import { useNavbarContext } from "../Context/NavbarContext";
 interface BasketProps {
   basket: BasketItem[];
   setBasket: React.Dispatch<React.SetStateAction<BasketItem[]>>;
@@ -67,9 +69,10 @@ function Basket({
     setIsEditModalOpen(false);
     setSelectedBasketItem(null);
   };
-
+  const { handleBasketClick,hidePizzaItems } = useNavbarContext();
   return (
     <div className="BasketContainer">
+     <span className={`basket-icon-container ${hidePizzaItems ? 'close' : ''}`}><CgCloseO  onClick={handleBasketClick} /></span> 
       <h1 className="title">Basket</h1>
 
       {basket.length === 0 ? (
