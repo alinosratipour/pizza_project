@@ -16,7 +16,7 @@
 .basket-icon {
   display: none;
 }
-.badge{
+.badge {
   display: none;
 }
 // Styles for smaller screens
@@ -25,7 +25,6 @@
     display: block;
     cursor: pointer;
     font-size: 3rem;
-    margin-right: 20px;
   }
 
   .badge {
@@ -37,9 +36,15 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    right:20px;
-    top:30px;
+    right: 20px;
+    top: 30px;
     font-weight: 900;
+  }
+  .hide-basket-icon {
+    display: none;
+  }
+  .basket-bskicon-container {
+    margin-right: 10px;
   }
 }
 
@@ -50,7 +55,7 @@
     font-size: 3rem;
     margin-right: 20px;
   }
- 
+
   .badge {
     position: absolute;
     background-color: red;
@@ -60,7 +65,12 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    right:20px;
-    top:30px;
+    right: 20px;
+    font-weight: 900;
+    top: 30px;
+  }
+
+  .hide-basket-icon {
+    display: none;
   }
 }

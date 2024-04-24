@@ -57,3 +57,13 @@ justify-content: space-between;
 .removedTopping{
   padding-left: 20px;
 }
+
+@media (max-width: 1024px) {
+  .close{
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-left: 5px;
+    font-size: 2rem;
+  }
+}

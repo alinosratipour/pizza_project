@@ -10,6 +10,7 @@ import useSize from "../Hooks/StateHooks/useSize";
 import { useToppings } from "../Context/selectedTopping";
 import { usePizzaContext } from "../Context/PizzaContext";
 import { useToppingsRemovalFromPizza } from "../store/ToppingOnPizzaStore ";
+import { useNavbarContext } from "../Context/NavbarContext";
 
 const PizzaMenu = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,6 +23,7 @@ const PizzaMenu = () => {
   } = useToppings();
   const { setRemovedToppings } = useToppingsRemovalFromPizza();
   const { selectedSize, setSelectedSize } = useSize();
+  const { hidePizzaItems } = useNavbarContext();
   const {
     pizzaData,
     selectedPizza,
@@ -44,7 +46,6 @@ const PizzaMenu = () => {
     selectedToppings,
   });
 
-
   const openAddPizzaModal = (pizza: Pizza | null) => {
     setSelectedPizza(pizza);
     setSelectedSize(undefined);
@@ -63,10 +64,11 @@ const PizzaMenu = () => {
     return <p>Error fetching data</p>;
   }
 
+
   return (
     <div className="container">
-      <div className="pizza-menu-container">
-        <div className="pizza-items-container">
+       <div className={"pizza-menu-container"}>
+        <div className={`pizza-items-container ${hidePizzaItems ? 'hide-pizza-items' : ''}`}>
           {pizzaData &&
             pizzaData.map((pizza) => (
               <PizzaItem
@@ -76,7 +78,7 @@ const PizzaMenu = () => {
               />
             ))}
         </div>
-        <div className="basket-container">
+        <div className={`basket-container ${hidePizzaItems ? 'show-basket' : ''}`}>
           <div className="basket-content">
             <Basket
               basket={basket}
