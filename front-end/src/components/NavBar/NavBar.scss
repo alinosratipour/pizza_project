@@ -1,3 +1,4 @@
+@import "../../globalStyles.scss";
 .top-navbar {
   display: flex;
   align-items: center;
@@ -11,27 +12,27 @@
 
 .brand {
   font-size: 1.5rem;
+  padding-left: 30px;
+  font-family: var(--font-roboto);
 }
 
-.basket-icon {
-  display: none;
-}
+.basket-icon,
 .badge {
   display: none;
 }
-// Styles for smaller screens
-@media (max-width: 768px) {
+
+@media (max-width: 1023px) {
   .basket-icon {
     display: block;
     cursor: pointer;
-    font-size: 3rem;
+    font-size: 2.2rem;
   }
 
   .badge {
     position: absolute;
     background-color: red;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,31 +47,7 @@
   .basket-bskicon-container {
     margin-right: 10px;
   }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .basket-icon {
-    display: block;
-    cursor: pointer;
-    font-size: 3rem;
-    margin-right: 20px;
-  }
-
-  .badge {
-    position: absolute;
-    background-color: red;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    right: 20px;
-    font-weight: 900;
-    top: 30px;
-  }
-
-  .hide-basket-icon {
-    display: none;
+  .brand {
+    margin: auto;
   }
 }

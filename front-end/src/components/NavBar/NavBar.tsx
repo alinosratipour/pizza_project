@@ -1,9 +1,9 @@
-// NavBar.tsx
 import React from "react";
 import { FaShoppingBasket } from "react-icons/fa";
+import classNames from "classnames";
 import { useBasketContext } from "../Context/BasketContext";
-import "./NavBar.scss";
 import { useNavbarContext } from "../Context/NavbarContext";
+import "./NavBar.scss";
 
 interface TopNavBarProps {}
 
@@ -14,16 +14,13 @@ const TopNavBar: React.FC<TopNavBarProps> = () => {
     (total, item) => total + item.quantity,
     0
   );
-
+  const basketContainerClasses = classNames("basket-bskicon-container", {
+    "hide-basket-icon": hidePizzaItems,
+  });
   return (
     <div className="top-navbar">
       <h1 className="brand">Pizza Shop</h1>
-      <div
-        className={`basket-bskicon-container ${
-          hidePizzaItems ? "hide-basket-icon" : ""
-        }`}
-        onClick={handleBasketClick}
-      >
+      <div className={basketContainerClasses} onClick={handleBasketClick}>
         <span className="badge">{totalQuantity}</span>
         <FaShoppingBasket className="basket-icon" />
       </div>
