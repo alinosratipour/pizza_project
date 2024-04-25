@@ -59,7 +59,7 @@
   }
 }
 
-@include responsive-Pizza-Menu-styles;
+//@include responsive-Pizza-Menu-styles;
 @media (min-width: 1024px) {
   .pizza-items-container {
     grid-template-columns: repeat(3, 1fr);
