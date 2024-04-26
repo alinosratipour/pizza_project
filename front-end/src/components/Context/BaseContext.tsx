@@ -40,8 +40,6 @@ export const BaseProvider: React.FC<PizzaBaseProviderProps> = ({
     getBasesPricesBySize: BaseWithPrice[];
   }>(GET_ALL_SIZES_WITH_RELATED_BASES);
 
-  const availablePizzaBasesData = data?.getBasesPricesBySize ?? [];
-
   const refetchBases = useMemo(
     () =>
       async (idSize: number): Promise<void> => {
@@ -59,10 +57,10 @@ export const BaseProvider: React.FC<PizzaBaseProviderProps> = ({
   );
 
   useEffect(() => {
-    if (availablePizzaBasesData.length > 0) {
-      setAvailableBases(availablePizzaBasesData);
+    if (data) {
+      setAvailableBases(data.getBasesPricesBySize ?? []);
     }
-  }, [availablePizzaBasesData]);
+  }, [data]);
 
   return (
     <BaseContext.Provider
