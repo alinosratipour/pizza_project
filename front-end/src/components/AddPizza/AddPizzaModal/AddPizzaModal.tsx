@@ -7,6 +7,7 @@ import useAddToBasket from "../../Hooks/useAddToBasketHook";
 import Button from "../../UI-Liberary/Button/Button";
 import "./AddPizzaModal.scss";
 import Tooltip from "../../UI-Liberary/ToolTip/ToolTip";
+
 interface AddPizzaModalProps {
   selectedPizza: Pizza;
   setSelectedSize: (size: string | undefined) => void;

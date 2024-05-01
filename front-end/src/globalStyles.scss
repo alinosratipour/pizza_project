@@ -5,8 +5,10 @@
   --title-color: rgb(104, 110, 108);
   --content-color: #898585;
   --background: #ffffff;
-  --list-color:rgb(233, 238, 237);
-  --green:#0e985e;
+  --list-color: rgb(233, 238, 237);
+  --green: #0e985e;
+  --dark-gray: rgb(106, 103, 103);
+  --light-gray: lightgray;
 }
 
 @mixin image-styles {
@@ -22,26 +24,6 @@
     .card {
       max-width: 260px;
       border-radius: 8px;
-     
     }
   }
 }
-
-// @mixin responsive-Pizza-Menu-styles {
-//   @media (min-width: 1024px) and (max-width: 1675px) {
-//     .pizza-items-container {
-//       grid-template-columns: repeat(2, 1fr);
-//     }
-//     .basket-container {
-//       display: none;
-//     }
-//     .pizza-menu-container {
-//       display: flex;
-//       flex-direction: row;
-//       justify-content: space-between;
-//       width: 70%;
-//       margin: auto;
-//       padding: 0px;
-//     }
-//   }
-// }

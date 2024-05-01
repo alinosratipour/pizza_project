@@ -21,8 +21,6 @@
   text-align: center;
   max-height: 800px;
   overflow-y: auto;
-
-
 }
 
 .modal-close {
@@ -33,4 +31,9 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
+  color: var(--dark-gray);
+  transition: 0.5s ease-out;
+}
+.modal-close:hover {
+  color: var(--light-gray);
 }
