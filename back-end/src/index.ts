@@ -13,29 +13,16 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: () => ({ prisma }),
-  plugins: [
-    {
-      async serverWillStart() {
-        return {
-          async playground(): Promise<{ settings: { 'request.credentials': string; } }> {
-            return {
-              settings: {
-                'request.credentials': 'same-origin',
-              },
-            };
-          },
-        } as any; // Typecast to GraphQLServerListener
-      },
-    },
-  ],
 });
 
 const app = express();
+app.get("/custom-route", (req, res) => {
+  res.send("This is a custom route!");
+});
 
 async function startServer() {
   await server.start();
   server.applyMiddleware({ app });
-  
 
   const PORT = process.env.PORT || 5000;
 
