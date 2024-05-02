@@ -7,10 +7,9 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "dev": "nodemon --exec ts-node src/index.ts",
-    "build": "tsc --skipLibCheck",
+    "build": "tsc --skipLibCheck && npm run prisma:generate && npm run prisma:migrate && npm run seed",
     "seed": "ts-node src/seeds/seed.ts",
-    "start": "ts-node src/index.ts",
-    "vercel-build": "npm run prisma:generate && npm run prisma:migrate && npm run seed"
+    "start": "ts-node src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -28,14 +27,5 @@
     "prisma": "^5.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2"
-  },
-  "vercel": {
-    "builds": [
-      { "src": "vercel-build", "use": "@vercel/node" }
-    ],
-    "hooks": [
-      { "src": "/api/deploy", "target": "https://api.vercel.com/v1/integrations/deploy/prj_MuePbOBws6LZNM2t9e973wGz4gHp/OXnZs35H3S", "method": "post" }
-    ]
   }
-
 }
