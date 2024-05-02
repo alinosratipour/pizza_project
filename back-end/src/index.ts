@@ -16,10 +16,6 @@ const server = new ApolloServer({
 });
 
 const app = express();
-// Add a route to print a message on a page
-// app.get("/", (req, res) => {
-//   res.send("Your Node.js application is up and running!");
-// });
 
 async function startServer() {
   await server.start();
