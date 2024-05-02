@@ -7,8 +7,8 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "dev": "nodemon --exec ts-node src/index.ts",
-    "build": "tsc --skipLibCheck",
-    "seed": "ts-node src/seeds/seed.ts",
+    "build": "npm run prisma:generate && npm run prisma:migrate && tsc --skipLibCheck",
+    "seed": "npm run prisma:generate && ts-node src/seeds/seed.ts", 
     "start": "ts-node src/index.ts"
   },
   "keywords": [],
