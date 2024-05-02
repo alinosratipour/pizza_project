@@ -13,7 +13,9 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: () => ({ prisma }),
-});
+  introspection: true, // Enable introspection for GraphQL Playground
+  playground: true, // Enable GraphQL Playground
+}as any);
 
 const app = express();
 
