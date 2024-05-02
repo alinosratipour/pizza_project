@@ -16,7 +16,9 @@ const server = new ApolloServer({
 });
 
 const app = express();
-
+app.get("/", (req, res) => {
+  res.send("application is up and running!");
+});
 async function startServer() {
   await server.start();
   server.applyMiddleware({ app });
