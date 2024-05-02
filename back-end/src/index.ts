@@ -8,13 +8,13 @@ import dotenv from "dotenv"; // Import dotenv package
 dotenv.config(); // Load environment variables from .env file
 
 const prisma = new PrismaClient();
-
+const isProduction = process.env.NODE_ENV === "production";
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: () => ({ prisma }),
-  introspection: true, // Enable introspection for GraphQL Playground
-  playground: true, // Enable GraphQL Playground
+ introspection: !isProduction, // Enable introspection for GraphQL Playground in non-production environments
+  playground: !isProduction, // Enable GraphQL Playground in non-production environments
 }as any);
 
 const app = express();
