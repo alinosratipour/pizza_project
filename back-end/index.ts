@@ -1,8 +1,8 @@
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { PrismaClient } from "@prisma/client";
-import typeDefs from "./resolvers/schema";
-import resolvers from "./resolvers";
+import typeDefs from "./src/resolvers/schema";
+import resolvers from "./src/resolvers";
 import dotenv from "dotenv"; // Import dotenv package
 
 dotenv.config(); // Load environment variables from .env file
