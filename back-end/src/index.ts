@@ -16,9 +16,6 @@ const server = new ApolloServer({
 });
 
 const app = express();
-app.get("/custom-route", (req, res) => {
-  res.send("This is a custom route!");
-});
 
 async function startServer() {
   await server.start();
