@@ -18,3 +18,4 @@ seed.flag
 **/.env
 **/assets.txt
 
+.vercel
