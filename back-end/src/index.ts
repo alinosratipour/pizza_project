@@ -17,6 +17,9 @@ const server = new ApolloServer({
 
 const app = express();
 
+app.get('/', (req, res) => {
+  res.send('hello world')
+})
 async function startServer() {
   await server.start();
   server.applyMiddleware({ app });
