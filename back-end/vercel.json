@@ -1,6 +1,0 @@
-{
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/back-end/src/index.ts" }
-    ]
-  }
-  
