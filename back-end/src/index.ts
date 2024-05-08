@@ -28,6 +28,14 @@ async function startServer() {
 
   app.listen(PORT, () => {
     console.log(`running at http://localhost:${PORT}${server.graphqlPath}`);
+    if (!isProduction) {
+      console.log(
+        `dev GraphQL Playground enabled at http://localhost:${PORT}${server.graphqlPath}`
+      );
+    }
+    if (isProduction) {
+      console.log("graphql running in prod");
+    }
   });
 }
 
