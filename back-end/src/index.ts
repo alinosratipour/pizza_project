@@ -8,8 +8,8 @@ import dotenv from "dotenv"; // Import dotenv package
 dotenv.config(); // Load environment variables from .env file
 
 const prisma = new PrismaClient();
-const isProduction = process.env.NODE_ENV;
-const istest = process.env.NODE_ENV_PROD;
+const isDevelopment= process.env.NODE_ENV;
+const isProduction = process.env.NODE_ENV_PROD;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -22,11 +22,16 @@ async function startServer() {
   await server.start();
   server.applyMiddleware({ app });
 
+  if (!isProduction) {
+    // Apply middleware only if not in production
+    server.applyMiddleware({ app });
+  }
+
   const PORT = process.env.PORT || 5000;
 
   app.listen(PORT, () => {
     console.log(isProduction);
-    console.log("prod", istest);
+  
 
     console.log(
       `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
