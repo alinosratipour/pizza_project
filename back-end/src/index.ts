@@ -20,22 +20,14 @@ const app = express();
 
 async function startServer() {
   await server.start();
-  if (isProduction) {
-    server.applyMiddleware({ app });
-  }
+  server.applyMiddleware({ app });
 
   const PORT = process.env.PORT || 5000;
 
   app.listen(PORT, () => {
+    console.log(isProduction);
+    
     console.log(`running at http://localhost:${PORT}${server.graphqlPath}`);
-    if (!isProduction) {
-      console.log(
-        `dev GraphQL Playground enabled at http://localhost:${PORT}${server.graphqlPath}`
-      );
-    }
-    if (isProduction) {
-      console.log("enviroment is:",process.env.NODE_ENV);
-    }
   });
 }
 
