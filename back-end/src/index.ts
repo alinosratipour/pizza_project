@@ -8,7 +8,7 @@ import dotenv from "dotenv"; // Import dotenv package
 dotenv.config(); // Load environment variables from .env file
 
 const prisma = new PrismaClient();
-const isProduction = process.env.NODE_ENV === "development";
+const isProduction = process.env.NODE_ENV === "production";
 
 const server = new ApolloServer({
   typeDefs,
@@ -26,7 +26,7 @@ async function startServer() {
 
   app.listen(PORT, () => {
     console.log(isProduction);
-    
+    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
     console.log(`running at http://localhost:${PORT}${server.graphqlPath}`);
   });
 }
