@@ -8,20 +8,21 @@ import dotenv from "dotenv"; // Import dotenv package
 dotenv.config(); // Load environment variables from .env file
 
 const prisma = new PrismaClient();
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: () => ({ prisma }),
-  playground: !isProduction,
-}as any);
+});
 
 const app = express();
 
 async function startServer() {
   await server.start();
-  server.applyMiddleware({ app });
+  if (!isProduction) {
+    server.applyMiddleware({ app });
+  }
 
   const PORT = process.env.PORT || 5000;
 
