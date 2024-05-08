@@ -8,8 +8,8 @@ import dotenv from "dotenv"; // Import dotenv package
 dotenv.config(); // Load environment variables from .env file
 
 const prisma = new PrismaClient();
-//const isDevelopment = process.env.NODE_ENV;
-//const isProduction = process.env.NODE_ENV_PROD;
+const isDevelopment = process.env.NODE_ENV;
+const isProduction = process.env.NODE_ENV_PROD;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -25,6 +25,11 @@ async function startServer() {
   const PORT = process.env.PORT || 5000;
 
   app.listen(PORT, () => {
+    console.log(isProduction);
+
+    console.log(
+      `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+    );
     console.log(`running at http://localhost:${PORT}${server.graphqlPath}`);
   });
 }
