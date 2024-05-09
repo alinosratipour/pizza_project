@@ -19,7 +19,7 @@ const TopNavBar: React.FC<TopNavBarProps> = () => {
   });
   return (
     <div className="top-navbar">
-      <h1 className="brand">Pizza Shop 1</h1>
+      <h1 className="brand">Pizza Shop</h1>
       <div className={basketContainerClasses} onClick={handleBasketClick}>
         <span className="badge">{totalQuantity}</span>
         <FaShoppingBasket className="basket-icon" />
