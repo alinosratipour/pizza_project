@@ -8,7 +8,7 @@ import dotenv from "dotenv"; // Import dotenv package
 dotenv.config(); // Load environment variables from .env file
 
 const prisma = new PrismaClient();
-console.log("Prisma connection URL:", process.env.DATABASE_URL);
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
