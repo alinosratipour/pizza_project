@@ -22,10 +22,11 @@ interface EditBasketModalProps {
   onSizeChange?: (newSize: number, sizeName: string) => void;
   onBaseChange?: (newBase: string, price: number) => void;
   onToppingsChange: (toppings: ToppingType[]) => void;
-  onToppingsTotalChange:
-    | React.Dispatch<React.SetStateAction<number>>
-    | ((prevTotal: number) => number)
-    | undefined;
+  // onToppingsTotalChange:
+  //   | React.Dispatch<React.SetStateAction<number>>
+  //   | ((prevTotal: number) => number)
+  //   | undefined;
+    onToppingsTotalChange: (total: number) => void;
 }
 
 const EditBasketModal: React.FC<EditBasketModalProps> = ({
