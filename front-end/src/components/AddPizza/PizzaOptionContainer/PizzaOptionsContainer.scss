@@ -1,3 +1,4 @@
+@import "../../../globalStyles.scss";
 .PizzaToppings {
   margin-top: 15px;
   padding: 30px;
@@ -35,4 +36,12 @@
   font-weight: bold;
   font-size: 1.3rem;
   color: lightslategray;
+}
+
+@include small-screen {
+// .SizeRadioButton{
+//   background-color: red;
+//   flex-direction: column;
+//   justify-content: flex-start;
+// }
 }

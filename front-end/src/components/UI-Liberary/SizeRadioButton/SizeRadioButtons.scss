@@ -1,4 +1,5 @@
-.Container {
+@import "../../../globalStyles.scss";
+.Size-Radio-Container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,4 +46,29 @@
 
 .CustomRadio:not(:disabled):hover {
   background-color: rgb(194, 184, 184);
+}
+
+@include small-screen {
+  .Size-Radio-Container {
+    flex-direction: column;
+    margin: auto;
+  }
+
+  .label {
+    cursor: pointer;
+    margin-bottom: 30px;
+    width: 100%;
+    margin-right: 24px;
+  }
+
+  .SizeName {
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: rgb(107, 102, 102);
+  }
+  .CustomRadio:not(:disabled):checked {
+    background-color: rgb(224, 126, 28);
+    transform: scale(1.1);
+    border: none;
+  }
 }

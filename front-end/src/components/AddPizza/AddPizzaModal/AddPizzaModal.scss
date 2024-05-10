@@ -26,12 +26,12 @@
   padding-bottom: 8px;
   color: grey;
 }
-.modal-close{
+.modal-close {
   margin-left: 400px;
   background: none;
   border: none;
   font-size: 30px;
-  margin-top:10px;
+  margin-top: 10px;
   cursor: pointer;
   color: var(--dark-gray);
   transition: 0.5s ease-out;
@@ -48,10 +48,9 @@
   .PizzaTitle {
     margin-top: 25px;
   }
-  .modal-close{
+  .modal-close {
     margin-left: 285px;
-    margin-top: 20px;
-   
+    margin-top: 30px;
+    height: 30px;
   }
 }
-
