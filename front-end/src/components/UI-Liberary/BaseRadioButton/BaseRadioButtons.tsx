@@ -14,9 +14,7 @@ const BaseRadioButtons: React.FC<BaseRadioButtonsProps> = ({
   initialCheckedBase,
   selectedSize,
 }) => {
-  // const [selectedBase, setSelectedBase] = useState<string | undefined>(
-  //   initialCheckedBase || undefined
-  // );
+ 
   const { selectedBase, setSelectedBase } = useBaseState();
 
   useEffect(() => {
@@ -25,9 +23,9 @@ const BaseRadioButtons: React.FC<BaseRadioButtonsProps> = ({
   }, [selectedSize]);
 
   return (
-    <div className="Container">
+    <div className="Base-Radio-Container">
       {bases.map((base) => (
-        <label key={base.base} className="label">
+        <label key={base.base} className="Base-Label">
           <input
             type="radio"
             name="base"

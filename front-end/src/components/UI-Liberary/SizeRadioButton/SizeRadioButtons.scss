@@ -62,10 +62,10 @@
   }
 
   .SizeName {
-    font-weight: 400;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: rgb(107, 102, 102);
   }
+
   .CustomRadio:not(:disabled):checked {
     background-color: rgb(224, 126, 28);
     transform: scale(1.1);
