@@ -17,7 +17,3 @@ if (root) {
     </ApolloProvider>
   );
 }
-// ReactDOM.render(
-
-//   document.getElementById("root")
-// );
