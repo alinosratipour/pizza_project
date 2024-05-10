@@ -59,7 +59,7 @@ const AddPizzaModal: React.FC<AddPizzaModalProps> = ({
   };
 
   return (
-    <>
+    <div className="main-Container">
       <div className="addPizzaContainer">
         <h2 className="PizzaTitle">{selectedPizza.name}</h2>
         <p className="PizzaDescription">{selectedPizza.description}</p>
@@ -91,7 +91,7 @@ const AddPizzaModal: React.FC<AddPizzaModalProps> = ({
           </Button>
         </Tooltip>
       </div>
-    </>
+    </div>
   );
 };
 
