@@ -1,6 +1,5 @@
 // Modal.tsx
 import React, { ReactNode } from "react";
-import { CgCloseO } from "react-icons/cg";
 import "./Modal.scss";
 
 type ModalProps = {
@@ -9,19 +8,14 @@ type ModalProps = {
   onClose: () => void;
 };
 
-const Modal: React.FC<ModalProps> = ({ isOpen, children, onClose }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, children }) => {
   if (!isOpen) {
     return null;
   }
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
-        <button className="modal-close" onClick={onClose}>
-          <CgCloseO />
-        </button>
-        {children}
-      </div>
+      <div className="modal-content">{children}</div>
     </div>
   );
 };
