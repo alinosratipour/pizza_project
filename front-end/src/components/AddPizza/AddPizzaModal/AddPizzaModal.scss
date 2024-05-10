@@ -26,7 +26,19 @@
   padding-bottom: 8px;
   color: grey;
 }
-
+.modal-close{
+  margin-left: 400px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  margin-top:10px;
+  cursor: pointer;
+  color: var(--dark-gray);
+  transition: 0.5s ease-out;
+}
+.modal-close:hover {
+  color: var(--light-gray);
+}
 @include small-screen {
   .main-Container {
     height: 667px;
@@ -36,4 +48,10 @@
   .PizzaTitle {
     margin-top: 25px;
   }
+  .modal-close{
+    margin-left: 300px;
+    margin-top: 20px;
+   
+  }
 }
+

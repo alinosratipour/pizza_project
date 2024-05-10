@@ -7,6 +7,7 @@ import useAddToBasket from "../../Hooks/useAddToBasketHook";
 import Button from "../../UI-Liberary/Button/Button";
 import "./AddPizzaModal.scss";
 import Tooltip from "../../UI-Liberary/ToolTip/ToolTip";
+import { CgCloseO } from "react-icons/cg";
 
 interface AddPizzaModalProps {
   selectedPizza: Pizza;
@@ -57,10 +58,15 @@ const AddPizzaModal: React.FC<AddPizzaModalProps> = ({
     addToBasket(selectedPizza, selectedSize || "", selectedBase || "");
     setIsModalOpen(false);
   };
-
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div className="main-Container">
       <div className="addPizzaContainer">
+      <button className="modal-close" onClick={handleCloseModal}>
+          <CgCloseO/>
+        </button>
         <h2 className="PizzaTitle">{selectedPizza.name}</h2>
         <p className="PizzaDescription">{selectedPizza.description}</p>
         <div className="ImageContainer">
