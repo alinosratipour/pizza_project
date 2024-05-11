@@ -149,7 +149,7 @@ const extraToppingsCost =calculateExtraToppingsCost();
 
   return (
     <Modal isOpen={true} onClose={onClose}>
-      <div className="container">
+      <div className="edit-Container">
         <h1 className="PizzaName">{item?.name}</h1>
         <div className="SizeContainer">
           <h3 className="sizeTitle">Size: {item?.size}</h3>
