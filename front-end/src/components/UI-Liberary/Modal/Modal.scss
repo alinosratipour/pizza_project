@@ -20,6 +20,21 @@
   position: relative;
   width: 500px;
   text-align: center;
-  //max-height: 800px;
+  max-height: 900px;
   overflow-y: auto;
+}
+
+
+@include small-screen {
+  .modal-content {
+    background: gary;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    width: 500px;
+    text-align: center;
+    //max-height: 900px;
+    overflow-y: auto;
+    height: 100vh;
+  }
 }
