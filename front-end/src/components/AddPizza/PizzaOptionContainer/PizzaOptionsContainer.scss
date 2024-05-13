@@ -2,6 +2,7 @@
 .PizzaToppings {
   margin-top: 15px;
   padding: 30px;
+  background-color: var(--list-color);
 }
 
 .AccordionMenu-Wrapper {
@@ -39,11 +40,4 @@
 }
 
 @include small-screen {
- 
-  .PizzaToppings{
-    background-color: var(--list-color);
-    //border-radius: 10px;
-   
-  }
-  
 }
