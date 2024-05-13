@@ -56,7 +56,7 @@
     color: rgb(107, 102, 102);
   }
   .BaseCustomRadio:not(:disabled):checked {
-    background-color: rgb(224, 126, 28);
+    background-color: var(--orange);
     transform: scale(1.1);
     border: none;
   }

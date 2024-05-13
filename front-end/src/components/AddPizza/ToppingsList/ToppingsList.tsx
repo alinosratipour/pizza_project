@@ -93,7 +93,7 @@ function ToppingsList({
                 <>
                   <Button
                     onClick={() => handleRemoveClick(topping)}
-                    icon={<GrSubtractCircle style={{ fontSize: "22px" }} />}
+                    icon={<GrSubtractCircle style={{ fontSize: "22px" }}  />}
                     colorscheme="gost-primary"
                     size="sm"
                     iconPosition="right"

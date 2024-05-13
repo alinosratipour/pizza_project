@@ -13,8 +13,9 @@
       display: flex;
       justify-content: space-between;
       padding: 10px;
-      background-color: #f5f5f5;
-      cursor: pointer;
+      background-color: var(--black);
+      color: white;
+      cursor: pointer;    
   
       .accordion-title {
         flex-grow: 1;
