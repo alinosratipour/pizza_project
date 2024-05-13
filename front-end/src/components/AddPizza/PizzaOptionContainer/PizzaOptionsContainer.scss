@@ -39,9 +39,11 @@
 }
 
 @include small-screen {
-// .SizeRadioButton{
-//   background-color: red;
-//   flex-direction: column;
-//   justify-content: flex-start;
-// }
+ 
+  .PizzaToppings{
+    background-color: var(--list-color);
+    //border-radius: 10px;
+   
+  }
+  
 }

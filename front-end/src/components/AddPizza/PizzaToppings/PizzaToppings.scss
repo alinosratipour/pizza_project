@@ -19,11 +19,9 @@
   font-weight: 600;
   font-family: var(--font-roboto-condensed);
   &.selected {
-    background-color: #ffcccc;
+    background-color: #f23e3e;
     text-decoration: line-through;
-  
   }
-
 }
 
 // .selected {
@@ -33,8 +31,9 @@
 // }
 
 .ExtraTopping {
-  background-color: #e9b108;
+  background-color: var(--orange);
   color: #000000;
   font-weight: 600;
   font-family: var(--font-roboto-condensed);
+ 
 }
