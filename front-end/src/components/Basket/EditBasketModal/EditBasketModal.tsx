@@ -187,7 +187,7 @@ const extraToppingsCost =calculateExtraToppingsCost();
           onRemoveTopping={removeToppingFromBasket}
           selectedToppings={selectedToppings}
         />
-        <div className="ButtonContainer1">
+        <div className="SaveButtonContainer">
           <Button
             size="md"
             colorscheme="primary"
