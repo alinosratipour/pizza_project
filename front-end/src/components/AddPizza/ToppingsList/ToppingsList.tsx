@@ -64,7 +64,7 @@ function ToppingsList({
       ),
     }));
   };
-
+  const style = { color: "orange", fontSize: "22px" }
   return (
     <div className="ToppingListContainer">
       {availableToppings &&
@@ -93,7 +93,7 @@ function ToppingsList({
                 <>
                   <Button
                     onClick={() => handleRemoveClick(topping)}
-                    icon={<GrSubtractCircle style={{ fontSize: "22px" }}  />}
+                    icon={<GrSubtractCircle  style={style} />}
                     colorscheme="gost-primary"
                     size="sm"
                     iconPosition="right"
@@ -101,7 +101,7 @@ function ToppingsList({
 
                   <Button
                     onClick={() => handleAddClick(topping)}
-                    icon={<IoMdAddCircleOutline style={{ fontSize: "25px" }} />}
+                    icon={<IoMdAddCircleOutline style={{ fontSize: "25px"}} />}
                     colorscheme="gost-primary"
                     size="sm"
                     iconPosition="right"
@@ -112,7 +112,7 @@ function ToppingsList({
                   <>
                     <Button
                       onClick={() => handleRemoveClick(topping)}
-                      icon={<GrSubtractCircle style={{ fontSize: "22px" }} />}
+                      icon={<GrSubtractCircle style={style} />}
                       colorscheme="gost-secondery"
                       size="sm"
                       iconPosition="right"
