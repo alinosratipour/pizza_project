@@ -125,7 +125,11 @@ const PizzaOptionsContainer = ({
               selectedSize={selectedSize}
             />
           </div>
-
+          <If condition={selectedSizePrice}>
+        <div className="PizzaPrice">
+          <SizePrice selectedSizePrice={selectedSizePrice} size="" />
+        </div>
+      </If>
           <div className="AccordionMenu-Wrapper">
             <AccordionMenu title="Customise Toppings">
               <div className="PizzaToppings">
@@ -143,11 +147,7 @@ const PizzaOptionsContainer = ({
         </>
       </If>
 
-      <If condition={selectedSizePrice}>
-        <div className="PizzaPrice">
-          <SizePrice selectedSizePrice={selectedSizePrice} size="" />
-        </div>
-      </If>
+     
     </div>
   );
 };

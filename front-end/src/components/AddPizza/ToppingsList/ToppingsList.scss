@@ -12,7 +12,6 @@
   margin-top: 2px;
   display: flex;
   background-color: var(--list-color);
-
 }
 .ToppingName-Container {
   background-color: var(--list-color);
@@ -40,7 +39,6 @@
   width: 90%;
   padding-left: 3px;
   font-weight: bold;
-
 }
 
 .in-ToppingList {
@@ -50,7 +48,7 @@
 }
 
 .in-Basket {
-  color: red;
+  //color: green; YET TO DECIDE IF WE GOING TO NEED THIS
 }
 
 .in-Default {
@@ -59,9 +57,6 @@
   margin-top: 2px;
 }
 
-.in-green {
-  color: blueviolet;
-}
 ul {
   list-style-type: none;
 }
@@ -79,5 +74,4 @@ ul {
   .ToppingListContainer {
     width: 100%;
   }
- 
 }

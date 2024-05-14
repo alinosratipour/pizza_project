@@ -32,12 +32,11 @@
   padding-top: 16px;
 }
 
+
+
+@include large-screen {
 .PizzaPrice {
-  font-family: var(--font-roboto);
-  font-weight: bold;
-  font-size: 1.3rem;
-  color: lightslategray;
+padding-top: 40px;
 }
 
-@include small-screen {
 }

@@ -39,6 +39,7 @@
 .modal-close:hover {
   color: var(--light-gray);
 }
+
 @include small-screen {
   .main-Container {
     height: 667px;
