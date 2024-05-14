@@ -1,9 +1,9 @@
 import { SizePriceProps } from "../SharedTypes"; // Import the shared type
-
+import "./SizePrice.scss";
 function SizePrice({ selectedSizePrice }: SizePriceProps) {
   return (
     <div>
-      <p>£{selectedSizePrice || 0}</p>
+      <p className="price">£{selectedSizePrice || 0}</p>
     </div>
   );
 }
