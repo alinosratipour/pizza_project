@@ -1,0 +1,89 @@
+@import "../../globalStyles.scss";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+// body {
+//   background-color: rgb(57, 57, 57);
+// }
+.Home-Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0px;
+  background-color: rgb(57, 57, 57);
+  height: 100vh;
+}
+
+.Hero-Text {
+  font-family: var(--font-roboto-condensed);
+  color: var(--orange);
+  font-size: 5rem;
+  text-align: center;
+  font-weight: bold;
+  margin-left: 50px;
+  text-decoration: none;
+}
+.Hero-Text-Container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.Hero-Pizza {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  order: 1;
+}
+.Pizza-Image {
+  width: 80%;
+  height: 80%;
+  max-width: 100%;
+  height: auto; /* Maintain aspect ratio */
+}
+
+.text {
+  text-align: center;
+  margin-left: 50px;
+  color: var(--background);
+  font-size: 2rem;
+  padding-bottom: 30px;
+}
+
+@include small-screen {
+  .Home-Container {
+    flex-direction: column;
+  }
+
+  .Hero-Pizza {
+    justify-content: start;
+    align-items: center;
+  }
+  .Pizza-Image {
+    margin-left: 55px;
+  }
+  .Hero-Text {
+    font-size: 3rem;
+    margin-left: 0px;
+    padding-bottom: 30px;
+    text-decoration: none;
+    font-style: none;
+    cursor: pointer;
+    margin-bottom: 150px;
+  }
+  .text {
+    margin-left: 10px;
+    font-size: 1.3rem;
+    padding-bottom: 20px;
+  }
+  .test{
+    height: 100vh;
+    background-color: white;
+    opacity: 0.6;
+    width: 100vh;
+    z-index: 10;
+  }
+}

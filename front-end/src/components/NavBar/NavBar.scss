@@ -6,21 +6,30 @@
   height: 90px;
   color: white;
   width: 100%;
-  background-color: #343a40;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgb(80, 77, 76);
+  box-shadow: 0px 1px 5px rgba(251, 249, 249, 0.1);
 }
 
 .brand {
   font-size: 1.5rem;
   padding-left: 30px;
   font-family: var(--font-roboto);
+  flex: 1;
 }
 
 .basket-icon,
 .badge {
   display: none;
 }
-
+.MenuBar-Wrapper {
+  flex: 1;
+}
+.Mobile-Menu {
+  display: none;
+}
+.Slid-Menu {
+  display: none;
+}
 @media (max-width: 1023px) {
   .basket-icon {
     display: block;
@@ -38,7 +47,7 @@
     align-items: center;
     border-radius: 50%;
     right: 20px;
-    top: 30px;
+    top: 20px;
     font-weight: 900;
   }
   .hide-basket-icon {
@@ -49,5 +58,34 @@
   }
   .brand {
     margin: auto;
+  }
+  .MenuBar-Wrapper {
+    display: none;
+  }
+  .Slid-Menu {
+    display: block;
+  }
+}
+
+@include small-screen {
+  .MenuBar-Wrapper {
+    display: none;
+  }
+  .brand {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  .Mobile-Menu {
+    display: block;
+    padding-left: 10px;
+  }
+  .top-navbar {
+    height: 50px;
+  }
+  .badge {
+    top: 10px;
+  }
+  .Slid-Menu {
+    display: block;
   }
 }

@@ -1,0 +1,11 @@
+.MenuBar-Container{
+   
+}
+.MenuItem-Container{
+    display: flex;
+    gap:60px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    font-family: var(--font-roboto-condensed);
+}
