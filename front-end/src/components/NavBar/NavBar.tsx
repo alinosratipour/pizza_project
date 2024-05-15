@@ -10,7 +10,7 @@ import SlidingMenu from "../SlidingMenu/SlidingMenu";
 
 interface TopNavBarProps {}
 
-const TopNavBar: React.FC<TopNavBarProps> = () => {
+const NavBar: React.FC<TopNavBarProps> = () => {
   const { basket } = useBasketContext();
   const { handleBasketClick, hidePizzaItems } = useNavbarContext();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -49,4 +49,4 @@ const TopNavBar: React.FC<TopNavBarProps> = () => {
   );
 };
 
-export default TopNavBar;
+export default NavBar;
