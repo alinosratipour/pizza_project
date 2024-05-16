@@ -1,0 +1,100 @@
+@import "../../globalStyles.scss";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.Home-Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0px;
+  background-color: rgb(57, 57, 57);
+  height: 100vh;
+}
+
+.Hero-Text {
+  font-family: var(--font-roboto-condensed);
+  color: var(--orange);
+  font-size: 5rem;
+  text-align: center;
+  font-weight: bold;
+  margin-left: 50px;
+  text-decoration: none;
+}
+.Hero-Text-Container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.Hero-Pizza {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  order: 1;
+}
+.Pizza-Image {
+  width: 80%;
+  max-width: 100%;
+  height: auto; /* Maintain aspect ratio */
+}
+
+.text {
+  text-align: center;
+  margin-left: 60px;
+  color: var(--background);
+  font-size: 2rem;
+  padding-bottom: 30px;
+}
+.Button-Container {
+  text-align: center;
+  margin-left: 50px;
+  padding-top: 20px;
+}
+
+@include small-screen {
+  .Home-Container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .Hero-Pizza {
+    justify-content: start;
+    align-items: center;
+    order: 1;
+    margin-top: 50px;
+  }
+  .Pizza-Image {
+    width: 100%;
+    max-width: 100%;
+
+    margin-left: 23px;
+  }
+  .Hero-Text {
+    font-size: 2rem;
+    margin-left: 0px;
+    padding-bottom: 30px;
+    text-decoration: none;
+    font-style: none;
+    cursor: pointer;
+  }
+  .Hero-Text-Container {
+    justify-content: flex-end;
+    order: 2;
+    height: 40vh;
+  }
+  .text {
+    margin-left: 10px;
+    font-size: 1.3rem;
+    padding-bottom: 20px;
+  }
+  .Button-Container {
+    text-align: center;
+    margin-left: 10px;
+    padding-top: 10px;
+  }
+}

@@ -66,9 +66,11 @@
   }
 
   &.button--secondery {
-    //background-color: rgb(8, 30, 228);
+    background-color: #fff;
     &:hover {
-      background-color: rgb(95, 110, 244);
+      background-color: black;
+      border: 1px solid #fff;
+      color: #fff;
     }
   }
 
