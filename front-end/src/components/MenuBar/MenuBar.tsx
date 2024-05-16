@@ -1,12 +1,16 @@
+import { Link } from "react-router-dom";
 import "./MenuBar.scss";
 
 const MenuBar = () => {
   return (
     <div className="MenuBar-Container">
       <ul className="MenuItem-Container">
-        <li>Home</li>
-        <li>Menu</li>
-        <li>Contact</li>
+        <li>
+          <Link  className="Home-Link" to="./">Home</Link> 
+        </li>
+        <li>
+          <Link className="Menu-Link" to="./pizza-menu">Menu</Link>
+        </li>
       </ul>
     </div>
   );

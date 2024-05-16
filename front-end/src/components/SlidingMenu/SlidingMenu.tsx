@@ -12,13 +12,14 @@ const SlidingMenu: React.FC<SlidingMenuProps> = ({ isOpen, closeMenu }) => {
     <div className={`sliding-menu ${isOpen ? "open" : ""}`}>
       <ul className="Items">
         <li>
-        <Link to="/" onClick={closeMenu}>Home</Link>
+          <Link to="/" onClick={closeMenu}>
+            Home
+          </Link>
         </li>
         <li>
-          <Link to="/pizza-menu" onClick={closeMenu}>Menu</Link>
-        </li>
-        <li>
-        <Link to="/" onClick={closeMenu}>Contact</Link>
+          <Link to="/pizza-menu" onClick={closeMenu}>
+            Menu
+          </Link>
         </li>
       </ul>
     </div>

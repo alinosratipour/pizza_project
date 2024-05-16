@@ -7,6 +7,7 @@ import "./NavBar.scss";
 import MenuBar from "../MenuBar/MenuBar";
 import HamburgerMenu from "../UI-Liberary/HamburgerMenu/HamburgerMenu";
 import SlidingMenu from "../SlidingMenu/SlidingMenu";
+import { Link } from "react-router-dom";
 
 interface NavBarProps {}
 
@@ -35,7 +36,7 @@ const NavBar: React.FC<NavBarProps> = () => {
       <div className="Mobile-Menu">
         <HamburgerMenu isOpen={menuOpen} onClick={toggleMenu} />
       </div>
-      <h1 className="brand">Pizza Shop</h1>
+      <h1 className="brand"><Link className="brand-link"  to="/">Pizza Shop</Link></h1>
       <div className={basketContainerClasses} onClick={handleBasketClick}>
         <span className="badge">{totalQuantity}</span>
         <FaShoppingBasket className="basket-icon" />
