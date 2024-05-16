@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { FaShoppingBasket } from "react-icons/fa";
 import classNames from "classnames";
 import { useBasketContext } from "../Context/BasketContext";
@@ -8,9 +8,9 @@ import MenuBar from "../MenuBar/MenuBar";
 import HamburgerMenu from "../UI-Liberary/HamburgerMenu/HamburgerMenu";
 import SlidingMenu from "../SlidingMenu/SlidingMenu";
 
-interface TopNavBarProps {}
+interface NavBarProps {}
 
-const NavBar: React.FC<TopNavBarProps> = () => {
+const NavBar: React.FC<NavBarProps> = () => {
   const { basket } = useBasketContext();
   const { handleBasketClick, hidePizzaItems } = useNavbarContext();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -41,10 +41,8 @@ const NavBar: React.FC<TopNavBarProps> = () => {
         <MenuBar />
       </div>
       <div className="Slid-Menu">
-             <SlidingMenu isOpen={menuOpen} />
+        <SlidingMenu isOpen={menuOpen} />
       </div>
- 
-
     </div>
   );
 };
