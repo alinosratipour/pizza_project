@@ -44,10 +44,15 @@
 
 .text {
   text-align: center;
-  margin-left: 50px;
+  margin-left: 60px;
   color: var(--background);
   font-size: 2rem;
   padding-bottom: 30px;
+}
+.Button-Container {
+  text-align: center;
+  margin-left: 50px;
+  padding-top: 20px;
 }
 
 @include small-screen {
@@ -70,7 +75,7 @@
     margin-left: 23px;
   }
   .Hero-Text {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-left: 0px;
     padding-bottom: 30px;
     text-decoration: none;
@@ -80,11 +85,17 @@
   .Hero-Text-Container {
     justify-content: flex-end;
     order: 2;
-    height: 25vh;
+    height: 40vh;
+    
   }
   .text {
     margin-left: 10px;
     font-size: 1.3rem;
     padding-bottom: 20px;
+  }
+  .Button-Container {
+    text-align: center;
+    margin-left: 10px;
+    padding-top: 10px;
   }
 }
