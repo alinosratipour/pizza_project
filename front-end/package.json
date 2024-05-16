@@ -8,6 +8,7 @@
     "start": "vite",
     "build": "vite build",
     "copy-uploads": "cp -R ./uploads dist/uploads",
+    "copy-img": "cp -R ./src/assets/img dist/assets/img",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
