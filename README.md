@@ -28,21 +28,21 @@ The FastFood Online Ordering System aims to solve these problems by providing an
 
 This project leverages modern web technologies to create a robust, scalable, and efficient online ordering system:
 
-1. React: A powerful JavaScript library for building user interfaces.
+- React: A powerful JavaScript library for building user interfaces.
 
-2. Vite: A next-generation front-end tool for faster and leaner development.
+- Vite: A next-generation front-end tool for faster and leaner development.
 
-3. Apollo Server: A fully-featured GraphQL server for building high-performance APIs.
+- Apollo Server: A fully-featured GraphQL server for building high-performance APIs.
 
-4. GraphQL: A query language for your API, providing a more efficient, powerful, and flexible alternative to REST.
+- GraphQL: A query language for your API, providing a more efficient, powerful, and flexible alternative to REST.
 
-5. TypeScript: A statically typed superset of JavaScript that enhances development productivity and code quality.
+- TypeScript: A statically typed superset of JavaScript that enhances development productivity and code quality.
 
-6. PostgreSQL: A powerful, open-source relational database system known for its reliability and performance.
+- PostgreSQL: A powerful, open-source relational database system known for its reliability and performance.
 
-7. Prisma: A next-generation ORM (Object-Relational Mapping) for Node.js and TypeScript that helps in managing the database schema and queries.
+- Prisma: A next-generation ORM (Object-Relational Mapping) for Node.js and TypeScript that helps in managing the database schema and queries.
 
-8. Docker: A platform for developing, shipping, and running applications in containers, ensuring consistency across multiple environments.
+- Docker: A platform for developing, shipping, and running applications in containers, ensuring consistency across multiple environments.
 
 # Features
 
