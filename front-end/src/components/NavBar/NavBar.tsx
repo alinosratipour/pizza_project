@@ -19,6 +19,10 @@ const NavBar: React.FC<NavBarProps> = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   const totalQuantity = basket.reduce(
     (total, item) => total + item.quantity,
     0
@@ -29,8 +33,7 @@ const NavBar: React.FC<NavBarProps> = () => {
   return (
     <div className="top-navbar">
       <div className="Mobile-Menu">
-        {" "}
-        <HamburgerMenu onClick={toggleMenu} />
+        <HamburgerMenu isOpen={menuOpen} onClick={toggleMenu} />
       </div>
       <h1 className="brand">Pizza Shop</h1>
       <div className={basketContainerClasses} onClick={handleBasketClick}>
@@ -41,7 +44,7 @@ const NavBar: React.FC<NavBarProps> = () => {
         <MenuBar />
       </div>
       <div className="Slid-Menu">
-        <SlidingMenu isOpen={menuOpen} />
+        <SlidingMenu isOpen={menuOpen} closeMenu={closeMenu} />
       </div>
     </div>
   );

@@ -4,21 +4,21 @@ import "./SlidingMenu.scss";
 
 interface SlidingMenuProps {
   isOpen: boolean;
-
+  closeMenu: () => void;
 }
 
-const SlidingMenu: React.FC<SlidingMenuProps> = ({ isOpen }) => {
+const SlidingMenu: React.FC<SlidingMenuProps> = ({ isOpen, closeMenu }) => {
   return (
     <div className={`sliding-menu ${isOpen ? "open" : ""}`}>
       <ul className="Items">
         <li>
-          <a href="#home">Home</a>
+        <Link to="/" onClick={closeMenu}>Home</Link>
         </li>
         <li>
-        <Link to="/pizza-menu" >Menu</Link>
+          <Link to="/pizza-menu" onClick={closeMenu}>Menu</Link>
         </li>
         <li>
-          <a href="#contact">Contact</a>
+        <Link to="/" onClick={closeMenu}>Contact</Link>
         </li>
       </ul>
     </div>

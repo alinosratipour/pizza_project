@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './HamburgerMenu.scss';
 
 interface HamburgerMenuProps {
+  isOpen: boolean;
   onClick: () => void;
 }
 
-const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ onClick }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    onClick(); // Call the passed function to toggle the sliding menu
-  };
-
+const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, onClick }) => {
   return (
-    <div className="hamburger-menu" onClick={toggleMenu}>
+    <div className="hamburger-menu" onClick={onClick}>
       <div className={`burger ${isOpen ? 'open' : ''}`}>
         <div className="bar"></div>
         <div className="bar"></div>
