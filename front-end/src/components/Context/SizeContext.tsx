@@ -10,7 +10,7 @@ import { useQuery, ApolloQueryResult } from "@apollo/client";
 import { SizeType, SizeWithPrice, SizesData } from "../SharedTypes";
 import { GET_PIZZAS_WITH_SIZES_AND_PRICES } from "../../queries/queries";
 export interface SizeContextProps {
-  availableSizes: SizeWithPrice[]; // Update this to match the type in the GraphQL response
+  availableSizes: SizeWithPrice[];
   setSizes: React.Dispatch<React.SetStateAction<SizeWithPrice[]>>;
   sizesLoading: boolean;
   sizesData?: SizesData;
