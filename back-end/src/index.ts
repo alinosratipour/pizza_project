@@ -8,7 +8,6 @@ import dotenv from "dotenv"; // Import dotenv package
 dotenv.config(); // Load environment variables from .env file
 
 const prisma = new PrismaClient();
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,

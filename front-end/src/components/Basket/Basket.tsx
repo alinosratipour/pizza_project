@@ -22,7 +22,6 @@ const BASKET_STORAGE_KEY = "basket";
 function Basket({
   basket,
   setBasket,
-  calculateTotalPrice,
   onSizeChange,
   onBaseChange,
   onBasketToppingsChange,
@@ -51,7 +50,6 @@ function Basket({
   }, [basket]);
 
   const handleSaveChanges = (updatedItem: BasketItem) => {
-   
     const updatedBasket = basket.map((item) =>
       item.id_pizza === updatedItem.id_pizza
         ? {
@@ -69,10 +67,14 @@ function Basket({
     setIsEditModalOpen(false);
     setSelectedBasketItem(null);
   };
-  const { handleBasketClick,hidePizzaItems } = useNavbarContext();
+  const { handleBasketClick, hidePizzaItems } = useNavbarContext();
   return (
     <div className="BasketContainer">
-     <span className={`basket-icon-container ${hidePizzaItems ? 'close' : ''}`}><CgCloseO  onClick={handleBasketClick} /></span> 
+      <span
+        className={`basket-icon-container ${hidePizzaItems ? "close" : ""}`}
+      >
+        <CgCloseO onClick={handleBasketClick} />
+      </span>
       <h1 className="title">Basket</h1>
 
       {basket.length === 0 ? (
@@ -115,13 +117,14 @@ function Basket({
                 <div className="ex">
                   {item.toppings && item.toppings.length > 0 && (
                     <div>
-                      <div className="extraToppingTotal">Extra Toppings : £{item.toppingsTotal}</div>
+                      <div className="extraToppingTotal">
+                        Extra Toppings : £{item.toppingsTotal}
+                      </div>
                       <ul>
                         {item.toppings.map((topping, index) => (
                           <li key={index} className="topping">
                             <span className="qty">{topping.name} </span>
                             <span className="qty"> {topping.quantity} </span>
-                            {/* {topping.price} */}
                           </li>
                         ))}
                       </ul>
@@ -144,7 +147,6 @@ function Basket({
                 </div>
 
                 <hr></hr>
-                
               </li>
             ))}
           </ul>

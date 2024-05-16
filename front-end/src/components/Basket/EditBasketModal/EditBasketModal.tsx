@@ -22,10 +22,11 @@ interface EditBasketModalProps {
   onSizeChange?: (newSize: number, sizeName: string) => void;
   onBaseChange?: (newBase: string, price: number) => void;
   onToppingsChange: (toppings: ToppingType[]) => void;
-  onToppingsTotalChange:
-    | React.Dispatch<React.SetStateAction<number>>
-    | ((prevTotal: number) => number)
-    | undefined;
+  // onToppingsTotalChange:
+  //   | React.Dispatch<React.SetStateAction<number>>
+  //   | ((prevTotal: number) => number)
+  //   | undefined;
+    onToppingsTotalChange: (total: number) => void;
 }
 
 const EditBasketModal: React.FC<EditBasketModalProps> = ({
@@ -148,7 +149,7 @@ const extraToppingsCost =calculateExtraToppingsCost();
 
   return (
     <Modal isOpen={true} onClose={onClose}>
-      <div className="container">
+      <div className="edit-Container">
         <h1 className="PizzaName">{item?.name}</h1>
         <div className="SizeContainer">
           <h3 className="sizeTitle">Size: {item?.size}</h3>
@@ -186,7 +187,7 @@ const extraToppingsCost =calculateExtraToppingsCost();
           onRemoveTopping={removeToppingFromBasket}
           selectedToppings={selectedToppings}
         />
-        <div className="ButtonContainer1">
+        <div className="SaveButtonContainer">
           <Button
             size="md"
             colorscheme="primary"

@@ -17,7 +17,7 @@ const SizeRadioButtons: React.FC<SizeRadioButtonsProps> = ({
     initialCheckedSize || undefined
   );
   return (
-    <div className="Container">
+    <div className="Size-Radio-Container">
       {sizes.map((sizeData) => (
         <label key={sizeData.id_size} className="label">
           <input

@@ -16,4 +16,6 @@ seed.flag
 .vscode/
 
 **/.env
+**/assets.txt
 
+.vercel

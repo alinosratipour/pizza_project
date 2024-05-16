@@ -23,7 +23,10 @@ interface PizzaOptionsContainerProps {
   onRemoveTopping: (topping: ToppingType) => void;
   initialSize?: string;
 }
-
+interface Pizza {
+  id_pizza: number;
+  sizesWithPrices: SizeWithPrice[];
+}
 const PizzaOptionsContainer = ({
   pizzaId,
   onSizeChange,
@@ -42,10 +45,11 @@ const PizzaOptionsContainer = ({
     number | undefined
   >(0);
   const LOADING_MESSAGE = "Loading sizes...";
+
   useEffect(() => {
     if (!sizesLoading && sizesData) {
       const getPizzaSizesAndPrices = sizesData.getpizzasWithSizesAndPrices.find(
-        (pizza: any) => pizza.id_pizza === pizzaId
+        (pizza: Pizza) => pizza.id_pizza === pizzaId
       );
 
       if (getPizzaSizesAndPrices) {
@@ -66,7 +70,7 @@ const PizzaOptionsContainer = ({
         }
       }
     }
-  }, [sizesLoading, sizesData, pizzaId, initialSize]);
+  }, [sizesLoading, sizesData, pizzaId, initialSize, onSizeChange, setSizes]);
 
   useEffect(() => {
     if (selectedSize) {
@@ -121,7 +125,11 @@ const PizzaOptionsContainer = ({
               selectedSize={selectedSize}
             />
           </div>
-
+          <If condition={selectedSizePrice}>
+        <div className="PizzaPrice">
+          <SizePrice selectedSizePrice={selectedSizePrice} size="" />
+        </div>
+      </If>
           <div className="AccordionMenu-Wrapper">
             <AccordionMenu title="Customise Toppings">
               <div className="PizzaToppings">
@@ -139,11 +147,7 @@ const PizzaOptionsContainer = ({
         </>
       </If>
 
-      <If condition={selectedSizePrice}>
-        <div className="PizzaPrice">
-          <SizePrice selectedSizePrice={selectedSizePrice} size="" />
-        </div>
-      </If>
+     
     </div>
   );
 };

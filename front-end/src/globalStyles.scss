@@ -9,8 +9,13 @@
   --green: #0e985e;
   --dark-gray: rgb(106, 103, 103);
   --light-gray: lightgray;
+  --orange: #e9b108;
+  --black:#000000;
 }
-
+.no-underline-white {
+  text-decoration: none;
+  color: white;
+}
 @mixin image-styles {
   width: 100%;
   max-height: 200px;
@@ -25,5 +30,16 @@
       max-width: 260px;
       border-radius: 8px;
     }
+  }
+}
+
+@mixin small-screen {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+@mixin large-screen {
+  @media (min-width: 1200px) {
+    @content;
   }
 }

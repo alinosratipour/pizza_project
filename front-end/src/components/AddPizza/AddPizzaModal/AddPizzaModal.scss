@@ -1,4 +1,4 @@
-/* AddPizzaModal.scss */
+@import "../../../globalStyles.scss";
 .ImageContainer {
   width: 100%;
   max-height: 200px;
@@ -25,4 +25,33 @@
   font-family: var(--font-roboto-condensed);
   padding-bottom: 8px;
   color: grey;
+}
+.modal-close {
+  margin-left: 400px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  margin-top: 10px;
+  cursor: pointer;
+  color: var(--dark-gray);
+  transition: 0.5s ease-out;
+}
+.modal-close:hover {
+  color: var(--light-gray);
+}
+
+@include small-screen {
+  .main-Container {
+    height: 667px;
+    padding-bottom: 30px;
+    overflow-y: auto;
+  }
+  .PizzaTitle {
+    margin-top: 25px;
+  }
+  .modal-close {
+    margin-left: 285px;
+    margin-top: 30px;
+    height: 30px;
+  }
 }

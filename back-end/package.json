@@ -7,7 +7,7 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "dev": "nodemon --exec ts-node src/index.ts",
-    "build": "tsc --skipLibCheck && npm run prisma:generate && npm run prisma:migrate && npm run seed",
+    "build": "tsc --skipLibCheck ",
     "seed": "ts-node src/seeds/seed.ts",
     "start": "ts-node src/index.ts"
   },
@@ -27,5 +27,8 @@
     "prisma": "^5.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">= 16"
   }
 }

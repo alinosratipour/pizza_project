@@ -2,7 +2,7 @@
   padding-bottom: 30px;
   color: var(--title-color);
 }
-.container {
+.edit-Container {
   color: var(--content-color);
   display: flex;
   flex-direction: column;
@@ -18,10 +18,11 @@
 .BaseTitle {
   padding-bottom: 30px;
 }
-.ButtonContainer1 {
+.SaveButtonContainer{
   width: 88%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
+  padding-top: 20px;
 }

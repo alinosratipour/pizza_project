@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PizzaOptionsContainer from "../PizzaOptionContainer/PizzaOptionsContainer";
 import { Pizza } from "../../SharedTypes";
 import useBaseState from "../../Hooks/StateHooks/useBase";
@@ -7,6 +7,7 @@ import useAddToBasket from "../../Hooks/useAddToBasketHook";
 import Button from "../../UI-Liberary/Button/Button";
 import "./AddPizzaModal.scss";
 import Tooltip from "../../UI-Liberary/ToolTip/ToolTip";
+import { CgCloseO } from "react-icons/cg";
 
 interface AddPizzaModalProps {
   selectedPizza: Pizza;
@@ -37,9 +38,9 @@ const AddPizzaModal: React.FC<AddPizzaModalProps> = ({
     selectedToppings,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setRemovedToppings(updatedRemovedToppings);
-  }, [updatedRemovedToppings]);
+  }, [updatedRemovedToppings, setRemovedToppings]);
 
   const handleSizeChange = (
     price: number | undefined,
@@ -57,10 +58,15 @@ const AddPizzaModal: React.FC<AddPizzaModalProps> = ({
     addToBasket(selectedPizza, selectedSize || "", selectedBase || "");
     setIsModalOpen(false);
   };
-
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
-    <>
+    <div className="main-Container">
       <div className="addPizzaContainer">
+      <button className="modal-close" onClick={handleCloseModal}>
+          <CgCloseO/>
+        </button>
         <h2 className="PizzaTitle">{selectedPizza.name}</h2>
         <p className="PizzaDescription">{selectedPizza.description}</p>
         <div className="ImageContainer">
@@ -91,7 +97,7 @@ const AddPizzaModal: React.FC<AddPizzaModalProps> = ({
           </Button>
         </Tooltip>
       </div>
-    </>
+    </div>
   );
 };
 
