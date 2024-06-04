@@ -34,7 +34,6 @@ const SizeRadioButtons: React.FC<SizeRadioButtonsProps> = ({
             }
             className="CustomRadio"
           />
-
           <span className="SizeName">{sizeData.p_size}</span>
         </label>
       ))}
