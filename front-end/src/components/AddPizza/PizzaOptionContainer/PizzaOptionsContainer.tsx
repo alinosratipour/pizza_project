@@ -3,7 +3,7 @@ import { If } from "tsx-control-statements/components";
 import SizePrice from "../SizePrice";
 import ToppingsList from "../ToppingsList/ToppingsList";
 import SizeRadioButtons from "../../SizeRadioButton/SizeRadioButtons";
-import BaseRadioButtons from "../../UI-Liberary/BaseRadioButton/BaseRadioButtons";
+import BaseRadioButtons from "../../BaseRadioButton/BaseRadioButtons";
 import { SizeWithPrice, ToppingType } from "../../SharedTypes";
 import { useSizeContext } from "../../Context/SizeContext";
 import { useBaseContext } from "../../Context/BaseContext";

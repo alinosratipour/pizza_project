@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./BaseRadioButtons.scss";
-import useBaseState from "../../Hooks/StateHooks/useBase";
-import RadioButton from "../RadioButton/RadioButton";
+import useBaseState from "../Hooks/StateHooks/useBase";
+import RadioButton from "../UI-Liberary/RadioButton/RadioButton";
 
 interface BaseRadioButtonsProps {
   bases: { base: string; price: number }[];

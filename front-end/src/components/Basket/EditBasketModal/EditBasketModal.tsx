@@ -4,7 +4,7 @@ import SizeRadioButtons from "../../SizeRadioButton/SizeRadioButtons";
 import { useSizeContext } from "../../Context/SizeContext";
 import { useBaseContext } from "../../Context/BaseContext";
 import { useAllAvailableToppingsStore } from "../../store/AllAvailableToppingsStore";
-import BaseRadioButtons from "../../UI-Liberary/BaseRadioButton/BaseRadioButtons";
+import BaseRadioButtons from "../../BaseRadioButton/BaseRadioButtons";
 import SizePrice from "../../AddPizza/SizePrice";
 import { BasketItem, SizeWithPrice, ToppingType } from "../../SharedTypes";
 import ToppingsList from "../../AddPizza/ToppingsList/ToppingsList";
