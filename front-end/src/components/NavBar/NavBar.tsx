@@ -8,6 +8,7 @@ import MenuBar from "../MenuBar/MenuBar";
 import HamburgerMenu from "../UI-Liberary/HamburgerMenu/HamburgerMenu";
 import SlidingMenu from "../SlidingMenu/SlidingMenu";
 import { Link, useLocation  } from "react-router-dom";
+import { usePizzaContext } from "../Context/PizzaContext";
 
 interface NavBarProps {}
 
@@ -35,15 +36,20 @@ const NavBar: React.FC<NavBarProps> = () => {
 
   const hiddenBasketRoutes = ["/"];
 
+  const {
+    globalLoading,
+    localLoading,
+  } = usePizzaContext();
   // Check if the current route is in the list of hidden routes
   const hideBasket = hiddenBasketRoutes.includes(location.pathname);
+  const showBasketIcon = !globalLoading && !localLoading && !hideBasket;
   return (
     <div className="top-navbar">
       <div className="Mobile-Menu">
         <HamburgerMenu isOpen={menuOpen} onClick={toggleMenu} />
       </div>
       <h1 className="brand"><Link className="brand-link"  to="/">Pizza Shop</Link></h1>
-      {!hideBasket && (
+      {showBasketIcon  && (
       <div className={basketContainerClasses} onClick={handleBasketClick}>
         <span className="badge">{totalQuantity}</span>
         <FaShoppingBasket className="basket-icon" />
