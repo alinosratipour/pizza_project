@@ -10,7 +10,7 @@ seed.flag
 
 # macOS system files
 .DS_Store
-
+txt.txt
 # IDE files
 .idea/
 .vscode/

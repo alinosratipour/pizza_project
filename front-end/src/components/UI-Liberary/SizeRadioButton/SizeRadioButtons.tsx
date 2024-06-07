@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SizeWithPrice } from "../../SharedTypes";
 import "./SizeRadioButtons.scss";
+import RadioButton from "../RadioButton/RadioButton";
 
 interface SizeRadioButtonsProps {
   sizes: SizeWithPrice[];
@@ -19,23 +20,21 @@ const SizeRadioButtons: React.FC<SizeRadioButtonsProps> = ({
   return (
     <div className="Size-Radio-Container">
       {sizes.map((sizeData) => (
-        <label key={sizeData.id_size} className="label">
-          <input
-            type="radio"
-            name="size"
-            value={sizeData.id_size.toString()}
-            onChange={() => {
-              setSelectedSize(sizeData.p_size);
-              onSizeChange(sizeData.id_size, sizeData.p_size);
-            }}
-            checked={
-              sizeData.p_size === initialCheckedSize ||
-              sizeData.p_size === selectedSize
-            }
-            className="CustomRadio"
-          />
-          <span className="SizeName">{sizeData.p_size}</span>
-        </label>
+        <RadioButton
+          key={sizeData.id_size}
+          id={sizeData.id_size.toString()}
+          name="size"
+          value={sizeData.id_size.toString()}
+          checked={
+            sizeData.p_size === initialCheckedSize ||
+            sizeData.p_size === selectedSize
+          }
+          onChange={() => {
+            setSelectedSize(sizeData.p_size);
+            onSizeChange(sizeData.id_size, sizeData.p_size);
+          }}
+          label={sizeData.p_size}
+        />
       ))}
     </div>
   );

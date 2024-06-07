@@ -14,7 +14,6 @@ import Button from "../../UI-Liberary/Button/Button";
 import PizzaToppings from "../../AddPizza/PizzaToppings/PizzaToppings";
 import useAddToBasket from "../../Hooks/useAddToBasketHook";
 
-
 interface EditBasketModalProps {
   item: BasketItem | null;
   onClose: () => void;
@@ -26,7 +25,7 @@ interface EditBasketModalProps {
   //   | React.Dispatch<React.SetStateAction<number>>
   //   | ((prevTotal: number) => number)
   //   | undefined;
-    onToppingsTotalChange: (total: number) => void;
+  onToppingsTotalChange: (total: number) => void;
 }
 
 const EditBasketModal: React.FC<EditBasketModalProps> = ({
@@ -58,12 +57,13 @@ const EditBasketModal: React.FC<EditBasketModalProps> = ({
     setSelectedToppings,
   } = useAddToppings();
 
-  const { removedToppings: updatedRemovedToppings, setRemovedToppings,calculateExtraToppingsCost } =
-    useAddToBasket({
-      selectedToppings,
-    });
-
-  
+  const {
+    removedToppings: updatedRemovedToppings,
+    setRemovedToppings,
+    calculateExtraToppingsCost,
+  } = useAddToBasket({
+    selectedToppings,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -114,7 +114,7 @@ const EditBasketModal: React.FC<EditBasketModalProps> = ({
     }
   };
 
-const extraToppingsCost =calculateExtraToppingsCost();
+  const extraToppingsCost = calculateExtraToppingsCost();
 
   const handleSave = () => {
     if (editedPizza) {
@@ -129,9 +129,7 @@ const extraToppingsCost =calculateExtraToppingsCost();
         price: selectedSize?.price || 0,
         toppings: selectedToppings, // Include selected toppings
         removedToppings: updatedRemovedToppings,
-        extraToppingsCost:extraToppingsCost
-
-        
+        extraToppingsCost: extraToppingsCost,
       };
       onSave(updatedItem);
       onClose();
