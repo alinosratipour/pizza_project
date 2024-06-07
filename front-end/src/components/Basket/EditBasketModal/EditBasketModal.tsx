@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../../UI-Liberary/Modal/Modal";
-import SizeRadioButtons from "../../UI-Liberary/SizeRadioButton/SizeRadioButtons";
+import SizeRadioButtons from "../../SizeRadioButton/SizeRadioButtons";
 import { useSizeContext } from "../../Context/SizeContext";
 import { useBaseContext } from "../../Context/BaseContext";
 import { useAllAvailableToppingsStore } from "../../store/AllAvailableToppingsStore";
-import BaseRadioButtons from "../../UI-Liberary/BaseRadioButton/BaseRadioButtons";
+import BaseRadioButtons from "../../BaseRadioButton/BaseRadioButtons";
 import SizePrice from "../../AddPizza/SizePrice";
 import { BasketItem, SizeWithPrice, ToppingType } from "../../SharedTypes";
 import ToppingsList from "../../AddPizza/ToppingsList/ToppingsList";
@@ -13,7 +13,6 @@ import "./EditBasketModal.scss";
 import Button from "../../UI-Liberary/Button/Button";
 import PizzaToppings from "../../AddPizza/PizzaToppings/PizzaToppings";
 import useAddToBasket from "../../Hooks/useAddToBasketHook";
-
 
 interface EditBasketModalProps {
   item: BasketItem | null;
@@ -26,7 +25,7 @@ interface EditBasketModalProps {
   //   | React.Dispatch<React.SetStateAction<number>>
   //   | ((prevTotal: number) => number)
   //   | undefined;
-    onToppingsTotalChange: (total: number) => void;
+  onToppingsTotalChange: (total: number) => void;
 }
 
 const EditBasketModal: React.FC<EditBasketModalProps> = ({
@@ -58,12 +57,13 @@ const EditBasketModal: React.FC<EditBasketModalProps> = ({
     setSelectedToppings,
   } = useAddToppings();
 
-  const { removedToppings: updatedRemovedToppings, setRemovedToppings,calculateExtraToppingsCost } =
-    useAddToBasket({
-      selectedToppings,
-    });
-
-  
+  const {
+    removedToppings: updatedRemovedToppings,
+    setRemovedToppings,
+    calculateExtraToppingsCost,
+  } = useAddToBasket({
+    selectedToppings,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -114,7 +114,7 @@ const EditBasketModal: React.FC<EditBasketModalProps> = ({
     }
   };
 
-const extraToppingsCost =calculateExtraToppingsCost();
+  const extraToppingsCost = calculateExtraToppingsCost();
 
   const handleSave = () => {
     if (editedPizza) {
@@ -129,9 +129,7 @@ const extraToppingsCost =calculateExtraToppingsCost();
         price: selectedSize?.price || 0,
         toppings: selectedToppings, // Include selected toppings
         removedToppings: updatedRemovedToppings,
-        extraToppingsCost:extraToppingsCost
-
-        
+        extraToppingsCost: extraToppingsCost,
       };
       onSave(updatedItem);
       onClose();
