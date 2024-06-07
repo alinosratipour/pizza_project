@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { If } from "tsx-control-statements/components";
 import SizePrice from "../SizePrice";
 import ToppingsList from "../ToppingsList/ToppingsList";
-import SizeRadioButtons from "../../UI-Liberary/SizeRadioButton/SizeRadioButtons";
+import SizeRadioButtons from "../../SizeRadioButton/SizeRadioButtons";
 import BaseRadioButtons from "../../UI-Liberary/BaseRadioButton/BaseRadioButtons";
 import { SizeWithPrice, ToppingType } from "../../SharedTypes";
 import { useSizeContext } from "../../Context/SizeContext";

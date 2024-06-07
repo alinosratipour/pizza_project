@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../../UI-Liberary/Modal/Modal";
-import SizeRadioButtons from "../../UI-Liberary/SizeRadioButton/SizeRadioButtons";
+import SizeRadioButtons from "../../SizeRadioButton/SizeRadioButtons";
 import { useSizeContext } from "../../Context/SizeContext";
 import { useBaseContext } from "../../Context/BaseContext";
 import { useAllAvailableToppingsStore } from "../../store/AllAvailableToppingsStore";

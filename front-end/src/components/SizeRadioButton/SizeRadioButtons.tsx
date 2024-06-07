@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { SizeWithPrice } from "../../SharedTypes";
+import { SizeWithPrice } from "../SharedTypes";
 import "./SizeRadioButtons.scss";
-import RadioButton from "../RadioButton/RadioButton";
+import RadioButton from "../UI-Liberary/RadioButton/RadioButton";
 
 interface SizeRadioButtonsProps {
   sizes: SizeWithPrice[];
