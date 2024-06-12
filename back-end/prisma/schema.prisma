@@ -83,3 +83,30 @@ model Toppings {
   toppingPrice    ToppingPrice[]
 }
  
+model User {
+  id                 Int       @id @default(autoincrement())
+  email              String    @unique
+  name               String?
+  password           String
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  resetPasswordToken String?   @unique
+  resetPasswordExpires DateTime?
+  isVerified         Boolean   @default(false)
+  loginAttempts      Int       @default(0)
+  lastLoginAttempt   DateTime?
+  
+  addresses          Address[]
+}
+
+model Address {
+  id          Int      @id @default(autoincrement())
+  street      String
+  city        String
+  state       String
+  postalCode  String
+  country     String
+  userId      Int
+
+  user        User     @relation(fields: [userId], references: [id])
+}
