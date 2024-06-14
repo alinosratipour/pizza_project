@@ -1,4 +1,4 @@
-import { Context } from '../helpers/prismaContext';
+import { Context } from "../../helpers/prismaContext";
 
 const getBasesBySizeResolver = async (
   _parent: unknown,
@@ -31,8 +31,8 @@ const getBasesBySizeResolver = async (
     return basesWithPrices;
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.error('Error fetching bases by size:', error);
-      throw new Error('Unable to fetch bases by size');
+      console.error("Error fetching bases by size:", error);
+      throw new Error("Unable to fetch bases by size");
     }
   }
 };

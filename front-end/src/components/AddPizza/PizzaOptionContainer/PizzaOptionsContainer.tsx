@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { If } from "tsx-control-statements/components";
 import SizePrice from "../SizePrice";
 import ToppingsList from "../ToppingsList/ToppingsList";
-import SizeRadioButtons from "../../UI-Liberary/SizeRadioButton/SizeRadioButtons";
-import BaseRadioButtons from "../../UI-Liberary/BaseRadioButton/BaseRadioButtons";
+import SizeRadioButtons from "../../SizeRadioButton/SizeRadioButtons";
+import BaseRadioButtons from "../../BaseRadioButton/BaseRadioButtons";
 import { SizeWithPrice, ToppingType } from "../../SharedTypes";
 import { useSizeContext } from "../../Context/SizeContext";
 import { useBaseContext } from "../../Context/BaseContext";
@@ -126,10 +126,10 @@ const PizzaOptionsContainer = ({
             />
           </div>
           <If condition={selectedSizePrice}>
-        <div className="PizzaPrice">
-          <SizePrice selectedSizePrice={selectedSizePrice} size="" />
-        </div>
-      </If>
+            <div className="PizzaPrice">
+              <SizePrice selectedSizePrice={selectedSizePrice} size="" />
+            </div>
+          </If>
           <div className="AccordionMenu-Wrapper">
             <AccordionMenu title="Customise Toppings">
               <div className="PizzaToppings">
@@ -146,8 +146,6 @@ const PizzaOptionsContainer = ({
           </div>
         </>
       </If>
-
-     
     </div>
   );
 };

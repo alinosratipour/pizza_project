@@ -72,20 +72,47 @@ const typeDefs = gql`
     price: Float!
   }
 
+  type User {
+    id: Int!
+    email: String!
+    name: String
+    addresses: [Address!]!
+    createdAt: String!
+    updatedAt: String!
+  }
+
+  type Address {
+    id: Int!
+    street: String!
+    city: String!
+    state: String!
+    postalCode: String!
+    country: String!
+    createdAt: String!
+    updatedAt: String!
+  }
+
+  type Mutation {
+    registerUser(
+      email: String!
+      name: String
+      password: String!
+      street: String!
+      city: String!
+      state: String!
+      postalCode: String!
+      country: String!
+    ): User!
+  }
+
   type Query {
     getAllPizzasList: [Pizza!]!
     getpizzaWithRelatedToppings: [Pizza!]!
     getSizesWithBases: [SizeWithRelatedBases!]!
     getpizzasWithSizesAndPrices: [Pizza!]!
-    #getToppingPricesBySize: [ToppingPriceForSize!] # New query
     getToppingPricesBySize(id_size: Int): [ToppingPriceForSize]
-    getBasesPricesBySize(id_size: Int): [BaseWithPrice] # New query
+    getBasesPricesBySize(id_size: Int): [BaseWithPrice] 
     getToppingsOnPizza(pizzaId: Int!): [ToppingOnPizza!]!
-  }
-
-  type Mutation {
-    createPizza(name: String!, top_quantity: Int!, description: String): Pizza!
-    createBase(name: String!, increase_price: Int!): Base! # Add a mutation to create a base
   }
 `;
 

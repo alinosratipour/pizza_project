@@ -1,5 +1,4 @@
- import { Context } from '../helpers/prismaContext';
-
+import { Context } from "../../helpers/prismaContext";
 
 // export default getToppingPricesBySizeResolver;
 const getToppingPricesBySizeResolver = async (
@@ -28,11 +27,11 @@ const getToppingPricesBySizeResolver = async (
     }));
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.error('Error fetching topping prices by size:', error);
-      throw new Error('Unable to fetch topping prices by size');
+      console.error("Error fetching topping prices by size:", error);
+      throw new Error("Unable to fetch topping prices by size");
     } else {
-      console.error('Unexpected error:', error);
-      throw new Error('An unexpected error occurred');
+      console.error("Unexpected error:", error);
+      throw new Error("An unexpected error occurred");
     }
   } finally {
     await _context.prisma.$disconnect();

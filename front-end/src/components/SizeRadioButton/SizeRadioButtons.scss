@@ -1,0 +1,104 @@
+@import "../../globalStyles.scss";
+
+.Size-Radio-Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.label {
+  cursor: pointer;
+  display: block; 
+  position: relative; 
+  width: 100%;
+  padding: 20px;
+  text-align: left;
+}
+
+.label::after {
+  content: '';
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  width: 100%; 
+  height: 1px; 
+  background-color: var(--light-gray); 
+}
+
+
+.SizeName {
+  font-family: var(--font-roboto-condensed);
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: rgb(107, 102, 102);
+}
+
+.Title {
+  padding-bottom: 16px;
+  padding-top: 10px;
+  font-family: var(--font-roboto-condensed);
+  font-weight: 400;
+}
+
+.CustomRadio {
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: 20px;
+  height: 20px;
+  border: 2px solid lightgray;
+  border-radius: 50%;
+  appearance: none;
+  background-color: rgb(246, 243, 243);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); // Add subtle shadow
+  position: relative; // Required for the pseudo-element
+}
+
+.CustomRadio::after {
+  content: '';
+  width: 10px; // Adjust size as needed
+  height: 10px;
+  background-color: var(--orange);// Color of the inner circle
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0; // Hide by default
+  transition: opacity 0.2s ease-in-out;
+}
+
+.CustomRadio:not(:disabled):checked::after {
+  opacity: 1; // Show when checked
+}
+
+.CustomRadio:not(:disabled):hover {
+  background-color: rgb(194, 184, 184);
+  border: 2px solid gray; // Slightly darker border on hover
+}
+
+@include small-screen {
+  .Size-Radio-Container {
+    flex-direction: column;
+    margin: auto;
+  }
+
+ 
+
+  .SizeName {
+    font-size: 1.2rem;
+    color: rgb(107, 102, 102);
+  }
+
+  .CustomRadio:not(:disabled):checked {
+    background-color: var(--orange);
+    transform: scale(1.1);
+    border: none;
+  }
+
+  .CustomRadio:not(:disabled):checked::after {
+    background-color: white; // Inner circle color for small screens
+  }
+}
