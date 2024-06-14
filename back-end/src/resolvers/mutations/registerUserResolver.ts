@@ -1,7 +1,7 @@
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { Context } from "../helpers/prismaContext";
-import { RegisterUserArgs } from "./types/types";
+import { Context } from "../../helpers/prismaContext";
+import { RegisterUserArgs } from "../types/types";
 
 /**
  * Registers a new user with the provided data.
@@ -17,7 +17,8 @@ const registerUserResolver = async (
   context: Context
 ): Promise<User> => {
   try {
-    const { email, name, password, street, city, state, postalCode, country } = args;
+    const { email, name, password, street, city, state, postalCode, country } =
+      args;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 

@@ -1,4 +1,4 @@
-import { Context } from "../helpers/prismaContext";
+import { Context } from "../../helpers/prismaContext";
 
 const getToppingsOnPizzaResolver = async (
   _parent: unknown,

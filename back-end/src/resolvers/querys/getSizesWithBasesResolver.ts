@@ -1,4 +1,4 @@
-import { Context } from "../helpers/prismaContext";
+import { Context } from "../../helpers/prismaContext";
 
 const getSizesWithBasesResolver = async (
   _parent: unknown,
@@ -20,7 +20,7 @@ const getSizesWithBasesResolver = async (
 
     // Process the data to format it as desired
     const formattedData = sizesWithBasesAndPrices.map((size) => ({
-      id_size: size.id_size, 
+      id_size: size.id_size,
       size: size.p_size,
       price: size.price_topping,
       bases: size.basePrice.map((basePrice) => ({

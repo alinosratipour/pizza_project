@@ -1,11 +1,11 @@
-import getAllPizzasListResolver from "./getAllPizzasListResolver";
-import getpizzaWithRelatedToppingsResolver from "./getpizzaWithRelatedToppingsResolver";
-import getpizzasWithSizesAndPricesResolver from "./getpizzasWithSizesAndPricesResolver";
-import getSizesWithBasesResolver from "./getSizesWithBasesResolver";
-import getToppingPricesBySizeResolver from "./getToppingPricesBySizeResolver";
-import getBasesBySizeResolver from "./getBasesBySizeResolver";
-import getToppingsOnPizzaResolver from "./getToppingsOnPizzaResolver";
-import registerUserResolver from "./registerUserResolver";
+import getAllPizzasListResolver from "./querys/getAllPizzasListResolver";
+import getpizzaWithRelatedToppingsResolver from "./querys/getpizzaWithRelatedToppingsResolver";
+import getpizzasWithSizesAndPricesResolver from "./querys/getpizzasWithSizesAndPricesResolver";
+import getSizesWithBasesResolver from "./querys/getSizesWithBasesResolver";
+import getToppingPricesBySizeResolver from "./querys/getToppingPricesBySizeResolver";
+import getBasesBySizeResolver from "./querys/getBasesBySizeResolver";
+import getToppingsOnPizzaResolver from "./querys/getToppingsOnPizzaResolver";
+import registerUserResolver from "./mutations/registerUserResolver";
 
 const resolvers = {
   Query: {
