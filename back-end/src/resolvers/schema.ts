@@ -110,9 +110,8 @@ const typeDefs = gql`
     getpizzaWithRelatedToppings: [Pizza!]!
     getSizesWithBases: [SizeWithRelatedBases!]!
     getpizzasWithSizesAndPrices: [Pizza!]!
-    #getToppingPricesBySize: [ToppingPriceForSize!] # New query
     getToppingPricesBySize(id_size: Int): [ToppingPriceForSize]
-    getBasesPricesBySize(id_size: Int): [BaseWithPrice] # New query
+    getBasesPricesBySize(id_size: Int): [BaseWithPrice] 
     getToppingsOnPizza(pizzaId: Int!): [ToppingOnPizza!]!
   }
 `;
