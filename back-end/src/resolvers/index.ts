@@ -1,23 +1,24 @@
-import getAllPizzasListResolver from "./getAllPizzasListResolver";
-//import getpizzaWithRelatedToppings from "./getpizzaWithRelatedToppingsResolver";
-import getpizzaWithRelatedToppingsResolver from "./getpizzaWithRelatedToppingsResolver";
-//import getToppingPricesForSizesResolver from "./ getToppingPricesForSizesResolver ";
-import getpizzasWithSizesAndPricesResolver from "./getpizzasWithSizesAndPricesResolver";
-import getSizesWithBasesResolver from "./getSizesWithBasesResolver"
-import getToppingPricesBySizeResolver  from "./getToppingPricesBySizeResolver"
-import getBasesBySizeResolver from "./getBasesBySizeResolver"
-import getToppingsOnPizzaResolver from "./getToppingsOnPizzaResolver"
+import getAllPizzasListResolver from "./querys/getAllPizzasListResolver";
+import getpizzaWithRelatedToppingsResolver from "./querys/getpizzaWithRelatedToppingsResolver";
+import getpizzasWithSizesAndPricesResolver from "./querys/getpizzasWithSizesAndPricesResolver";
+import getSizesWithBasesResolver from "./querys/getSizesWithBasesResolver";
+import getToppingPricesBySizeResolver from "./querys/getToppingPricesBySizeResolver";
+import getBasesBySizeResolver from "./querys/getBasesBySizeResolver";
+import getToppingsOnPizzaResolver from "./querys/getToppingsOnPizzaResolver";
+import registerUserResolver from "./mutations/registerUserResolver";
+
 const resolvers = {
   Query: {
-    getAllPizzasList:getAllPizzasListResolver,
-    getpizzaWithRelatedToppings:getpizzaWithRelatedToppingsResolver,
-   // getToppingPricesForSizes: getToppingPricesForSizesResolver, 
+    getAllPizzasList: getAllPizzasListResolver,
+    getpizzaWithRelatedToppings: getpizzaWithRelatedToppingsResolver,
     getpizzasWithSizesAndPrices: getpizzasWithSizesAndPricesResolver,
-    getSizesWithBases:getSizesWithBasesResolver,
-    getToppingPricesBySize:getToppingPricesBySizeResolver, 
-    getBasesPricesBySize:getBasesBySizeResolver,
-    getToppingsOnPizza:getToppingsOnPizzaResolver
-
+    getSizesWithBases: getSizesWithBasesResolver,
+    getToppingPricesBySize: getToppingPricesBySizeResolver,
+    getBasesPricesBySize: getBasesBySizeResolver,
+    getToppingsOnPizza: getToppingsOnPizzaResolver,
+  },
+  Mutation: {
+    registerUser: registerUserResolver,
   },
 };
 

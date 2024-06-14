@@ -1,4 +1,4 @@
-import { Context } from "../helpers/prismaContext";
+import { Context } from "../../helpers/prismaContext";
 
 const getAllPizzasListResolver = async (
   _parent: unknown,
