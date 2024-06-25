@@ -17,10 +17,11 @@ const resolvers = {
     getToppingPricesBySize: getToppingPricesBySizeResolver,
     getBasesPricesBySize: getBasesBySizeResolver,
     getToppingsOnPizza: getToppingsOnPizzaResolver,
-    loginUser: loginUserResolver,
+    
   },
   Mutation: {
     registerUser: registerUserResolver,
+    loginUser: loginUserResolver,
   },
 };
 
