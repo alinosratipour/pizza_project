@@ -107,6 +107,11 @@ const typeDefs = gql`
     ): User!
   }
 
+  type LoginResponse {
+    token: String!
+    user: User!
+  }
+
   type Query {
     getAllPizzasList: [Pizza!]!
     getpizzaWithRelatedToppings: [Pizza!]!
@@ -115,6 +120,7 @@ const typeDefs = gql`
     getToppingPricesBySize(id_size: Int): [ToppingPriceForSize]
     getBasesPricesBySize(id_size: Int): [BaseWithPrice]
     getToppingsOnPizza(pizzaId: Int!): [ToppingOnPizza!]!
+    loginUser(email: String!, password: String!): LoginResponse!
   }
 `;
 
