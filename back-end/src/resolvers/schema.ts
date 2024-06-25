@@ -83,9 +83,10 @@ const typeDefs = gql`
 
   type Address {
     id: Int!
-    street: String!
+    address1: String!
+    address2: String!
     city: String!
-    state: String!
+    state: String
     postalCode: String!
     country: String!
     createdAt: String!
@@ -97,9 +98,10 @@ const typeDefs = gql`
       email: String!
       name: String
       password: String!
-      street: String!
+      address1: String!
+      address2: String!
       city: String!
-      state: String!
+      state: String
       postalCode: String!
       country: String!
     ): User!
@@ -111,7 +113,7 @@ const typeDefs = gql`
     getSizesWithBases: [SizeWithRelatedBases!]!
     getpizzasWithSizesAndPrices: [Pizza!]!
     getToppingPricesBySize(id_size: Int): [ToppingPriceForSize]
-    getBasesPricesBySize(id_size: Int): [BaseWithPrice] 
+    getBasesPricesBySize(id_size: Int): [BaseWithPrice]
     getToppingsOnPizza(pizzaId: Int!): [ToppingOnPizza!]!
   }
 `;

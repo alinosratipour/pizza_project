@@ -97,9 +97,10 @@ model User {
 
 model Address {
   id          Int      @id @default(autoincrement())
-  street      String
+  address1    String   
+  address2    String   
   city        String
-  state       String
+  state       String?
   postalCode  String
   country     String
   userId      Int
