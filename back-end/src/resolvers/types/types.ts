@@ -2,7 +2,8 @@ export interface RegisterUserArgs {
     email: string;
     name?: string;
     password: string;
-    street: string;
+    address1: string;
+    address2: string;
     city: string;
     state: string;
     postalCode: string;
