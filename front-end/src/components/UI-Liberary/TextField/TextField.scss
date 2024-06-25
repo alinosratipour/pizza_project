@@ -1,0 +1,140 @@
+@import "../../../globalStyles.scss";
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(194, 184, 184);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgb(194, 184, 184);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgb(194, 184, 184);
+}
+
+.text-field .input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.input-container input {
+  border-radius: 10px;
+  width: 100%; // Ensure full width within container
+  padding: 20px;
+  padding-left: 50px; // Adjust padding to make room for the icon
+  //border: 1px solid ; // Set initial border
+  //font-family: var(--primary);
+  box-sizing: border-box;
+  margin: 6px;
+  outline: none;
+  //font-family: var(--primary);
+  color: #000;
+}
+
+/* Dynamic border width */
+.input-border-width-1px {
+  border-width: 1px;
+  border-color: black;
+}
+
+.input-border-width-2px {
+  border-width: 2px;
+}
+.text-field .input-border-error {
+  background-color: rgb(242, 164, 164);
+}
+.text-field .text-error::placeholder {
+  color: black;
+}
+
+.input-icons {
+  flex-direction: column;
+  display: flex;
+  font-size: 2rem;
+}
+.text-field .input-icon {
+  position: absolute;
+  left: 50px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  color: #fff;
+  font-size: 2rem;
+}
+
+.text-field .input {
+  padding-left: 50px;
+}
+
+.text-field .input-small {
+  width: 30%;
+}
+
+.text-field .input-medium {
+  width: 50%;
+}
+
+.text-field .input-large {
+  width: 90%;
+}
+
+.text-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.label {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  font-family: UbuntuRegular;
+  font-size: 14px;
+  font-weight: 200;
+}
+.input-border-error {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+}
+
+/* Color classes */
+.input-color-blue {
+  background-color: blue;
+}
+
+.input-color-green {
+  background-color: var(--form-input-color);
+}
+
+.input-color-gray {
+  background-color: lightgray;
+}
+.input-color-yellow {
+  background-color: lightyellow;
+}
+
+.input-color-red {
+  background-color: orange;
+}
+
+.input-border {
+  border: 1px solid black;
+}
+@include small-screen {
+  .text-field .input-icon {
+    position: absolute;
+    left: 23px;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    color: #fff;
+  }
+}

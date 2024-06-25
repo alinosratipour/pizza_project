@@ -2,31 +2,13 @@ import { useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../queries/queries";
 import { useNavigate } from "react-router-dom";
-
-interface LoginUserResult {
-  loginUser: {
-    token: string;
-    user: {
-      id: number;
-      email: string;
-      name: string | null;
-      addresses: {
-        id: number;
-        address1: string;
-        address2: string;
-        city: string;
-        state: string | null;
-        postalCode: string;
-        country: string;
-      }[];
-      createdAt: string; // You might want to use Date type here
-      updatedAt: string; // You might want to use Date type here
-    };
-  };
-}
-
+import { LoginUserResult } from "../SharedTypes";
+import TextField from "../UI-Liberary/TextField/TextField"; // Adjust the import path as per your file structure
+import "./LoginForm.scss";
+import Button from "../UI-Liberary/Button/Button";
 const LoginForm: React.FC = () => {
-  const [loginUserMutation, { loading, error }] = useMutation<LoginUserResult>(LOGIN_USER);
+  const [loginUserMutation, { loading, error }] =
+    useMutation<LoginUserResult>(LOGIN_USER);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,13 +43,42 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <button type="submit">Login</button>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
-    </form>
+    <>
+      <div className="container">
+        <form onSubmit={handleSubmit} className="form">
+          Login
+          <div className="email">
+            <TextField
+              type="email"
+              name="email"
+              placeholder="Email"
+              inputSize="large"
+              borderWidth="1px"
+              required
+            />
+          </div>
+          <div className="password">
+            <TextField
+              type="password"
+              name="password"
+              placeholder="Password"
+              inputSize="large"
+              borderWidth="1px"
+              required
+            />
+          </div>
+       
+          <div className="button-container">
+          <Button size="xlg" colorscheme="primary">
+            Login
+          </Button>
+         </div>
+
+          {loading && <p>Loading...</p>}
+          {error && <p>Error: {error.message}</p>}
+        </form>
+      </div>
+    </>
   );
 };
 
