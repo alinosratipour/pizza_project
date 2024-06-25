@@ -12,12 +12,12 @@ interface ToppingsListProps {
   refetchToppings?: (idSize: number) => Promise<void>;
   selectedToppings?: ToppingType[];
 }
-function ToppingsList({
+const ToppingsList = ({
   availableToppings,
   selectedToppings,
   onAddTopping,
   onRemoveTopping,
-}: ToppingsListProps) {
+}: ToppingsListProps) => {
   const [toppingQuantities, setToppingQuantities] = useState<{
     [key: string]: number;
   }>({});
@@ -64,7 +64,7 @@ function ToppingsList({
       ),
     }));
   };
-  const style = { color: "orange", fontSize: "22px" }
+  const style = { color: "orange", fontSize: "22px" };
   return (
     <div className="ToppingListContainer">
       {availableToppings &&
@@ -93,7 +93,7 @@ function ToppingsList({
                 <>
                   <Button
                     onClick={() => handleRemoveClick(topping)}
-                    icon={<GrSubtractCircle  style={style} />}
+                    icon={<GrSubtractCircle style={style} />}
                     colorscheme="gost-primary"
                     size="sm"
                     iconPosition="right"
@@ -101,7 +101,7 @@ function ToppingsList({
 
                   <Button
                     onClick={() => handleAddClick(topping)}
-                    icon={<IoMdAddCircleOutline style={{ fontSize: "25px"}} />}
+                    icon={<IoMdAddCircleOutline style={{ fontSize: "25px" }} />}
                     colorscheme="gost-primary"
                     size="sm"
                     iconPosition="right"
@@ -142,6 +142,6 @@ function ToppingsList({
         ))}
     </div>
   );
-}
+};
 
 export default ToppingsList;
