@@ -12,9 +12,8 @@
     "declaration": true,
     "sourceMap": true,
     "lib": ["esnext"],
-    "skipLibCheck": false,
-    "noImplicitAny": false,
-    "types": ["node", "@prisma/client"]
+    "skipLibCheck": true,
+    "noImplicitAny": false
   },
   "include": ["src/**/*.ts", "src/index.ts"],
 
