@@ -87,3 +87,25 @@ export interface ToppingOnPizza {
   id_pizza: number;
   toppings: ToppingType;
 }
+
+export interface LoginUserResult {
+  loginUser: {
+    token: string;
+    user: {
+      id: number;
+      email: string;
+      name: string | null;
+      addresses: {
+        id: number;
+        address1: string;
+        address2: string;
+        city: string;
+        state: string | null;
+        postalCode: string;
+        country: string;
+      }[];
+      createdAt: string; // You might want to use Date type here
+      updatedAt: string; // You might want to use Date type here
+    };
+  };
+}

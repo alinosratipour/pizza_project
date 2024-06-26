@@ -67,4 +67,26 @@ export const GET_TOPPINGS_ON_PIZZA = gql`
   }
 `;
 
-
+export const LOGIN_USER = gql`
+  mutation LoginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      token
+      user {
+        id
+        email
+        name
+        addresses {
+          id
+          address1
+          address2
+          city
+          state
+          postalCode
+          country
+        }
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
