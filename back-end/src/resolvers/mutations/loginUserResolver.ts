@@ -4,7 +4,7 @@ import { Context } from "../../helpers/prismaContext";
 import { LoginUserArgs, LoginUserResponse, UserWithAddresses } from "../types/types";
 
 // Secret key for JWT
-const JWT_SECRET = process.env.JWT_SECRET || "Secret";
+//const JWT_SECRET = process.env.JWT_SECRET || "Secret";
 
 const loginUserResolver = async (
   _: unknown,
