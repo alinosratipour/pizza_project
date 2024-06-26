@@ -88,6 +88,7 @@ const typeDefs = gql`
     address2: String!
     city: String!
     state: String
+    phoneNumber: String!
     postalCode: String!
     country: String!
     createdAt: DateTime!
@@ -108,6 +109,7 @@ const typeDefs = gql`
       address2: String!
       city: String!
       state: String
+      phoneNumber: String!
       postalCode: String!
       country: String!
     ): User!
