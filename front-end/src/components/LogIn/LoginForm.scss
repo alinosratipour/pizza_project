@@ -1,48 +1,47 @@
-.container {
-    display: flex;
-    justify-content: center; /* Center align horizontally */
-    align-items: center; /* Center align vertically */
-    height: 100vh; /* Adjust height as needed */
-  }
-  
-  .form {
-    width: 100%; /* Ensure the form takes full width */
-    max-width: 600px; /* Adjust max-width as needed */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: 800;
-  }
-  
-  .email,
-  .password {
-    margin-bottom: 20px; /* Add spacing between fields */
-    margin-top: 20px;
-  }
-  
-  .text-field {
-    width: 100%; /* Ensure input fields take full width */
-  }
-  
-  .input-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px; /* Adjust top margin as needed */
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 10px;
-  }
-  
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.email,
+.password {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.text-field {
+  width: 100%;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}

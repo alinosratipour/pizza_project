@@ -1,11 +1,17 @@
 import PizzaMenu from "./components/PizzaMenu/PizzaMenu";
-import { BrowserRouter as Router, Routes, Route,Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import ContextProvider from "./components/Context/ContextProvider";
 import NavBar from "./components/NavBar/NavBar";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import LoginForm from "./components/LogIn/LoginForm";
 import DashBoard from "./components/Dashboard/DashBoard";
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <div className="App">
@@ -18,7 +24,11 @@ function App() {
               <Route path="/pizza-menu" element={<PizzaMenu />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/dashboard" element={<DashBoard />} />
-              <Route path="/login" element={<Navigate to="/dashboard" />} />
+              {/* <Route path="/login" element={<Navigate to="/dashboard" />} /> */}
+              <Route
+                path="/dashboard"
+                element={<ProtectedRoute element={<DashBoard />} />}
+              />
             </Routes>
           </ContextProvider>
         </main>

@@ -1,16 +1,19 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../queries/queries";
 import { useNavigate } from "react-router-dom";
 import { LoginUserResult } from "../SharedTypes";
-import TextField from "../UI-Liberary/TextField/TextField"; // Adjust the import path as per your file structure
+import TextField from "../../components/UI-Liberary/TextField/TextField";
+import Button from "../../components/UI-Liberary/Button/Button";
 import "./LoginForm.scss";
-import Button from "../UI-Liberary/Button/Button";
+
 const LoginForm: React.FC = () => {
-  const [loginUserMutation, { loading, error }] =
-    useMutation<LoginUserResult>(LOGIN_USER);
+  const [loginUserMutation, { loading, error }] = useMutation<LoginUserResult>(
+    LOGIN_USER
+  );
   const navigate = useNavigate();
 
+  // Check if user is already logged in and redirect to dashboard
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -43,42 +46,35 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <>
-      <div className="container">
-        <form onSubmit={handleSubmit} className="form">
+    <div className="loginContainer">
+      <form onSubmit={handleSubmit} className="form">
+        <div className="email">
+          <TextField
+            type="email"
+            name="email"
+            placeholder="Email"
+            inputSize="large"
+            borderWidth="1px"
+            required
+          />
+        </div>
+        <div className="password">
+          <TextField
+            type="password"
+            name="password"
+            placeholder="Password"
+            inputSize="large"
+            borderWidth="1px"
+            required
+          />
+        </div>
+        <Button size="lg" colorscheme="primary" type="submit">
           Login
-          <div className="email">
-            <TextField
-              type="email"
-              name="email"
-              placeholder="Email"
-              inputSize="large"
-              borderWidth="1px"
-              required
-            />
-          </div>
-          <div className="password">
-            <TextField
-              type="password"
-              name="password"
-              placeholder="Password"
-              inputSize="large"
-              borderWidth="1px"
-              required
-            />
-          </div>
-       
-          <div className="button-container">
-          <Button size="xlg" colorscheme="primary">
-            Login
-          </Button>
-         </div>
-
-          {loading && <p>Loading...</p>}
-          {error && <p>Error: {error.message}</p>}
-        </form>
-      </div>
-    </>
+        </Button>
+        {loading && <p>Loading...</p>}
+        {error && <p>Error: {error.message}</p>}
+      </form>
+    </div>
   );
 };
 
