@@ -12,7 +12,7 @@
     "declaration": true,
     "sourceMap": true,
     "lib": ["esnext"],
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "noImplicitAny": false
   },
   "include": ["src/**/*.ts"],
