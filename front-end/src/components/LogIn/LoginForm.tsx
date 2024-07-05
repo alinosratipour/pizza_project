@@ -4,8 +4,10 @@ import { LOGIN_USER } from "../../queries/queries";
 import { useNavigate } from "react-router-dom";
 import { LoginUserResult } from "../SharedTypes";
 import TextField from "../../components/UI-Liberary/TextField/TextField";
+import { FaUserLock } from "react-icons/fa6";
 import Button from "../../components/UI-Liberary/Button/Button";
 import "./LoginForm.scss";
+import { Link } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
   const [loginUserMutation, { loading, error }] =
@@ -47,7 +49,11 @@ const LoginForm: React.FC = () => {
   return (
     <div className="loginContainer">
       <form onSubmit={handleSubmit} className="form">
-        Sign In
+        <div className="icons">
+          <FaUserLock />
+          <p>Sign In</p>
+        </div>
+
         <div className="email">
           <TextField
             type="email"
@@ -73,6 +79,9 @@ const LoginForm: React.FC = () => {
         </Button>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
+        <p className="createAccount">
+          Don't have an account ? <Link to="/signup" className="link">Sign up</Link>
+        </p>
       </form>
     </div>
   );

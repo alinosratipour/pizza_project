@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { SignUpUserResult } from "../SharedTypes";
 import TextField from "../../components/UI-Liberary/TextField/TextField";
 import Button from "../../components/UI-Liberary/Button/Button";
+import { IoIosCreate } from "react-icons/io";
 import "./Signup.scss";
 
 const Signup: React.FC = () => {
@@ -57,7 +58,11 @@ const Signup: React.FC = () => {
   return (
     <div className="signupContainer">
       <form onSubmit={handleSubmit} className="form">
-        Sign Up
+        <div className="icons">
+          <IoIosCreate />
+          <p> Sign Up</p>
+        </div>
+
         <div className="name">
           <TextField
             type="text"
