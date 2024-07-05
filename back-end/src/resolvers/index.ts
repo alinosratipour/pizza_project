@@ -7,6 +7,7 @@ import getBasesBySizeResolver from "./querys/getBasesBySizeResolver";
 import getToppingsOnPizzaResolver from "./querys/getToppingsOnPizzaResolver";
 import registerUserResolver from "./mutations/registerUserResolver";
 import loginUserResolver from "./mutations/loginUserResolver";
+import signUpUserResolver from "./mutations/signUpUserResolver";
 
 const resolvers = {
   Query: {
@@ -17,11 +18,11 @@ const resolvers = {
     getToppingPricesBySize: getToppingPricesBySizeResolver,
     getBasesPricesBySize: getBasesBySizeResolver,
     getToppingsOnPizza: getToppingsOnPizzaResolver,
-    
   },
   Mutation: {
     registerUser: registerUserResolver,
     loginUser: loginUserResolver,
+    signUpUser: signUpUserResolver,
   },
 };
 

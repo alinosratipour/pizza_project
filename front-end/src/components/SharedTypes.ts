@@ -130,3 +130,18 @@ export interface RegisterUserResult {
     };
   };
 }
+
+export interface SignUpUserResult {
+  signUpUser: {
+    token: string;
+    user: {
+      id: number;
+      email: string;
+      name: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+  };
+}
+
+

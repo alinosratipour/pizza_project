@@ -100,6 +100,11 @@ const typeDefs = gql`
     user: UserWithAddresses!
   }
 
+  type AuthPayload {
+    token: String!
+    user: User!
+  }
+
   type Mutation {
     registerUser(
       email: String!
@@ -114,6 +119,8 @@ const typeDefs = gql`
       country: String!
     ): User!
     loginUser(email: String!, password: String!): LoginResponse!
+    signUpUser(email: String!, name: String!, password: String!): AuthPayload!
+    
   }
 
   type UserWithAddresses {
