@@ -96,7 +96,7 @@ const Signup: React.FC = () => {
         <Button size="lg" colorscheme="primary" type="submit">
           Register
         </Button>
-        {loading && <p>Loading...</p>}
+        {loading && <p>Registering User...</p>}
         {error && <p>Error: {error.message}</p>}
       </form>
     </div>
