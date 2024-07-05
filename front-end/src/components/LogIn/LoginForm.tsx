@@ -77,7 +77,7 @@ const LoginForm: React.FC = () => {
         <Button size="lg" colorscheme="primary" type="submit">
           Login
         </Button>
-        {loading && <p>Registering User...</p>}
+        {loading && <p>Signing User...</p>}
         {error && <p>Error: {error.message}</p>}
         <p className="createAccount">
           Don't have an account ?{" "}
