@@ -77,10 +77,13 @@ const LoginForm: React.FC = () => {
         <Button size="lg" colorscheme="primary" type="submit">
           Login
         </Button>
-        {loading && <p>Loading...</p>}
+        {loading && <p>Registering User...</p>}
         {error && <p>Error: {error.message}</p>}
         <p className="createAccount">
-          Don't have an account ? <Link to="/signup" className="link">Sign up</Link>
+          Don't have an account ?{" "}
+          <Link to="/signup" className="link">
+            Sign up
+          </Link>
         </p>
       </form>
     </div>
