@@ -40,8 +40,7 @@ export interface BasketItem {
   availableSizes?: SizeType[];
   toppingsTotal?: number;
   removedToppings?: ToppingType[];
-  extraToppingsCost?:number
-
+  extraToppingsCost?: number;
 }
 
 export type BaseWithPrice = {
@@ -69,7 +68,6 @@ export interface ToppingType {
     }[];
   };
 }
-
 
 export interface ToppingsData {
   getToppingsOnPizza: ToppingOnPizza[];
@@ -109,3 +107,41 @@ export interface LoginUserResult {
     };
   };
 }
+
+export interface RegisterUserResult {
+  registerUser: {
+    token: string; // Add token here
+    user: {
+      id: number;
+      email: string;
+      name: string | null;
+      addresses: {
+        id: number;
+        address1: string;
+        address2: string;
+        city: string;
+        state: string | null;
+        phoneNumber: string;
+        postalCode: string;
+        country: string;
+      }[];
+      createdAt: string; // You might want to use Date type here
+      updatedAt: string; // You might want to use Date type here
+    };
+  };
+}
+
+export interface SignUpUserResult {
+  signUpUser: {
+    token: string;
+    user: {
+      id: number;
+      email: string;
+      name: string | null;
+      createdAt: string;
+      updatedAt: string;
+    };
+  };
+}
+
+

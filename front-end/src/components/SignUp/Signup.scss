@@ -1,0 +1,22 @@
+@import "../../globalStyles.scss";
+.signupContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: var(--font-roboto-condensed);
+}
+
+.name {
+  padding-top: 10px;
+}
+.icons {
+  font-size: 3rem;
+  text-align: left;
+  color: var(--orange);
+}
+.icons p {
+  font-size: 2rem;
+  text-align: center;
+  color: #000;
+}

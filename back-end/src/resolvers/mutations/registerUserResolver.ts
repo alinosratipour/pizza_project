@@ -17,7 +17,7 @@ const registerUserResolver = async (
   context: Context
 ): Promise<User> => {
   try {
-    const { email, name, password, address1, address2, city, state, postalCode, country } = args;
+    const { email, name, password, address1, address2, city, state,phoneNumber, postalCode, country } = args;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -32,6 +32,7 @@ const registerUserResolver = async (
             address2,
             city,
             state,
+            phoneNumber,
             postalCode,
             country,
           },
