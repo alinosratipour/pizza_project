@@ -12,6 +12,7 @@ import Home from "./pages/Home/Home";
 import LoginForm from "./components/LogIn/LoginForm";
 import DashBoard from "./components/Dashboard/DashBoard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Signup from "./components/SignUp/Signup";
 function App() {
   return (
     <div className="App">
@@ -24,7 +25,7 @@ function App() {
               <Route path="/pizza-menu" element={<PizzaMenu />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/dashboard" element={<DashBoard />} />
-              {/* <Route path="/login" element={<Navigate to="/dashboard" />} /> */}
+              <Route path="/signup" element={<Signup/>} />
               <Route
                 path="/dashboard"
                 element={<ProtectedRoute element={<DashBoard />} />}

@@ -8,9 +8,8 @@ import Button from "../../components/UI-Liberary/Button/Button";
 import "./LoginForm.scss";
 
 const LoginForm: React.FC = () => {
-  const [loginUserMutation, { loading, error }] = useMutation<LoginUserResult>(
-    LOGIN_USER
-  );
+  const [loginUserMutation, { loading, error }] =
+    useMutation<LoginUserResult>(LOGIN_USER);
   const navigate = useNavigate();
 
   // Check if user is already logged in and redirect to dashboard
@@ -48,6 +47,7 @@ const LoginForm: React.FC = () => {
   return (
     <div className="loginContainer">
       <form onSubmit={handleSubmit} className="form">
+        Sign In
         <div className="email">
           <TextField
             type="email"
