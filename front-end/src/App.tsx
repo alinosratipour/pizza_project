@@ -13,6 +13,7 @@ import LoginForm from "./components/LogIn/LoginForm";
 import DashBoard from "./components/Dashboard/DashBoard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Signup from "./components/SignUp/Signup";
+import CheckOutPage from "./components/CheckOut/CheckOutPage";
 function App() {
   return (
     <div className="App">
@@ -26,6 +27,7 @@ function App() {
               <Route path="/login" element={<LoginForm />} />
               <Route path="/dashboard" element={<DashBoard />} />
               <Route path="/signup" element={<Signup/>} />
+              <Route path="/checkout" element={<CheckOutPage/>} />
               <Route
                 path="/dashboard"
                 element={<ProtectedRoute element={<DashBoard />} />}

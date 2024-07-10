@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Modal from "../UI-Liberary/Modal/Modal";
+import { useNavigate } from "react-router-dom";
 import Basket from "../Basket/Basket";
 import AddPizzaModal from "../AddPizza/AddPizzaModal/AddPizzaModal";
 import PizzaItem from "../PizzaItems/PizzaItem";
@@ -34,6 +35,10 @@ const PizzaMenu = () => {
     localLoading,
   } = usePizzaContext();
 
+  const navigate = useNavigate();
+  const handleCheckout = () => {
+    navigate("/checkout", { state: { basket,totalPrice } });
+  };
   useEffect(() => {
     if (selectedSize) {
       setSelectedToppings([]);
@@ -46,6 +51,7 @@ const PizzaMenu = () => {
   const { calculateTotalPrice, basket, setBasket } = useAddToBasket({
     selectedToppings,
   });
+
 
   useEffect(() => {
     setTotalPrice(calculateTotalPrice());
@@ -102,7 +108,12 @@ const PizzaMenu = () => {
             />
           </div>
           <div className="checkoutButton">
-            <Button colorscheme="primary" size="xlg" disabled={totalPrice < 15}>
+            <Button
+              colorscheme="primary"
+              size="xlg"
+              disabled={totalPrice < 15}
+              onClick={handleCheckout}
+            >
               Checkout
             </Button>
           </div>
