@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
 import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "../../queries/queries";
+import { SIGN_UP_USER } from "../../queries/queries";
 import { useNavigate } from "react-router-dom";
-import { LoginUserResult } from "../SharedTypes";
+import { SignUpUserResult } from "../SharedTypes";
 import TextField from "../../components/UI-Liberary/TextField/TextField";
-import { FaUserLock } from "react-icons/fa6";
 import Button from "../../components/UI-Liberary/Button/Button";
-import "./LoginForm.scss";
-import { Link } from "react-router-dom";
+import { IoIosCreate } from "react-icons/io";
+import "./Signup.scss";
 
-const LoginForm: React.FC = () => {
-  const [loginUserMutation, { loading, error }] =
-    useMutation<LoginUserResult>(LOGIN_USER);
+const Signup: React.FC = () => {
+  const [signUpUserMutation, { loading, error }] =
+    useMutation<SignUpUserResult>(SIGN_UP_USER);
   const navigate = useNavigate();
 
-  // Check if user is already logged in and redirect to dashboard
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -22,38 +20,59 @@ const LoginForm: React.FC = () => {
     }
   }, [navigate]);
 
-  const handleLogin = async (email: string, password: string) => {
+  const handleSignup = async (
+    email: string,
+    password: string,
+    name: string
+  ) => {
     try {
-      const response = await loginUserMutation({
-        variables: { email, password },
+      const response = await signUpUserMutation({
+        variables: {
+          email,
+          password,
+          name,
+        },
       });
 
       if (response.data) {
-        localStorage.setItem("token", response.data.loginUser.token);
+        localStorage.setItem("token", response.data.signUpUser.token);
         navigate("/dashboard");
       } else {
         throw new Error("No data returned from server");
       }
     } catch (error: any) {
-      console.error("Login error:", error.message);
+      console.error("Signup error:", error.message);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const email = e.currentTarget.email.value;
-    const password = e.currentTarget.password.value;
-    handleLogin(email, password);
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const name = formData.get("name") as string;
+
+    handleSignup(email, password, name);
   };
 
   return (
-    <div className="loginContainer">
+    <div className="signupContainer">
       <form onSubmit={handleSubmit} className="form">
         <div className="icons">
-          <FaUserLock />
-          <p>Sign In</p>
+          <IoIosCreate />
+          <p> Sign Up</p>
         </div>
 
+        <div className="name">
+          <TextField
+            type="text"
+            name="name"
+            placeholder="Name"
+            inputSize="large"
+            borderWidth="1px"
+            required
+          />
+        </div>
         <div className="email">
           <TextField
             type="email"
@@ -75,19 +94,13 @@ const LoginForm: React.FC = () => {
           />
         </div>
         <Button size="lg" colorscheme="primary" type="submit">
-          Login
+          Register
         </Button>
-        {loading && <p>Signing User...</p>}
+        {loading && <p>Registering User...</p>}
         {error && <p>Error: {error.message}</p>}
-        <p className="createAccount">
-          Don't have an account ?{" "}
-          <Link to="/signup" className="link">
-            Sign up
-          </Link>
-        </p>
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default Signup;

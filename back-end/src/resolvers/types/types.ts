@@ -24,6 +24,7 @@ export interface RegisterUserArgs {
   address2: string;
   city: string;
   state: string;
+  phoneNumber:string;
   postalCode: string;
   country: string;
 }

@@ -11,10 +11,11 @@ import { usePizzaContext } from "../Context/PizzaContext";
 import { useToppingsRemovalFromPizza } from "../store/ToppingOnPizzaStore ";
 import { useNavbarContext } from "../Context/NavbarContext";
 import "./PizzaMenu.scss";
+import Button from "../UI-Liberary/Button/Button";
 
 const PizzaMenu = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [totalPrice, setTotalPrice] = useState(0);
   const {
     selectedToppings,
     setSelectedToppings,
@@ -45,6 +46,10 @@ const PizzaMenu = () => {
   const { calculateTotalPrice, basket, setBasket } = useAddToBasket({
     selectedToppings,
   });
+
+  useEffect(() => {
+    setTotalPrice(calculateTotalPrice());
+  }, [basket, calculateTotalPrice]);
 
   const openAddPizzaModal = (pizza: Pizza | null) => {
     setSelectedPizza(pizza);
@@ -96,7 +101,11 @@ const PizzaMenu = () => {
               onBasketToppingsTotalChange={(total) => setToppingsTotal(total)}
             />
           </div>
-
+          <div className="checkoutButton">
+            <Button colorscheme="primary" size="xlg" disabled={totalPrice < 15}>
+              Checkout
+            </Button>
+          </div>
           <div className="basketFooter">
             <span>Total</span>
             <span> £{calculateTotalPrice()}</span>

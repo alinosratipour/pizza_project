@@ -90,3 +90,60 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const REGISTER_USER = gql`
+  mutation RegisterUser(
+    $email: String!
+    $name: String!
+    $password: String!
+    $phoneNumber: String!
+    $address1: String!
+    $address2: String!
+    $city: String!
+    $state: String
+    $postalCode: String!
+    $country: String!
+  ) {
+    registerUser(
+      email: $email
+      name: $name
+      password: $password
+      phoneNumber: $phoneNumber
+      address1: $address1
+      address2: $address2
+      city: $city
+      state: $state
+      postalCode: $postalCode
+      country: $country
+    ) {
+      id
+      email
+      name
+      addresses {
+        id
+        address1
+        address2
+        city
+        state
+        phoneNumber
+        postalCode
+        country
+      }
+    }
+  }
+`;
+
+export const SIGN_UP_USER = gql`
+  mutation SignUpUser($email: String!, $name: String!, $password: String!) {
+    signUpUser(email: $email, name: $name, password: $password) {
+      token
+      user {
+        id
+        email
+        name
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
