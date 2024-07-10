@@ -28,7 +28,10 @@
 .basket-icon-container {
   display: none;
 }
-
+.checkoutButton {
+  text-align: center;
+  padding-bottom: 10px;
+}
 @media (min-width: 768px) and (max-width: 1023px) {
   .pizza-items-container {
     grid-template-columns: repeat(2, 1fr);
