@@ -11,13 +11,13 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-height: 100vh; /* Ensure container covers full viewport height */
   gap: 150px; /* Gap between .form and .basketReview */
-  
+  font-family: var(--font-roboto-condensed);
   .form {
     width: 100%;
     display: flex;
     flex-direction: column;
     margin-left: 120px; /* Adjust margin as needed for spacing */
-     
+
     .icons {
       display: flex;
       align-items: center;
@@ -42,19 +42,28 @@
     padding: 20px; /* Add padding for better spacing */
     text-align: center;
     min-height: 100vh; /* Ensure it covers full viewport height */
-   
-    
+
     .basketItem {
+      border-bottom: 1px solid #ccc; /* Example border */
+      padding-top: 5px;
+    }
+    .wrapper {
       display: flex;
       padding: 10px;
       border-bottom: 2px solid #ccc; /* Example border */
-      
+      gap: 200px;
+      justify-content: left;
+      align-items: left;
     }
-    .basketItem p{
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     padding: 10px;
+    .subItemsLeft {
+      text-align: left;
+
+      width: 100%;
+    }
+    .subItemsRight {
+      text-align: left;
+      width: 100%;
+      text-align: right;
     }
 
     .basketItem:last-child {
@@ -71,8 +80,8 @@
     }
 
     .pizzaName {
-      font-family: var(--font-roboto-condensed);
       font-size: 1.8rem;
+      text-align: center;
     }
   }
 

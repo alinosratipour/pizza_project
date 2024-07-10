@@ -54,7 +54,6 @@ const CheckoutPage: React.FC = () => {
     const formData = new FormData(e.currentTarget);
     handleCheckout(formData);
   };
- 
 
   return (
     <div className="checkoutContainer">
@@ -150,48 +149,55 @@ const CheckoutPage: React.FC = () => {
         {basket.map((item: BasketItem, index: number) => (
           <div key={index} className="basketItem">
             <p className="pizzaName">{item.name}</p>
-            <p>
-              <strong>Size:</strong> {item.size}
-            </p>
-            <p>
-              <strong>Base:</strong> {item.base}
-            </p>
-            <p>
-              <strong>Price:</strong> £{(item.price ?? 0).toFixed(2)}
-            </p>
-            <p>
-              <strong>Quantity:</strong> {item.quantity}
-            </p>
-            {item.toppings && ( // Check if item.toppings is defined before mapping
-              <p>
-                {item.toppings && item.toppings.length > 0 && (
+            <div className="wrapper">
+              <div className="subItemsLeft">
+                <p>
+                  <strong>Size:</strong> {item.size}
+                </p>
+                <p>
+                  <strong>Base:</strong> {item.base}
+                </p>
+                <p>
+                  <strong>Price:</strong> £{(item.price ?? 0).toFixed(2)}
+                </p>
+              </div>
+              <div className="subItemsRight">
+                <p>
+                  <strong>Quantity:</strong> {item.quantity}
+                </p>
+                {item.toppings && ( // Check if item.toppings is defined before mapping
                   <p>
-                    <strong>Toppings:</strong>{" "}
-                    {item.toppings.map((topping: ToppingType, i: number) => (
-                      <span key={i}>
-                        {topping.name}
-                        {i < item.toppings!.length - 1 ? ", " : ""}
-                      </span>
-                    ))}
+                    {item.toppings && item.toppings.length > 0 && (
+                      <p>
+                        <strong>Extra Toppings:</strong>{" "}
+                        {item.toppings.map(
+                          (topping: ToppingType, i: number) => (
+                            <span key={i}>
+                              {topping.name}
+                              {i < item.toppings!.length - 1 ? ", " : ""}
+                            </span>
+                          )
+                        )}
+                      </p>
+                    )}
                   </p>
                 )}
-              </p>
-            )}
-            {item.removedToppings && item.removedToppings.length > 0 && (
-              <p>
-                <strong>Removed Toppings:</strong>{" "}
-                {item.removedToppings.map(
-                  (removedTopping: ToppingType, i: number) => (
-                    <span key={i} className="removedToppings">
-                      {removedTopping.name}
-                      {i < item.removedToppings!.length - 1 ? ", " : ""}
-                    </span>
-                  )
+                {item.removedToppings && item.removedToppings.length > 0 && (
+                  <p>
+                    <strong>Removed Toppings:</strong>{" "}
+                    {item.removedToppings.map(
+                      (removedTopping: ToppingType, i: number) => (
+                        <span key={i} className="removedToppings">
+                          {removedTopping.name}
+                          {i < item.removedToppings!.length - 1 ? ", " : ""}
+                        </span>
+                      )
+                    )}
+                  </p>
                 )}
-              </p>
-            )}
-            {/* {index !== basket.length - 1 && <hr className="line" />}{" "} */}
-            
+                {/* {index !== basket.length - 1 && <hr className="line" />}{" "} */}
+              </div>
+            </div>
           </div>
         ))}
         <h2>Total Price: £{totalPrice.toFixed(2)}</h2>
