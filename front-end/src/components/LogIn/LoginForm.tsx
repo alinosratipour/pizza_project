@@ -27,18 +27,26 @@ const LoginForm: React.FC = () => {
       const response = await loginUserMutation({
         variables: { email, password },
       });
-
-      if (response.data) {
-        localStorage.setItem("token", response.data.loginUser.token);
+  
+      if (response.data && response.data.loginUser) {
+        const { token, user } = response.data.loginUser;
+  
+        // Check if user.name exists before setting localStorage
+        if (user && user.name) {
+          localStorage.setItem("userName", user.name);
+        }
+  
+        localStorage.setItem("token", token);
+        localStorage.setItem("userEmail", user.email); // Assuming user.email is always available
+  
         navigate("/dashboard");
       } else {
-        throw new Error("No data returned from server");
+        throw new Error("No data returned from server or loginUser is null");
       }
     } catch (error: any) {
       console.error("Login error:", error.message);
     }
   };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const email = e.currentTarget.email.value;

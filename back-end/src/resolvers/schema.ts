@@ -95,6 +95,17 @@ const typeDefs = gql`
     updatedAt: DateTime!
   }
 
+  input AddressUpdateInput {
+    addressId: Int!
+    address1: String
+    address2: String
+    city: String
+    state: String
+    postalCode: String
+    country: String
+    phoneNumber: String
+  }
+
   type LoginResponse {
     token: String!
     user: UserWithAddresses!
@@ -120,7 +131,11 @@ const typeDefs = gql`
     ): User!
     loginUser(email: String!, password: String!): LoginResponse!
     signUpUser(email: String!, name: String!, password: String!): AuthPayload!
-    
+    updateUser(
+      userId: Int!
+      name: String
+      addresses: [AddressUpdateInput!]
+    ): User!
   }
 
   type UserWithAddresses {

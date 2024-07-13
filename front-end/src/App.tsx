@@ -26,11 +26,15 @@ function App() {
               <Route path="/pizza-menu" element={<PizzaMenu />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/dashboard" element={<DashBoard />} />
-              <Route path="/signup" element={<Signup/>} />
-              <Route path="/checkout" element={<CheckOutPage/>} />
+              <Route path="/signup" element={<Signup />} />
+
               <Route
                 path="/dashboard"
                 element={<ProtectedRoute element={<DashBoard />} />}
+              />
+              <Route
+                path="/checkout"
+                element={<ProtectedRoute element={<CheckOutPage />} />}
               />
             </Routes>
           </ContextProvider>

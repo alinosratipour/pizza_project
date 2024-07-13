@@ -28,3 +28,20 @@ export interface RegisterUserArgs {
   postalCode: string;
   country: string;
 }
+
+export interface AddressUpdateInput {
+  addressId: number;
+  address1?: string;
+  address2?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  country?: string;
+  phoneNumber?: string;
+}
+
+export interface UpdateUserArgs {
+  userId: number;
+  name?: string;
+  addresses?: AddressUpdateInput[];
+}

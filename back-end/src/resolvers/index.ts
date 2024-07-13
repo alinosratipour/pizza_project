@@ -8,6 +8,7 @@ import getToppingsOnPizzaResolver from "./querys/getToppingsOnPizzaResolver";
 import registerUserResolver from "./mutations/registerUserResolver";
 import loginUserResolver from "./mutations/loginUserResolver";
 import signUpUserResolver from "./mutations/signUpUserResolver";
+import updateUserResolver from "./mutations/updateUserResolver";
 
 const resolvers = {
   Query: {
@@ -23,6 +24,7 @@ const resolvers = {
     registerUser: registerUserResolver,
     loginUser: loginUserResolver,
     signUpUser: signUpUserResolver,
+    updateUser: updateUserResolver
   },
 };
 

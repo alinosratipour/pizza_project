@@ -147,3 +147,30 @@ export const SIGN_UP_USER = gql`
     }
   }
 `;
+
+export const UPDATE_USER_DETAILS = gql`
+  mutation UpdateUserDetails(
+    $userId: Int!
+    $name: String
+    $addresses: [AddressUpdateInput]
+  ) {
+    updateUser(
+      userId: $userId
+      name: $name
+      addresses: $addresses
+    ) {
+      id
+      email
+      name
+      addresses {
+        id
+        address1
+        address2
+        city
+        state
+        postalCode
+        country
+      }
+    }
+  }
+`;

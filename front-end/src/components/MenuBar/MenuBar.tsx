@@ -17,6 +17,8 @@ const MenuBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userName"); 
+    localStorage.removeItem("userEmail"); 
     setIsLoggedIn(false);
   };
 
