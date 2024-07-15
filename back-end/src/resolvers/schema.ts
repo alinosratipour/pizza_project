@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
   scalar DateTime
-  
+
   type ToppingPrice {
     id: Int!
     id_size: Int!
@@ -107,7 +107,7 @@ const typeDefs = gql`
     country: String
     phoneNumber: String!
   }
-  
+
   type LoginResponse {
     token: String!
     user: UserWithAddresses!
@@ -123,6 +123,35 @@ const typeDefs = gql`
     email: String!
     name: String
     addresses: [Address!]!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+  }
+
+  input CreateOrderItemInput {
+    productId: Int!
+    quantity: Int!
+    price: Float!
+    toppings: [String!]!
+  }
+
+  type Order {
+    id: Int!
+    userId: Int!
+    addressId: Int!
+    paymentType: String!
+    status: String!
+    totalAmount: Float!
+    createdAt: DateTime!
+    items: [OrderItem!]!
+  }
+
+  type OrderItem {
+    id: Int!
+    orderId: Int!
+    productId: Int!
+    quantity: Int!
+    price: Float!
+    toppings: [String!]!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -147,6 +176,14 @@ const typeDefs = gql`
       name: String
       addresses: [AddressUpdateInput!]
     ): User!
+    createOrder(
+      userId: Int!
+      addressId: Int!
+      paymentType: String!
+      status: String!
+      totalAmount: Float!
+      items: [CreateOrderItemInput!]!
+    ): Order!
   }
 
   type Query {
