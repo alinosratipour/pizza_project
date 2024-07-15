@@ -96,15 +96,16 @@ const typeDefs = gql`
   }
 
   input AddressUpdateInput {
-    addressId: Int!
-    address1: String
+    addressId: Int
+    address1: String!
     address2: String
-    city: String
+    city: String!
     state: String
-    postalCode: String
-    country: String
-    phoneNumber: String
+    postalCode: String!
+    country: String!
+    phoneNumber: String!
   }
+  
 
   type LoginResponse {
     token: String!

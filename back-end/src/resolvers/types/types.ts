@@ -30,15 +30,16 @@ export interface RegisterUserArgs {
 }
 
 export interface AddressUpdateInput {
-  addressId: number;
-  address1?: string;
+  addressId?: number;
+  address1: string;
   address2?: string;
-  city?: string;
+  city: string;
   state?: string;
-  postalCode?: string;
-  country?: string;
-  phoneNumber?: string;
+  postalCode: string;
+  country: string;
+  phoneNumber: string;
 }
+
 
 export interface UpdateUserArgs {
   userId: number;
