@@ -30,60 +30,45 @@ const updateUserResolver = async (
 
     // Handle addresses
     if (addresses && addresses.length > 0) {
-      const updateAddressPromises = addresses.map(async (addressInput) => {
-        const {
-          addressId,
-          address1,
-          address2 = '',
-          city,
-          state = '',
-          postalCode,
-          country,
-          phoneNumber,
-        } = addressInput;
+      const userHasAddress = existingUser.addresses.length > 0;
 
-        const addressData = {
-          address1,
-          address2,
-          city,
-          state,
-          postalCode,
-          country,
-          phoneNumber,
-        };
+      if (userHasAddress) {
+        // Update existing address if user has one
+        const addressId = existingUser.addresses[0].id; // Assuming only one address per user for simplicity
 
-        if (addressId) {
-          // Update existing address if addressId is provided
-          const existingAddress = await context.prisma.address.findFirst({
-            where: { id: addressId, userId: userId },
-          });
-
-          if (existingAddress) {
-            await context.prisma.address.update({
-              where: { id: addressId },
-              data: addressData,
-            });
-          } else {
-            throw new Error(`Address with ID ${addressId} not found for user.`);
-          }
-        } else {
-          // Create new address if addressId is not provided
-          await context.prisma.address.create({
-            data: {
-              ...addressData,
-              user: { connect: { id: userId } }, // Connect address to the user
-            },
-          });
-        }
-      });
-
-      await Promise.all(updateAddressPromises);
+        await context.prisma.address.update({
+          where: { id: addressId },
+          data: {
+            address1: addresses[0].address1,
+            address2: addresses[0].address2 || '', // Ensure address2 is not undefined
+            city: addresses[0].city,
+            state: addresses[0].state || '',
+            postalCode: addresses[0].postalCode,
+            country: addresses[0].country,
+            phoneNumber: addresses[0].phoneNumber,
+          },
+        });
+      } else {
+        // Create new address if user doesn't have one
+        await context.prisma.address.create({
+          data: {
+            address1: addresses[0].address1,
+            address2: addresses[0].address2 || '', // Ensure address2 is not undefined
+            city: addresses[0].city,
+            state: addresses[0].state || '',
+            postalCode: addresses[0].postalCode,
+            country: addresses[0].country,
+            phoneNumber: addresses[0].phoneNumber,
+            user: { connect: { id: userId } },
+          },
+        });
+      }
     }
 
     // Fetch and return the updated user with addresses included
     const updatedUser = await context.prisma.user.findUnique({
       where: { id: userId },
-      include: { addresses: true }, // Ensure addresses are included in the response
+      include: { addresses: true },
     });
 
     if (!updatedUser) {
