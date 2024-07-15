@@ -148,11 +148,31 @@ export const SIGN_UP_USER = gql`
   }
 `;
 
+
+export const GET_USER_DETAILS = gql`
+  query GetUserDetails($userId: Int!) {
+    getUserDetails(userId: $userId) {
+      id
+      name
+      email
+      addresses {
+        id
+        address1
+        address2
+        city
+        postalCode
+        country
+        phoneNumber
+      }
+    }
+  }
+`;
+
 export const UPDATE_USER_DETAILS = gql`
   mutation UpdateUserDetails(
     $userId: Int!
     $name: String
-    $addresses: [AddressUpdateInput]
+    $addresses: [AddressUpdateInput!]!
   ) {
     updateUser(
       userId: $userId
@@ -160,16 +180,15 @@ export const UPDATE_USER_DETAILS = gql`
       addresses: $addresses
     ) {
       id
-      email
       name
       addresses {
         id
         address1
         address2
         city
-        state
         postalCode
         country
+        phoneNumber  
       }
     }
   }

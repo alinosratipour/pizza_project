@@ -2,6 +2,7 @@ import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
   scalar DateTime
+  
   type ToppingPrice {
     id: Int!
     id_size: Int!
@@ -29,6 +30,7 @@ const typeDefs = gql`
     name: String
     price: Float
   }
+
   type Pizza {
     id_pizza: Int!
     name: String!
@@ -106,7 +108,6 @@ const typeDefs = gql`
     phoneNumber: String!
   }
   
-
   type LoginResponse {
     token: String!
     user: UserWithAddresses!
@@ -115,6 +116,15 @@ const typeDefs = gql`
   type AuthPayload {
     token: String!
     user: User!
+  }
+
+  type UserWithAddresses {
+    id: Int!
+    email: String!
+    name: String
+    addresses: [Address!]!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type Mutation {
@@ -139,16 +149,8 @@ const typeDefs = gql`
     ): User!
   }
 
-  type UserWithAddresses {
-    id: Int!
-    email: String!
-    name: String
-    addresses: [Address!]!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-  }
-
   type Query {
+    getUserDetails(userId: Int!): User
     getAllPizzasList: [Pizza!]!
     getpizzaWithRelatedToppings: [Pizza!]!
     getSizesWithBases: [SizeWithRelatedBases!]!
@@ -156,7 +158,6 @@ const typeDefs = gql`
     getToppingPricesBySize(id_size: Int): [ToppingPriceForSize]
     getBasesPricesBySize(id_size: Int): [BaseWithPrice]
     getToppingsOnPizza(pizzaId: Int!): [ToppingOnPizza!]!
-    #loginUser(email: String!, password: String!): LoginResponse!
   }
 `;
 

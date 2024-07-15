@@ -35,9 +35,13 @@ const LoginForm: React.FC = () => {
         if (user && user.name) {
           localStorage.setItem("userName", user.name);
         }
-  
+        if (user.id) {
+          localStorage.setItem("userId", String(user.id));
+        }
+
         localStorage.setItem("token", token);
         localStorage.setItem("userEmail", user.email); // Assuming user.email is always available
+ 
   
         navigate("/dashboard");
       } else {

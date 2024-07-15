@@ -9,6 +9,7 @@ import registerUserResolver from "./mutations/registerUserResolver";
 import loginUserResolver from "./mutations/loginUserResolver";
 import signUpUserResolver from "./mutations/signUpUserResolver";
 import updateUserResolver from "./mutations/updateUserResolver";
+import getUserDetailsResolver from "./querys/getUserDetailsResolver";
 
 const resolvers = {
   Query: {
@@ -19,6 +20,7 @@ const resolvers = {
     getToppingPricesBySize: getToppingPricesBySizeResolver,
     getBasesPricesBySize: getBasesBySizeResolver,
     getToppingsOnPizza: getToppingsOnPizzaResolver,
+    getUserDetails:getUserDetailsResolver
   },
   Mutation: {
     registerUser: registerUserResolver,

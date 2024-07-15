@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { UPDATE_USER_DETAILS } from "../../queries/queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { UPDATE_USER_DETAILS, GET_USER_DETAILS } from "../../queries/queries";
 import TextField from "../../components/UI-Liberary/TextField/TextField";
 import Button from "../../components/UI-Liberary/Button/Button";
 import { IoIosCreate } from "react-icons/io";
@@ -10,46 +10,100 @@ import { BasketItem, ToppingType } from "../SharedTypes";
 
 const CheckoutPage: React.FC = () => {
   const location = useLocation();
-  const basket: BasketItem[] = location.state?.basket || []; // Explicitly type basket as BasketItem[]
+  const basket: BasketItem[] = location.state?.basket || [];
   const totalPrice: number = location.state?.totalPrice || 0;
 
-  const [name, setName] = useState<string>(() => localStorage.getItem("userName") || "");
-  const [email, setEmail] = useState<string>(() => localStorage.getItem("userEmail") || "");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [address1, setAddress1] = useState<string>("");
+  const [address2, setAddress2] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [postalCode, setPostalCode] = useState<string>("");
 
-  const [updateUserMutation, { loading, error }] = useMutation(UPDATE_USER_DETAILS);
 
-  const handleCheckout = async (formData: FormData) => {
-    const phoneNumber = formData.get("phoneNumber") as string;
-    const address1 = formData.get("address1") as string;
-    const address2 = formData.get("address2") as string;
-    const city = formData.get("city") as string;
-    const postalCode = formData.get("postalCode") as string;
+  const getUserIdFromStorage = (): number => {
+    const userIdStr = localStorage.getItem("userId");
+    if (!userIdStr) {
+      // Handle scenario where userId is not found in localStorage
+      // Example: Redirect to login page or fetch new userId from server
+      return 0; // Return default or handle the scenario appropriately
+    }
+    const userId = parseInt(userIdStr, 10);
+    if (isNaN(userId)) {
+      // Handle scenario where userId in localStorage is not a valid number
+      return 0; // Return default or handle the scenario appropriately
+    }
+    return userId;
+  };
+  
+  // `setUserId` is used to update the `userId` state fetched from localStorage.
+  const [userId, setUserId] = useState<number>(getUserIdFromStorage());
 
+  
+
+  // Fetch user details from GraphQL query
+  const {
+    data: userData,
+    loading: userLoading,
+    error: userError,
+  } = useQuery(GET_USER_DETAILS, {
+    variables: { userId },
+    skip: userId === 0,
+  });
+
+  // Populate form fields with user data from GraphQL query
+  useEffect(() => {
+    if (userData && userData.getUserDetails) {
+      const { name, email, addresses } = userData.getUserDetails;
+      setName(name || "");
+      setEmail(email || "");
+      if (addresses && addresses.length > 0) {
+        const primaryAddress = addresses[0]; // Assuming the first address is the primary one
+        setAddress1(primaryAddress.address1 || "");
+        setAddress2(primaryAddress.address2 || "");
+        setCity(primaryAddress.city || "");
+        setPostalCode(primaryAddress.postalCode || "");
+        setPhoneNumber(primaryAddress.phoneNumber || "");
+      }
+    }
+  }, [userData]);
+
+  // Mutation to update user details
+  const [
+    updateUserMutation,
+    { loading: updateUserLoading, error: updateUserError },
+  ] = useMutation(UPDATE_USER_DETAILS);
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
       await updateUserMutation({
         variables: {
-          email,
+          userId,
           name,
+          email,
           phoneNumber,
-          address1,
-          address2,
-          city,
-          postalCode,
+          addresses: [
+            {
+              address1,
+              address2,
+              city,
+              postalCode,
+              country: "USA", // Replace with actual country if applicable
+            },
+          ],
         },
       });
-
       console.log("User details updated successfully!");
     } catch (error) {
       console.error("Update user details error:", error);
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-
-    handleCheckout(formData);
-  };
+  if (userLoading) return <p>Loading user details...</p>;
+  if (userError) return <p>Error: {userError.message}</p>;
 
   return (
     <div className="checkoutContainer">
@@ -82,7 +136,6 @@ const CheckoutPage: React.FC = () => {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            disabled={!!email} // Disable if email is prepopulated
           />
         </div>
 
@@ -92,7 +145,9 @@ const CheckoutPage: React.FC = () => {
             name="phoneNumber"
             placeholder="Phone Number"
             inputSize="large"
+            value={phoneNumber}
             borderWidth="1px"
+            onChange={(e) => setPhoneNumber(e.target.value)}
             required
           />
         </div>
@@ -102,8 +157,10 @@ const CheckoutPage: React.FC = () => {
             name="address1"
             placeholder="Address Line 1"
             inputSize="large"
+            value={address1}
             borderWidth="1px"
-            required
+            onChange={(e) => setAddress1(e.target.value)}
+            required={!address1} // Make address1 required if it's empty
           />
         </div>
         <div className="address2">
@@ -112,7 +169,9 @@ const CheckoutPage: React.FC = () => {
             name="address2"
             placeholder="Address Line 2"
             inputSize="large"
+            value={address2}
             borderWidth="1px"
+            onChange={(e) => setAddress2(e.target.value)}
           />
         </div>
         <div className="city">
@@ -121,8 +180,10 @@ const CheckoutPage: React.FC = () => {
             name="city"
             placeholder="City"
             inputSize="large"
+            value={city}
             borderWidth="1px"
-            required
+            onChange={(e) => setCity(e.target.value)}
+            required={!city} // Make city required if it's empty
           />
         </div>
 
@@ -132,8 +193,10 @@ const CheckoutPage: React.FC = () => {
             name="postalCode"
             placeholder="Postal Code"
             inputSize="large"
+            value={postalCode}
             borderWidth="1px"
-            required
+            onChange={(e) => setPostalCode(e.target.value)}
+            required={!postalCode} // Make postalCode required if it's empty
           />
         </div>
 
@@ -141,8 +204,8 @@ const CheckoutPage: React.FC = () => {
           <Button size="xlg" colorscheme="primary" type="submit">
             Place Order
           </Button>
-          {loading && <p>Updating user details...</p>}
-          {error && <p>Error: {error.message}</p>}
+          {updateUserLoading && <p>Updating user details...</p>}
+          {updateUserError && <p>Error: {updateUserError.message}</p>}
         </div>
       </form>
 
