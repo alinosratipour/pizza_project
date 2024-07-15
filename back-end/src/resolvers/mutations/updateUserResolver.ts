@@ -44,7 +44,7 @@ const updateUserResolver = async (
             city: addresses[0].city,
             state: addresses[0].state || '',
             postalCode: addresses[0].postalCode,
-            country: addresses[0].country,
+            country: addresses[0].country  || '',
             phoneNumber: addresses[0].phoneNumber,
           },
         });
@@ -57,7 +57,7 @@ const updateUserResolver = async (
             city: addresses[0].city,
             state: addresses[0].state || '',
             postalCode: addresses[0].postalCode,
-            country: addresses[0].country,
+            country: addresses[0].country  || '',
             phoneNumber: addresses[0].phoneNumber,
             user: { connect: { id: userId } },
           },

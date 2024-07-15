@@ -21,7 +21,6 @@ const CheckoutPage: React.FC = () => {
   const [city, setCity] = useState<string>("");
   const [postalCode, setPostalCode] = useState<string>("");
 
-
   const getUserIdFromStorage = (): number => {
     const userIdStr = localStorage.getItem("userId");
     if (!userIdStr) {
@@ -36,13 +35,9 @@ const CheckoutPage: React.FC = () => {
     }
     return userId;
   };
-  
-  // `setUserId` is used to update the `userId` state fetched from localStorage.
+
   const [userId, setUserId] = useState<number>(getUserIdFromStorage());
 
-  
-
-  // Fetch user details from GraphQL query
   const {
     data: userData,
     loading: userLoading,
@@ -52,14 +47,13 @@ const CheckoutPage: React.FC = () => {
     skip: userId === 0,
   });
 
-  // Populate form fields with user data from GraphQL query
   useEffect(() => {
     if (userData && userData.getUserDetails) {
       const { name, email, addresses } = userData.getUserDetails;
       setName(name || "");
       setEmail(email || "");
       if (addresses && addresses.length > 0) {
-        const primaryAddress = addresses[0]; // Assuming the first address is the primary one
+        const primaryAddress = addresses[0];
         setAddress1(primaryAddress.address1 || "");
         setAddress2(primaryAddress.address2 || "");
         setCity(primaryAddress.city || "");
@@ -69,31 +63,31 @@ const CheckoutPage: React.FC = () => {
     }
   }, [userData]);
 
-  // Mutation to update user details
   const [
     updateUserMutation,
     { loading: updateUserLoading, error: updateUserError },
   ] = useMutation(UPDATE_USER_DETAILS);
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      const updatedAddresses = [
+        {
+          address1,
+          address2,
+          city,
+          postalCode,
+      
+          phoneNumber, // Include phoneNumber field
+        },
+      ];
+
       await updateUserMutation({
         variables: {
           userId,
           name,
           email,
-          phoneNumber,
-          addresses: [
-            {
-              address1,
-              address2,
-              city,
-              postalCode,
-              country: "USA", // Replace with actual country if applicable
-            },
-          ],
+          addresses: updatedAddresses,
         },
       });
       console.log("User details updated successfully!");
@@ -123,7 +117,7 @@ const CheckoutPage: React.FC = () => {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            disabled={!!name} // Disable if name is prepopulated
+            disabled={!!name}
           />
         </div>
         <div className="email">
@@ -160,7 +154,7 @@ const CheckoutPage: React.FC = () => {
             value={address1}
             borderWidth="1px"
             onChange={(e) => setAddress1(e.target.value)}
-            required={!address1} // Make address1 required if it's empty
+            required={!address1}
           />
         </div>
         <div className="address2">
@@ -183,7 +177,7 @@ const CheckoutPage: React.FC = () => {
             value={city}
             borderWidth="1px"
             onChange={(e) => setCity(e.target.value)}
-            required={!city} // Make city required if it's empty
+            required={!city}
           />
         </div>
 
@@ -196,7 +190,7 @@ const CheckoutPage: React.FC = () => {
             value={postalCode}
             borderWidth="1px"
             onChange={(e) => setPostalCode(e.target.value)}
-            required={!postalCode} // Make postalCode required if it's empty
+            required={!postalCode}
           />
         </div>
 
@@ -234,25 +228,17 @@ const CheckoutPage: React.FC = () => {
                 {item.toppings && (
                   <p>
                     <strong>Extra Toppings:</strong>{" "}
-                    {item.toppings.map((topping: ToppingType, i: number) => (
-                      <span key={i}>
-                        {topping.name}
-                        {i < item.toppings!.length - 1 ? ", " : ""}
-                      </span>
-                    ))}
+                    {item.toppings
+                      .map((topping: ToppingType) => topping.name)
+                      .join(", ")}
                   </p>
                 )}
                 {item.removedToppings && item.removedToppings.length > 0 && (
                   <p>
                     <strong>Removed Toppings:</strong>{" "}
-                    {item.removedToppings.map(
-                      (removedTopping: ToppingType, i: number) => (
-                        <span key={i} className="removedToppings">
-                          {removedTopping.name}
-                          {i < item.removedToppings!.length - 1 ? ", " : ""}
-                        </span>
-                      )
-                    )}
+                    {item.removedToppings
+                      .map((removedTopping: ToppingType) => removedTopping.name)
+                      .join(", ")}
                   </p>
                 )}
               </div>

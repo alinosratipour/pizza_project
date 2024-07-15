@@ -92,7 +92,7 @@ const typeDefs = gql`
     state: String
     phoneNumber: String!
     postalCode: String!
-    country: String!
+    country: String
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -104,7 +104,7 @@ const typeDefs = gql`
     city: String!
     state: String
     postalCode: String!
-    country: String!
+    country: String
     phoneNumber: String!
   }
   

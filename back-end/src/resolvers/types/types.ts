@@ -36,7 +36,7 @@ export interface AddressUpdateInput {
   city: string;
   state?: string;
   postalCode: string;
-  country: string;
+  country?: string;
   phoneNumber: string;
 }
 
