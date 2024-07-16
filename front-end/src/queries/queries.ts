@@ -193,3 +193,39 @@ export const UPDATE_USER_DETAILS = gql`
     }
   }
 `;
+
+export const CREATE_ORDER = gql`
+  mutation CreateOrder(
+    $userId: Int!
+    $addressId: Int!
+    $paymentType: String!
+    $status: String!
+    $totalAmount: Float!
+    $items: [CreateOrderItemInput!]!
+  ) {
+    createOrder(
+      userId: $userId
+      addressId: $addressId
+      paymentType: $paymentType
+      status: $status
+      totalAmount: $totalAmount
+      items: $items
+    ) {
+      id
+      userId
+      addressId
+      paymentType
+      status
+      totalAmount
+      createdAt
+      items {
+        id
+        orderId
+        productId
+        quantity
+        price
+        toppings
+      }
+    }
+  }
+`;

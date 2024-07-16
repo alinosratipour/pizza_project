@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
-import { UPDATE_USER_DETAILS, GET_USER_DETAILS } from "../../queries/queries";
+import {
+  UPDATE_USER_DETAILS,
+  GET_USER_DETAILS,
+  CREATE_ORDER,
+} from "../../queries/queries";
 import "./CheckOutPage.scss";
 import { BasketItem } from "../SharedTypes";
 import AddressForm from "./AddressForm";
@@ -60,15 +64,36 @@ const CheckoutPage: React.FC = () => {
     { loading: updateUserLoading, error: updateUserError },
   ] = useMutation(UPDATE_USER_DETAILS);
 
+  const [
+    createOrderMutation,
+    { loading: createOrderLoading, error: createOrderError },
+  ] = useMutation(CREATE_ORDER);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const updatedAddresses = [
         { address1, address2, city, postalCode, phoneNumber },
-      ];
-
+      ];    
       await updateUserMutation({
         variables: { userId, name, email, addresses: updatedAddresses },
+      });
+
+      const orderItems = basket.map(item => ({
+        productId: item.id_pizza,
+        quantity: item.quantity,
+        price: item.price,
+        toppings: item.toppings?.map(topping => topping.name) || [],
+      }));
+
+      await createOrderMutation({
+        variables: {
+          userId,
+          addressId: userData.getUserDetails.addresses[0].id,
+          paymentType: "Card",
+          status: "Pending",
+          totalAmount: totalPrice,
+          items: orderItems,
+        },
       });
 
       console.log("User details updated successfully!");
