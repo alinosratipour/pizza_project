@@ -1,5 +1,4 @@
-// CheckoutForm.tsx
-import React, { useState } from "react";
+import React from "react";
 import TextField from "../UI-Liberary/TextField/TextField";
 import Button from "../UI-Liberary/Button/Button";
 import { IoIosCreate } from "react-icons/io";
@@ -19,9 +18,9 @@ interface CheckoutFormProps {
   setCity: React.Dispatch<React.SetStateAction<string>>;
   postalCode: string;
   setPostalCode: React.Dispatch<React.SetStateAction<string>>;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   updateUserLoading: boolean;
   updateUserError: Error | undefined;
+  handlePlaceOrder: () => void; // Define the function type
 }
 
 const AddressForm: React.FC<CheckoutFormProps> = ({
@@ -39,12 +38,12 @@ const AddressForm: React.FC<CheckoutFormProps> = ({
   setCity,
   postalCode,
   setPostalCode,
-  handleSubmit,
   updateUserLoading,
   updateUserError,
+  handlePlaceOrder, // Receive the function prop
 }) => {
   return (
-    <form onSubmit={handleSubmit} className="form">
+    <div className="form">
       <div className="icons">
         <IoIosCreate />
         <p>Checkout</p>
@@ -138,13 +137,17 @@ const AddressForm: React.FC<CheckoutFormProps> = ({
       </div>
 
       <div className="buttonContainer">
-        <Button size="xlg" colorscheme="primary">
+        <Button
+          size="xlg"
+          colorscheme="primary"
+          onClick={handlePlaceOrder} // Handle place order on button click
+        >
           Place Order
         </Button>
         {updateUserLoading && <p>Updating user details...</p>}
         {updateUserError && <p>Error: {updateUserError.message}</p>}
       </div>
-    </form>
+    </div>
   );
 };
 

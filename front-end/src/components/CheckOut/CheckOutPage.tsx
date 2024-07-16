@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import {
   UPDATE_USER_DETAILS,
@@ -7,14 +7,17 @@ import {
   CREATE_ORDER,
 } from "../../queries/queries";
 import "./CheckOutPage.scss";
-import { BasketItem } from "../SharedTypes";
 import AddressForm from "./AddressForm";
 import BasketReview from "./BasketReview";
+import { useBasketContext } from "../Context/BasketContext";
 
 const CheckoutPage: React.FC = () => {
-  const location = useLocation();
-  const basket: BasketItem[] = location.state?.basket || [];
-  const totalPrice: number = location.state?.totalPrice || 0;
+  const navigate = useNavigate();
+  const { basket, setBasket } = useBasketContext();
+  const totalPrice: number = basket.reduce(
+    (total, item) => total + (item.price || 0) * item.quantity,
+    0
+  );
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -68,21 +71,21 @@ const CheckoutPage: React.FC = () => {
     createOrderMutation,
     { loading: createOrderLoading, error: createOrderError },
   ] = useMutation(CREATE_ORDER);
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+
+  const handlePlaceOrder = async () => {
     try {
       const updatedAddresses = [
         { address1, address2, city, postalCode, phoneNumber },
-      ];    
+      ];
       await updateUserMutation({
         variables: { userId, name, email, addresses: updatedAddresses },
       });
 
-      const orderItems = basket.map(item => ({
+      const orderItems = basket.map((item) => ({
         productId: item.id_pizza,
         quantity: item.quantity,
         price: item.price,
-        toppings: item.toppings?.map(topping => topping.name) || [],
+        toppings: item.toppings?.map((topping) => topping.name) || [],
       }));
 
       await createOrderMutation({
@@ -96,9 +99,16 @@ const CheckoutPage: React.FC = () => {
         },
       });
 
-      console.log("User details updated successfully!");
+      console.log("Order created successfully!");
+
+      // Clear the basket after order creation
+      setBasket([]);
+      localStorage.removeItem("basket"); // Remove from local storage if stored there
+
+      // Redirect to a success page or show a success message
+      navigate("/order-success");
     } catch (error) {
-      console.error("Update user details error:", error);
+      console.error("Error creating order:", error);
     }
   };
 
@@ -122,9 +132,9 @@ const CheckoutPage: React.FC = () => {
         setCity={setCity}
         postalCode={postalCode}
         setPostalCode={setPostalCode}
-        handleSubmit={handleSubmit}
         updateUserLoading={updateUserLoading}
         updateUserError={updateUserError}
+        handlePlaceOrder={handlePlaceOrder} // Pass the handler function down
       />
 
       <BasketReview basket={basket} totalPrice={totalPrice} />
