@@ -60,4 +60,5 @@ export interface CreateOrderItemInput {
   quantity: number;
   price: number;
   toppings: string[];
+  productName: string;
 }

@@ -19,6 +19,7 @@ model Pizza {
   image           String?
   pizzaPrice      PizzaPrice[]
   toppingsOnPizza ToppingOnPizza[]
+ 
 }
 
 model Size {
@@ -136,4 +137,6 @@ model OrderItem {
   toppings     String[]  // Example: Array of strings for toppings names
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
+  productName  String    // Add product name her
 }
+

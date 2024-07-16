@@ -132,6 +132,7 @@ const typeDefs = gql`
     quantity: Int!
     price: Float!
     toppings: [String!]!
+    productName: String! 
   }
 
   type Order {
@@ -154,6 +155,7 @@ const typeDefs = gql`
     toppings: [String!]!
     createdAt: DateTime!
     updatedAt: DateTime!
+    productName:String
   }
 
   type Mutation {

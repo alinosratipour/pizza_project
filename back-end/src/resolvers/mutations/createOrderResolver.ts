@@ -45,7 +45,10 @@ const createOrderResolver = async (
     // Create order items
     await Promise.all(
       items.map(async (item: CreateOrderItemInput) => {
-        const { productId, quantity, price, toppings } = item;
+        const { productId, quantity, price, toppings,productName } = item;
+        if (!productName) {
+          throw new ApolloError(`productName is missing in item: ${JSON.stringify(item)}`);
+        }
         return await context.prisma.orderItem.create({
           data: {
             orderId: order.id,
@@ -53,6 +56,7 @@ const createOrderResolver = async (
             quantity,
             price,
             toppings,
+            productName,
           },
         });
       })
