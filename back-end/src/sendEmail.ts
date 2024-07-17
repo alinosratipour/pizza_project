@@ -1,8 +1,42 @@
 // sendmail.ts
 
+//import { Address } from "@prisma/client";
 import * as nodemailer from "nodemailer";
+interface UserDetails {
+  name: string;
+  email: string;
+  addresses: Address[];
+}
+interface Topping {
+    id: number;
+    name: string;
+    // Add more fields as needed
+  }
+interface Address {
+    __typename: string;
+    id: number;
+    address1: string;
+    address2: string;
+    city: string;
+    postalCode: string;
+    country: string;
+    phoneNumber: string;
+  }
+interface BasketItem {
+  id_pizza: number;
+  name: string;
+  price: number;
+  quantity: number;
+  size: string;
+  base: string;
+  basePrice: number;
+  toppings: Topping[]; 
+  toppingsTotal: number;
+  removedToppings: Topping[];
+}
+async function sendEmail(userDetails: UserDetails, basketItems: BasketItem[]) {
+  console.log(basketItems);
 
-async function sendEmail(userDetails: any, basketItems: any[]) {
   // Destructure user details and address from userDetails object
   const { name, email, addresses } = userDetails;
   const {
