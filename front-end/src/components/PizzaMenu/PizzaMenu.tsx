@@ -53,6 +53,7 @@ const PizzaMenu = () => {
   });
 
 
+
   useEffect(() => {
     setTotalPrice(calculateTotalPrice());
   }, [basket, calculateTotalPrice]);

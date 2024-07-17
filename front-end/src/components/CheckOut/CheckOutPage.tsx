@@ -10,14 +10,12 @@ import "./CheckOutPage.scss";
 import AddressForm from "./AddressForm";
 import BasketReview from "./BasketReview";
 import { useBasketContext } from "../Context/BasketContext";
+import useAddToBasket from "../Hooks/useAddToBasketHook";
 
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
-  const { basket, setBasket } = useBasketContext();
-  const totalPrice: number = basket.reduce(
-    (total, item) => total + (item.price || 0) * item.quantity,
-    0
-  );
+  const { calculateTotalPrice, basket, setBasket } = useAddToBasket({});
+  const totalPrice = calculateTotalPrice();
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -72,6 +70,17 @@ const CheckoutPage: React.FC = () => {
     { loading: createOrderLoading, error: createOrderError },
   ] = useMutation(CREATE_ORDER);
 
+  useEffect(() => {
+    // Load basket from localStorage on component mount
+    const storedBasket = JSON.parse(localStorage.getItem("basket") || "[]");
+    setBasket(storedBasket);
+  }, [setBasket]);
+
+  useEffect(() => {
+    // Save basket to localStorage whenever it changes
+    localStorage.setItem("basket", JSON.stringify(basket));
+  }, [basket]);
+
   const handlePlaceOrder = async () => {
     try {
       const updatedAddresses = [
@@ -86,7 +95,7 @@ const CheckoutPage: React.FC = () => {
         quantity: item.quantity,
         price: item.price,
         toppings: item.toppings?.map((topping) => topping.name) || [],
-        productName: item.name, // Assuming 'name' is the productName you want to use
+        productName: item.name,
       }));
 
       await createOrderMutation({
