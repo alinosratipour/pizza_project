@@ -86,6 +86,7 @@ const CheckoutPage: React.FC = () => {
         quantity: item.quantity,
         price: item.price,
         toppings: item.toppings?.map((topping) => topping.name) || [],
+        productName: item.name, // Assuming 'name' is the productName you want to use
       }));
 
       await createOrderMutation({

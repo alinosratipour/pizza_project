@@ -225,6 +225,7 @@ export const CREATE_ORDER = gql`
         quantity
         price
         toppings
+        productName
       }
     }
   }
