@@ -35,9 +35,6 @@ interface BasketItem {
   removedToppings: Topping[];
 }
 async function sendEmail(userDetails: UserDetails, basketItems: BasketItem[]) {
-  console.log(basketItems);
-
-  // Destructure user details and address from userDetails object
   const { name, email, addresses } = userDetails;
   const {
     address1 = "N/A",
