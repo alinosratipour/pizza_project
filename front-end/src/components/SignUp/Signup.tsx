@@ -33,10 +33,13 @@ const Signup: React.FC = () => {
           name,
         },
       });
-
+  
       if (response.data) {
-        localStorage.setItem("token", response.data.signUpUser.token);
-        navigate("/dashboard");
+        const { token, user } = response.data.signUpUser;
+        const userId = user.id; // Extract userId from the user object
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", userId.toString()); // Store userId as string
+        navigate("/checkout"); // Redirect to checkout or dashboard
       } else {
         throw new Error("No data returned from server");
       }
@@ -44,6 +47,7 @@ const Signup: React.FC = () => {
       console.error("Signup error:", error.message);
     }
   };
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

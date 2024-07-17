@@ -147,3 +147,86 @@ export const SIGN_UP_USER = gql`
     }
   }
 `;
+
+
+export const GET_USER_DETAILS = gql`
+  query GetUserDetails($userId: Int!) {
+    getUserDetails(userId: $userId) {
+      id
+      name
+      email
+      addresses {
+        id
+        address1
+        address2
+        city
+        postalCode
+        country
+        phoneNumber
+      }
+    }
+  }
+`;
+
+export const UPDATE_USER_DETAILS = gql`
+  mutation UpdateUserDetails(
+    $userId: Int!
+    $name: String
+    $addresses: [AddressUpdateInput!]!
+  ) {
+    updateUser(
+      userId: $userId
+      name: $name
+      addresses: $addresses
+    ) {
+      id
+      name
+      addresses {
+        id
+        address1
+        address2
+        city
+        postalCode
+        country
+        phoneNumber
+      }
+    }
+  }
+`;
+
+export const CREATE_ORDER = gql`
+  mutation CreateOrder(
+    $userId: Int!
+    $addressId: Int!
+    $paymentType: String!
+    $status: String!
+    $totalAmount: Float!
+    $items: [CreateOrderItemInput!]!
+  ) {
+    createOrder(
+      userId: $userId
+      addressId: $addressId
+      paymentType: $paymentType
+      status: $status
+      totalAmount: $totalAmount
+      items: $items
+    ) {
+      id
+      userId
+      addressId
+      paymentType
+      status
+      totalAmount
+      createdAt
+      items {
+        id
+        orderId
+        productId
+        quantity
+        price
+        toppings
+        productName
+      }
+    }
+  }
+`;

@@ -145,3 +145,13 @@ export interface SignUpUserResult {
 }
 
 
+export interface AddressInput {
+  addressId?: number; // Optional if updating existing address
+  address1: string;
+  address2?: string;
+  city: string;
+  state?: string;
+  postalCode: string;
+  country: string;
+  phoneNumber?: string;
+}

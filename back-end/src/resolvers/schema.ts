@@ -2,6 +2,7 @@ import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
   scalar DateTime
+
   type ToppingPrice {
     id: Int!
     id_size: Int!
@@ -29,6 +30,7 @@ const typeDefs = gql`
     name: String
     price: Float
   }
+
   type Pizza {
     id_pizza: Int!
     name: String!
@@ -90,9 +92,20 @@ const typeDefs = gql`
     state: String
     phoneNumber: String!
     postalCode: String!
-    country: String!
+    country: String
     createdAt: DateTime!
     updatedAt: DateTime!
+  }
+
+  input AddressUpdateInput {
+    addressId: Int
+    address1: String!
+    address2: String
+    city: String!
+    state: String
+    postalCode: String!
+    country: String
+    phoneNumber: String!
   }
 
   type LoginResponse {
@@ -103,6 +116,46 @@ const typeDefs = gql`
   type AuthPayload {
     token: String!
     user: User!
+  }
+
+  type UserWithAddresses {
+    id: Int!
+    email: String!
+    name: String
+    addresses: [Address!]!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+  }
+
+  input CreateOrderItemInput {
+    productId: Int!
+    quantity: Int!
+    price: Float!
+    toppings: [String!]!
+    productName: String! 
+  }
+
+  type Order {
+    id: Int!
+    userId: Int!
+    addressId: Int!
+    paymentType: String!
+    status: String!
+    totalAmount: Float!
+    createdAt: DateTime!
+    items: [OrderItem!]!
+  }
+
+  type OrderItem {
+    id: Int!
+    orderId: Int!
+    productId: Int!
+    quantity: Int!
+    price: Float!
+    toppings: [String!]!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    productName:String
   }
 
   type Mutation {
@@ -120,19 +173,23 @@ const typeDefs = gql`
     ): User!
     loginUser(email: String!, password: String!): LoginResponse!
     signUpUser(email: String!, name: String!, password: String!): AuthPayload!
-    
-  }
-
-  type UserWithAddresses {
-    id: Int!
-    email: String!
-    name: String
-    addresses: [Address!]!
-    createdAt: DateTime!
-    updatedAt: DateTime!
+    updateUser(
+      userId: Int!
+      name: String
+      addresses: [AddressUpdateInput!]
+    ): User!
+    createOrder(
+      userId: Int!
+      addressId: Int!
+      paymentType: String!
+      status: String!
+      totalAmount: Float!
+      items: [CreateOrderItemInput!]!
+    ): Order!
   }
 
   type Query {
+    getUserDetails(userId: Int!): User
     getAllPizzasList: [Pizza!]!
     getpizzaWithRelatedToppings: [Pizza!]!
     getSizesWithBases: [SizeWithRelatedBases!]!
@@ -140,7 +197,6 @@ const typeDefs = gql`
     getToppingPricesBySize(id_size: Int): [ToppingPriceForSize]
     getBasesPricesBySize(id_size: Int): [BaseWithPrice]
     getToppingsOnPizza(pizzaId: Int!): [ToppingOnPizza!]!
-    #loginUser(email: String!, password: String!): LoginResponse!
   }
 `;
 

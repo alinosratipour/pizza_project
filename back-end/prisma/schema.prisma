@@ -19,6 +19,7 @@ model Pizza {
   image           String?
   pizzaPrice      PizzaPrice[]
   toppingsOnPizza ToppingOnPizza[]
+ 
 }
 
 model Size {
@@ -84,26 +85,58 @@ model Toppings {
 }
  
 // schema.prisma
-
 model User {
-  id                 Int       @id @default(autoincrement())
-  email              String    @unique
-  name               String?
-  password           String
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-  addresses          Address[]
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  addresses Address[]
+  orders    Order[]
 }
 
 model Address {
   id          Int      @id @default(autoincrement())
-  address1    String   
-  address2    String   
+  address1    String
+  address2    String
   city        String
   state       String?
   postalCode  String
   country     String
-  phoneNumber String 
+  phoneNumber String
   userId      Int
   user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  orders      Order[]
 }
+// Define the Order model
+model Order {
+  id           Int        @id @default(autoincrement())
+  userId       Int
+  user         User       @relation(fields: [userId], references: [id])
+  addressId    Int
+  address      Address    @relation(fields: [addressId], references: [id])
+  paymentType  String     // Example: cash, card, etc.
+  status       String     // Example: pending, confirmed, delivered, etc.
+  totalAmount  Float
+  createdAt    DateTime   @default(now())
+  // Define the relationship with order items
+  items        OrderItem[]
+}
+
+// Define the OrderItem model
+model OrderItem {
+  id           Int       @id @default(autoincrement())
+  orderId      Int
+  order        Order     @relation(fields: [orderId], references: [id])
+  productId    Int       // Assuming productId references some Product model
+  quantity     Int
+  price        Float
+  toppings     String[]  // Example: Array of strings for toppings names
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  productName  String    // Add product name her
+}
+
