@@ -11,6 +11,7 @@ import AddressForm from "./AddressForm";
 import BasketReview from "./BasketReview";
 import { useBasketContext } from "../Context/BasketContext";
 import useAddToBasket from "../Hooks/useAddToBasketHook";
+import  SendEmail  from "../SendEmail/SendEmail"; 
 
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
@@ -110,7 +111,7 @@ const CheckoutPage: React.FC = () => {
       });
 
       console.log("Order created successfully!");
-
+      await SendEmail(userData.getUserDetails, basket);
       // Clear the basket after order creation
       setBasket([]);
       localStorage.removeItem("basket"); // Remove from local storage if stored there
