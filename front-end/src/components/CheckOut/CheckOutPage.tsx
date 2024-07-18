@@ -9,9 +9,9 @@ import {
 import "./CheckOutPage.scss";
 import AddressForm from "./AddressForm";
 import BasketReview from "./BasketReview";
-import { useBasketContext } from "../Context/BasketContext";
 import useAddToBasket from "../Hooks/useAddToBasketHook";
-import  SendEmail  from "../SendEmail/SendEmail"; 
+import SendEmail from "../SendEmail/SendEmail";
+import Loading from "../Loading/Loading";
 
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
@@ -26,6 +26,8 @@ const CheckoutPage: React.FC = () => {
   const [city, setCity] = useState<string>("");
   const [postalCode, setPostalCode] = useState<string>("");
 
+  const [loading, setLoading] = useState<boolean>(false); // Loading state
+  console.log(basket);
   const getUserIdFromStorage = (): number => {
     const userIdStr = localStorage.getItem("userId");
     if (!userIdStr || isNaN(parseInt(userIdStr, 10))) {
@@ -65,25 +67,23 @@ const CheckoutPage: React.FC = () => {
     updateUserMutation,
     { loading: updateUserLoading, error: updateUserError },
   ] = useMutation(UPDATE_USER_DETAILS);
-
   const [
     createOrderMutation,
     { loading: createOrderLoading, error: createOrderError },
   ] = useMutation(CREATE_ORDER);
 
   useEffect(() => {
-    // Load basket from localStorage on component mount
     const storedBasket = JSON.parse(localStorage.getItem("basket") || "[]");
     setBasket(storedBasket);
   }, [setBasket]);
 
   useEffect(() => {
-    // Save basket to localStorage whenever it changes
     localStorage.setItem("basket", JSON.stringify(basket));
   }, [basket]);
 
   const handlePlaceOrder = async () => {
     try {
+      setLoading(true);
       const updatedAddresses = [
         { address1, address2, city, postalCode, phoneNumber },
       ];
@@ -110,16 +110,16 @@ const CheckoutPage: React.FC = () => {
         },
       });
 
-      console.log("Order created successfully!");
-      await SendEmail(userData.getUserDetails, basket);
-      // Clear the basket after order creation
-      setBasket([]);
-      localStorage.removeItem("basket"); // Remove from local storage if stored there
 
-      // Redirect to a success page or show a success message
+      await SendEmail(userData.getUserDetails, basket);
+      setBasket([]);
+      localStorage.removeItem("basket");
+
+      setLoading(false);
       navigate("/order-success");
     } catch (error) {
       console.error("Error creating order:", error);
+      setLoading(false);
     }
   };
 
@@ -128,6 +128,7 @@ const CheckoutPage: React.FC = () => {
 
   return (
     <div className="checkoutContainer">
+      {loading && <Loading text="Sending your order..." />}{" "}
       <AddressForm
         name={name}
         setName={setName}
@@ -145,9 +146,8 @@ const CheckoutPage: React.FC = () => {
         setPostalCode={setPostalCode}
         updateUserLoading={updateUserLoading}
         updateUserError={updateUserError}
-        handlePlaceOrder={handlePlaceOrder} // Pass the handler function down
+        handlePlaceOrder={handlePlaceOrder}
       />
-
       <BasketReview basket={basket} totalPrice={totalPrice} />
     </div>
   );

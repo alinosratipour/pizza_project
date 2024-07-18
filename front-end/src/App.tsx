@@ -14,6 +14,7 @@ import DashBoard from "./components/Dashboard/DashBoard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Signup from "./components/SignUp/Signup";
 import CheckOutPage from "./components/CheckOut/CheckOutPage";
+import OrderSuccessPage from "./pages/OrderSuccessPage/OrderSuccessPage";
 function App() {
   return (
     <div className="App">
@@ -27,7 +28,7 @@ function App() {
               <Route path="/login" element={<LoginForm />} />
               <Route path="/dashboard" element={<DashBoard />} />
               <Route path="/signup" element={<Signup />} />
-
+              {/* <Route path="/order-success" element={<OrderSuccessPage />} /> */}
               <Route
                 path="/dashboard"
                 element={<ProtectedRoute element={<DashBoard />} />}
@@ -35,6 +36,10 @@ function App() {
               <Route
                 path="/checkout"
                 element={<ProtectedRoute element={<CheckOutPage />} />}
+              />
+              <Route
+                path="/order-success"
+                element={<ProtectedRoute element={<OrderSuccessPage />} />}
               />
             </Routes>
           </ContextProvider>
