@@ -9,7 +9,6 @@ import {
 import "./CheckOutPage.scss";
 import AddressForm from "./AddressForm";
 import BasketReview from "./BasketReview";
-import { useBasketContext } from "../Context/BasketContext";
 import useAddToBasket from "../Hooks/useAddToBasketHook";
 import SendEmail from "../SendEmail/SendEmail";
 import Loading from "../Loading/Loading";
@@ -115,11 +114,11 @@ const CheckoutPage: React.FC = () => {
       setBasket([]);
       localStorage.removeItem("basket");
 
-      setLoading(false); // Hide loading spinner
+      setLoading(false);
       navigate("/order-success");
     } catch (error) {
       console.error("Error creating order:", error);
-      setLoading(false); // Hide loading spinner
+      setLoading(false);
     }
   };
 
