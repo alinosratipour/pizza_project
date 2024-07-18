@@ -27,7 +27,7 @@ const CheckoutPage: React.FC = () => {
   const [postalCode, setPostalCode] = useState<string>("");
 
   const [loading, setLoading] = useState<boolean>(false); // Loading state
-  console.log(basket);
+
   const getUserIdFromStorage = (): number => {
     const userIdStr = localStorage.getItem("userId");
     if (!userIdStr || isNaN(parseInt(userIdStr, 10))) {
@@ -109,7 +109,6 @@ const CheckoutPage: React.FC = () => {
           items: orderItems,
         },
       });
-
 
       await SendEmail(userData.getUserDetails, basket);
       setBasket([]);
