@@ -1,8 +1,7 @@
 async function sendEmail(userDetails: any, basketItems: any) {
-    console.log(userDetails);
- 
+   
     try {
-    const response = await fetch("http://localhost:5000/send-email", {
+    const response = await fetch("https://pizza-project-pagq.onrender.com/send-email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
