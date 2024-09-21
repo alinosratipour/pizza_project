@@ -19,7 +19,6 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
 
   const { basket, setBasket } = useBasketContext();
 
-
   useEffect(() => {
     const storedRemovedToppings = localStorage.getItem(
       EDITE_TOPPINGS_STORAGE_KEY
@@ -48,42 +47,95 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
   };
 
   const addToBasket = (pizza: Pizza, size: string, base: string) => {
-    if (size !== undefined) {
-      const existingPizzaIndex = basket.findIndex(
-        (item) =>
-          item.id_pizza === pizza.id_pizza &&
-          item.size === size &&
-          item.base === base
-        // && item.size_id === item.size_id
-      );
+    if (size === undefined) return;
+    const existingPizzaIndex = findExistingPizzaIndex(pizza, size, base);
 
-      if (existingPizzaIndex !== -1) {
-        // Pizza with the same size and base already exists, update quantity
-        const updatedBasket = [...basket];
-        updatedBasket[existingPizzaIndex].quantity += 1;
-        setBasket(updatedBasket);
-      } else {
-        const extraToppingsCost = calculateExtraToppingsCost();
-        // Add a new pizza to the basket
-        const pizzaWithPrice = {
-          id_pizza: pizza.id_pizza,
-          name: pizza.name,
-          price: selectedSizePrice || 0,
-          quantity: 1,
-          size: size,
-          // size_id: sizeId,
-          base: base,
-          basePrice: selectedBasePrice,
-          toppings: selectedToppings,
-          toppingsTotal: extraToppingsCost,
-          removedToppings: removedToppings,
-        };
-
-        setBasket([...basket, pizzaWithPrice]);
-        // setRemovedToppings([]); // Clear removed toppings after adding to the basket
-      }
+    if (existingPizzaIndex !== -1) {
+      handleExistingPizza(existingPizzaIndex, pizza, size, base);
+    } else {
+      addNewPizza(pizza, size, base);
     }
   };
+
+  const findExistingPizzaIndex = (pizza: Pizza, size: string, base: string) => {
+    return basket.findIndex(
+      (item) =>
+        item.id_pizza === pizza.id_pizza &&
+        item.size === size &&
+        item.base === base
+    );
+  };
+
+  const handleExistingPizza = (
+    index: number,
+    pizza: Pizza,
+    size: string,
+    base: string
+  ) => {
+    const existingPizza = basket[index];
+    const areToppingsSame =
+      JSON.stringify(existingPizza.toppings) ===
+      JSON.stringify(selectedToppings);
+
+    if (areToppingsSame) {
+      // Update quantity if toppings are the same
+      const updatedBasket = [...basket];
+      updatedBasket[index].quantity += 1;
+      setBasket(updatedBasket);
+    } else {
+      // Add as new item if toppings are different
+      addNewPizzaWithToppings(pizza, size, base);
+    }
+  };
+
+  const addNewPizza = (pizza: Pizza, size: string, base: string) => {
+    const extraToppingsCost = calculateExtraToppingsCost();
+    const pizzaWithPrice = createPizzaObject(
+      pizza,
+      size,
+      base,
+      extraToppingsCost,
+      1
+    );
+
+    setBasket([...basket, pizzaWithPrice]);
+  };
+
+  const addNewPizzaWithToppings = (
+    pizza: Pizza,
+    size: string,
+    base: string
+  ) => {
+    const extraToppingsCost = calculateExtraToppingsCost();
+    const newPizzaWithPrice = createPizzaObject(
+      pizza,
+      size,
+      base,
+      extraToppingsCost,
+      1
+    );
+
+    setBasket([...basket, newPizzaWithPrice]);
+  };
+
+  const createPizzaObject = (
+    pizza: Pizza,
+    size: string,
+    base: string,
+    toppingsCost: number,
+    quantity: number
+  ) => ({
+    id_pizza: pizza.id_pizza,
+    name: pizza.name,
+    price: selectedSizePrice || 0,
+    quantity: quantity,
+    size: size,
+    base: base,
+    basePrice: selectedBasePrice,
+    toppings: selectedToppings,
+    toppingsTotal: toppingsCost,
+    removedToppings: removedToppings,
+  });
 
   const calculateTotalPrice = () => {
     const pizzasTotalPrice = basket.reduce((total, item) => {
