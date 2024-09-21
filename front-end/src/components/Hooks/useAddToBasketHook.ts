@@ -49,41 +49,63 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
 
   const addToBasket = (pizza: Pizza, size: string, base: string) => {
     if (size !== undefined) {
+      // Check if a pizza with the same size and base exists
       const existingPizzaIndex = basket.findIndex(
         (item) =>
           item.id_pizza === pizza.id_pizza &&
           item.size === size &&
           item.base === base
-        // && item.size_id === item.size_id
       );
-
+  
       if (existingPizzaIndex !== -1) {
-        // Pizza with the same size and base already exists, update quantity
-        const updatedBasket = [...basket];
-        updatedBasket[existingPizzaIndex].quantity += 1;
-        setBasket(updatedBasket);
+        // If the pizza exists with the same size and base, check toppings
+        const existingPizza = basket[existingPizzaIndex];
+        const areToppingsSame = JSON.stringify(existingPizza.toppings) === JSON.stringify(selectedToppings);
+  
+        if (areToppingsSame) {
+          // Same size, base, and toppings: update quantity
+          const updatedBasket = [...basket];
+          updatedBasket[existingPizzaIndex].quantity += 1;
+          setBasket(updatedBasket);
+        } else {
+          // Same size and base but different toppings: add as new item
+          const extraToppingsCost = calculateExtraToppingsCost();
+          const newPizzaWithPrice = {
+            id_pizza: pizza.id_pizza,
+            name: pizza.name,
+            price: selectedSizePrice || 0,
+            quantity: 1,
+            size: size,
+            base: base,
+            basePrice: selectedBasePrice,
+            toppings: selectedToppings,
+            toppingsTotal: extraToppingsCost,
+            removedToppings: removedToppings,
+          };
+  
+          setBasket([...basket, newPizzaWithPrice]);
+        }
       } else {
+        // If no match found for size and base, add as new item
         const extraToppingsCost = calculateExtraToppingsCost();
-        // Add a new pizza to the basket
         const pizzaWithPrice = {
           id_pizza: pizza.id_pizza,
           name: pizza.name,
           price: selectedSizePrice || 0,
           quantity: 1,
           size: size,
-          // size_id: sizeId,
           base: base,
           basePrice: selectedBasePrice,
           toppings: selectedToppings,
           toppingsTotal: extraToppingsCost,
           removedToppings: removedToppings,
         };
-
+  
         setBasket([...basket, pizzaWithPrice]);
-        // setRemovedToppings([]); // Clear removed toppings after adding to the basket
       }
     }
   };
+  
 
   const calculateTotalPrice = () => {
     const pizzasTotalPrice = basket.reduce((total, item) => {
