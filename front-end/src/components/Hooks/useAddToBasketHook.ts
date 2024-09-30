@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Pizza, ToppingType } from "../SharedTypes";
+import { BasketItem, Pizza, ToppingType } from "../SharedTypes";
 import { calculateToppingsTotal } from "../../utils";
 import { useToppingsRemovalFromPizza } from "../store/ToppingOnPizzaStore ";
 import { useBasketContext } from "../Context/BasketContext";
@@ -58,13 +58,14 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
   };
 
   const findExistingPizzaIndex = (pizza: Pizza, size: string, base: string) => {
-    return basket.findIndex(
-      (item) =>
+    const isSamePizza = (item: BasketItem) => 
         item.id_pizza === pizza.id_pizza &&
         item.size === size &&
-        item.base === base
-    );
-  };
+        item.base === base;
+
+    return basket.findIndex(isSamePizza);
+};
+
 
   const handleExistingPizza = (
     index: number,
