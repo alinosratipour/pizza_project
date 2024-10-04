@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
-import { Pizza, ToppingType } from "../SharedTypes";
+import { useState } from "react";
+import { BasketItem, Pizza, ToppingType } from "../SharedTypes";
 import { calculateToppingsTotal } from "../../utils";
 import { useToppingsRemovalFromPizza } from "../store/ToppingOnPizzaStore ";
 import { useBasketContext } from "../Context/BasketContext";
+import { useLocalStorageToppings } from "./useLocalStorageToppings";
 
 interface UseAddToBasketProps {
   selectedToppings?: ToppingType[];
 }
-const EDITE_TOPPINGS_STORAGE_KEY = "toppings";
+
 const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
   const { removedToppings, setRemovedToppings } = useToppingsRemovalFromPizza();
   const [selectedSizePrice, setSelectedSizePrice] = useState<
@@ -18,21 +19,7 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
   >(0);
 
   const { basket, setBasket } = useBasketContext();
-
-  useEffect(() => {
-    const storedRemovedToppings = localStorage.getItem(
-      EDITE_TOPPINGS_STORAGE_KEY
-    );
-    if (storedRemovedToppings) {
-      setRemovedToppings(JSON.parse(storedRemovedToppings));
-    }
-  }, []);
-  useEffect(() => {
-    localStorage.setItem(
-      EDITE_TOPPINGS_STORAGE_KEY,
-      JSON.stringify(removedToppings)
-    );
-  }, [removedToppings]);
+  useLocalStorageToppings(removedToppings, setRemovedToppings);
 
   const calculateExtraToppingsCost = () => {
     const extraToppingsQuantity = calculateToppingsTotal(
@@ -58,12 +45,12 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
   };
 
   const findExistingPizzaIndex = (pizza: Pizza, size: string, base: string) => {
-    return basket.findIndex(
-      (item) =>
-        item.id_pizza === pizza.id_pizza &&
-        item.size === size &&
-        item.base === base
-    );
+    const isSamePizza = (item: BasketItem) =>
+      item.id_pizza === pizza.id_pizza &&
+      item.size === size &&
+      item.base === base;
+
+    return basket.findIndex(isSamePizza);
   };
 
   const handleExistingPizza = (
@@ -137,16 +124,20 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
     removedToppings: removedToppings,
   });
 
+  const calculatePizzaPrice = (item: BasketItem) => {
+    const price = item.price || 0;
+    const basePrice = item.basePrice || 0;
+    const toppingsTotal = item.toppingsTotal || 0;
+
+    return (price + basePrice + toppingsTotal) * item.quantity;
+  };
+
   const calculateTotalPrice = () => {
     const pizzasTotalPrice = basket.reduce((total, item) => {
-      const pizzaPrice =
-        (item.price || 0) * item.quantity +
-        (item.basePrice || 0) * item.quantity +
-        (item.toppingsTotal || 0) * item.quantity;
-      return total + pizzaPrice;
+      return total + calculatePizzaPrice(item);
     }, 0);
 
-    return Number(pizzasTotalPrice.toFixed(2));
+    return parseFloat(pizzasTotalPrice.toFixed(2)); // Use parseFloat for clarity
   };
 
   return {
