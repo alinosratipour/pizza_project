@@ -1,0 +1,81 @@
+@import "../../../globalStyles.scss";
+.basketReview {
+  overflow-y: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  text-align: center;
+  min-height: 100vh;
+  width: 30%;
+
+  .basketItem {
+    border-bottom: 1px solid #ccc;
+    padding-top: 5px;
+  }
+  .wrapper {
+    display: flex;
+    padding: 10px;
+    border-bottom: 2px solid #ccc;
+    gap: 100px;
+    justify-content: left;
+    align-items: left;
+  }
+  .subItemsLeft {
+    text-align: left;
+
+    width: 100%;
+  }
+  .subItemsRight {
+    width: 100%;
+
+    p {
+      text-align: left;
+    }
+  }
+
+  .basketItem:last-child {
+    border-bottom: none;
+  }
+
+  .line {
+    border-top: 2px solid #ccc;
+    margin: 10px 0;
+  }
+
+  .removedToppings {
+    color: red;
+  }
+
+  .pizzaName {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+  .title {
+    font-size: 2rem;
+    padding-bottom: 20px;
+    color: red;
+  }
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 900;
+}
+@include small-screen {
+  .basketReview {
+    width: 90%;
+    min-height: auto;
+    padding-bottom: 10px;
+  }
+
+  .wrapper {
+    flex-direction: column;
+  }
+  .subItemsRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: start;
+  }
+}

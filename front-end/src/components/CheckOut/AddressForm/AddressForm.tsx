@@ -1,7 +1,10 @@
 import React from "react";
-import TextField from "../UI-Liberary/TextField/TextField";
-import Button from "../UI-Liberary/Button/Button";
 import { IoIosCreate } from "react-icons/io";
+import "./AddressForm.scss";
+import TextField from "../../UI-Liberary/TextField/TextField";
+import Button from "../../UI-Liberary/Button/Button";
+
+
 
 interface CheckoutFormProps {
   name: string;
@@ -20,7 +23,7 @@ interface CheckoutFormProps {
   setPostalCode: React.Dispatch<React.SetStateAction<string>>;
   updateUserLoading: boolean;
   updateUserError: Error | undefined;
-  handlePlaceOrder: () => void; // Define the function type
+  handlePlaceOrder: () => void; 
   totalPrice: number;
 }
 
@@ -45,7 +48,7 @@ const AddressForm: React.FC<CheckoutFormProps> = ({
   totalPrice
 }) => {
   return (
-    <div className="form">
+    <div className="form" >
       <div className="icons">
         <IoIosCreate />
         <p>Checkout</p>

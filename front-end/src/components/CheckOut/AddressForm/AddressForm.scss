@@ -1,0 +1,32 @@
+@import "../../../globalStyles.scss";
+.form {
+
+  display: flex;
+  flex-direction: column;
+
+  .icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .name,
+  .email,
+  .phoneNumber,
+  .address1,
+  .address2,
+  .city,
+  .postalCode {
+    margin-bottom: 15px;
+  }
+}
+
+@include small-screen {
+  .form {
+    order: 2;
+    .icons {
+      display: none;
+    }
+  }
+}
