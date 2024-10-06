@@ -1,6 +1,7 @@
 // BasketReview.tsx
 import React from "react";
-import { BasketItem, ToppingType } from "../SharedTypes";
+import { BasketItem, ToppingType } from "../../SharedTypes";
+import "./BasketReview.scss"
 
 interface BasketReviewProps {
   basket: BasketItem[];
@@ -56,9 +57,7 @@ const BasketReview: React.FC<BasketReviewProps> = ({ basket, totalPrice }) => {
       <div className="total">
         <p>Total Price:</p>
         <p>£{totalPrice.toFixed(2)}</p>
-      
       </div>
-      
     </div>
   );
 };

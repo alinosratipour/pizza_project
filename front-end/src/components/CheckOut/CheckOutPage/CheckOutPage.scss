@@ -1,0 +1,29 @@
+@import "../../../globalStyles.scss";
+
+.checkoutContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  min-height: 100vh;
+  gap: 150px;
+  font-family: var(--font-roboto-condensed);
+
+ 
+  .loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: gray;
+  }
+}
+@include small-screen {
+  .checkoutContainer {
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0;
+  }
+}

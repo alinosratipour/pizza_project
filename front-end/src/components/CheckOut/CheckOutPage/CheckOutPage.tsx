@@ -5,13 +5,13 @@ import {
   UPDATE_USER_DETAILS,
   GET_USER_DETAILS,
   CREATE_ORDER,
-} from "../../queries/queries";
+} from "../../../queries/queries";
 import "./CheckOutPage.scss";
-import AddressForm from "./AddressForm";
-import BasketReview from "./BasketReview";
-import useAddToBasket from "../Hooks/useAddToBasketHook";
-import SendEmail from "../SendEmail/SendEmail";
-import Loading from "../Loading/Loading";
+import AddressForm from "../AddressForm/AddressForm";
+import BasketReview from "../BasketReview/BasketReview";
+import useAddToBasket from "../../Hooks/useAddToBasketHook";
+import SendEmail from "../../SendEmail/SendEmail";
+import Loading from "../../Loading/Loading";
 
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();

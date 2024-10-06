@@ -13,7 +13,7 @@ import LoginForm from "./components/LogIn/LoginForm";
 import DashBoard from "./components/Dashboard/DashBoard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Signup from "./components/SignUp/Signup";
-import CheckOutPage from "./components/CheckOut/CheckOutPage";
+import CheckOutPage from "./components/CheckOut/CheckOutPage/CheckOutPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage/OrderSuccessPage";
 function App() {
   return (
