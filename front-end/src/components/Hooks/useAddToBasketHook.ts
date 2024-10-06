@@ -63,8 +63,8 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
     const areToppingsSame =
       JSON.stringify(existingPizza.toppings) ===
       JSON.stringify(selectedToppings);
-
-    if (areToppingsSame) {
+      const hasRemovedToppings = removedToppings.length > 0;
+    if (areToppingsSame && !hasRemovedToppings) {
       // Update quantity if toppings are the same
       const updatedBasket = [...basket];
       updatedBasket[index].quantity += 1;
