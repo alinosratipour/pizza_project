@@ -31,13 +31,15 @@ const BasketReview: React.FC<BasketReviewProps> = ({ basket, totalPrice }) => {
               <p>
                 <strong>Quantity:</strong> {item.quantity}
               </p>
-              {item.toppings && (
-                <p>
-                  <strong>Extra Toppings:</strong>{" "}
-                  {item.toppings
-                    .map((topping: ToppingType) => topping.name)
-                    .join(", ")}
-                </p>
+              {item.toppings && item.toppings.length > 0 && (
+                <>
+                  <p>
+                    <strong>Extra Toppings:</strong>{" "}
+                    {item.toppings
+                      .map((topping: ToppingType) => topping.name)
+                      .join(", ")}
+                  </p>
+                </>
               )}
               {item.removedToppings && item.removedToppings.length > 0 && (
                 <p>
