@@ -51,7 +51,12 @@ const BasketReview: React.FC<BasketReviewProps> = ({ basket, totalPrice }) => {
           </div>
         </div>
       ))}
-      <h2>Total Price: £{totalPrice.toFixed(2)}</h2>
+      <div className="total">
+        <p>Total Price:</p>
+        <p>£{totalPrice.toFixed(2)}</p>
+      
+      </div>
+      
     </div>
   );
 };

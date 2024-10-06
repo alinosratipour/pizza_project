@@ -21,6 +21,7 @@ interface CheckoutFormProps {
   updateUserLoading: boolean;
   updateUserError: Error | undefined;
   handlePlaceOrder: () => void; // Define the function type
+  totalPrice: number;
 }
 
 const AddressForm: React.FC<CheckoutFormProps> = ({
@@ -41,6 +42,7 @@ const AddressForm: React.FC<CheckoutFormProps> = ({
   updateUserLoading,
   updateUserError,
   handlePlaceOrder, // Receive the function prop
+  totalPrice
 }) => {
   return (
     <div className="form">
@@ -141,8 +143,9 @@ const AddressForm: React.FC<CheckoutFormProps> = ({
           size="xlg"
           colorscheme="primary"
           onClick={handlePlaceOrder} // Handle place order on button click
+          
         >
-          Place Order
+          {`Place Order - £${totalPrice.toFixed(2)}`}
         </Button>
         {updateUserLoading && <p>Updating user details...</p>}
         {updateUserError && <p>Error: {updateUserError.message}</p>}

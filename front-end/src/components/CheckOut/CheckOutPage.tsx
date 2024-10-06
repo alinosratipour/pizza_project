@@ -146,6 +146,7 @@ const CheckoutPage: React.FC = () => {
         updateUserLoading={updateUserLoading}
         updateUserError={updateUserError}
         handlePlaceOrder={handlePlaceOrder}
+        totalPrice={totalPrice}
       />
       <BasketReview basket={basket} totalPrice={totalPrice} />
     </div>

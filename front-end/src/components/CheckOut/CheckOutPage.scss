@@ -51,7 +51,7 @@
       display: flex;
       padding: 10px;
       border-bottom: 2px solid #ccc;
-      gap: 200px;
+      gap: 100px;
       justify-content: left;
       align-items: left;
     }
@@ -96,30 +96,51 @@
     width: 100%;
     background-color: gray;
   }
+  .total{
+    display:flex;
+    justify-content: space-between;
+    font-weight: 900;
+  }
 }
 @include small-screen {
   .checkoutContainer {
+    gap: 20px;
     flex-direction: column;
     align-items: center;
     border-radius: 0;
+   
     .form {
       order: 2;
       width: 90%;
-      margin-top: -350px;
+    
       .icons {
         display: none;
       }
     }
   }
+ 
 
   .basketReview {
     width: 90%;
     padding: 10px;
     gap: 10px;
+   
   }
 
   .wrapper {
     flex-direction: column;
-    gap: 10px;
+  
+   
+    
   }
+  .subItemsRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items:start;
+
+   
+  
+  }
+
 }
