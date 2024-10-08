@@ -8,6 +8,9 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { GrSubtractCircle } from "react-icons/gr";
 import { CgCloseO } from "react-icons/cg";
 import { useNavbarContext } from "../Context/NavbarContext";
+import useLocalStorage from "../Hooks/useLocalStorage";
+import { LOCAL_STORAGE_KEYS } from "../Hooks/localStorageKeys";
+
 interface BasketProps {
   basket: BasketItem[];
   setBasket: React.Dispatch<React.SetStateAction<BasketItem[]>>;
@@ -18,7 +21,7 @@ interface BasketProps {
   onBasketToppingsChange: (updatedToppings: ToppingType[]) => void;
   onBasketToppingsTotalChange: (total: number) => void;
 }
-const BASKET_STORAGE_KEY = "basket";
+
 function Basket({
   basket,
   setBasket,
@@ -36,18 +39,21 @@ function Basket({
     setIsEditModalOpen(true);
   };
   const { increaseQuantity, decreaseQuantity } = useQuantity(basket, setBasket);
+  const [storedBasket, setStoredBasket] = useLocalStorage<BasketItem[]>(
+    LOCAL_STORAGE_KEYS.BASKET,
+    []
+  );
+  // Sync local storage with the basket prop whenever it changes
   useEffect(() => {
-    // Load basket from local storage on component mount
-    const storedBasket = localStorage.getItem(BASKET_STORAGE_KEY);
-    if (storedBasket) {
-      setBasket(JSON.parse(storedBasket));
-    }
-  }, []);
+    setStoredBasket(basket);
+  }, [basket, setStoredBasket]);
 
+  // Sync basket state when the local storage is loaded
   useEffect(() => {
-    // Save basket to local storage whenever it changes
-    localStorage.setItem(BASKET_STORAGE_KEY, JSON.stringify(basket));
-  }, [basket]);
+    if (storedBasket.length > 0) {
+      setBasket(storedBasket);
+    }
+  }, [storedBasket, setBasket]);
 
   const handleSaveChanges = (updatedItem: BasketItem) => {
     const updatedBasket = basket.map((item) =>
