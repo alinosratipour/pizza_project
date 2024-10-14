@@ -1,4 +1,3 @@
-
 import { Dispatch, SetStateAction } from "react";
 import { BasketItem } from "../SharedTypes";
 
@@ -13,28 +12,33 @@ const useQuantity = (
 ): UseQuantity => {
   const increaseQuantity = (basketItem: BasketItem) => {
     const updatedBasket = basket.map((item) => {
-      if (
-        item.id_pizza === basketItem.id_pizza &&
-        item.size === basketItem.size && // Check size
-        item.base === basketItem.base && // Check base (crust)
-        JSON.stringify(item.toppings) === JSON.stringify(basketItem.toppings) // Check toppings
-      ) {
+      const isSamePizza = item.id_pizza === basketItem.id_pizza;
+      const isSameSize = item.size === basketItem.size;
+      const isSameBase = item.base === basketItem.base;
+      const isSameRemovedToppings =
+        JSON.stringify(item.removedToppings) ===
+        JSON.stringify(basketItem.removedToppings);
+
+      // Check if all properties match
+      if (isSamePizza && isSameSize && isSameBase && isSameRemovedToppings) {
         return { ...item, quantity: item.quantity + 1 }; // Increase quantity only for the matching item
       }
       return item; // Return the item unchanged if it doesn't match
     });
     setBasket(updatedBasket);
   };
-  
 
   const decreaseQuantity = (basketItem: BasketItem) => {
     const updatedBasket = basket.map((item) => {
-      if (
-        item.id_pizza === basketItem.id_pizza &&
-        item.size === basketItem.size && // Check size
-        item.base === basketItem.base && // Check base (crust)
-        JSON.stringify(item.toppings) === JSON.stringify(basketItem.toppings) // Check toppings
-      ) {
+      const isSamePizza = item.id_pizza === basketItem.id_pizza;
+      const isSameSize = item.size === basketItem.size;
+      const isSameBase = item.base === basketItem.base;
+      const isSameRemovedToppings =
+        JSON.stringify(item.removedToppings) ===
+        JSON.stringify(basketItem.removedToppings);
+
+      // Check if all properties match
+      if (isSamePizza && isSameSize && isSameBase && isSameRemovedToppings) {
         if (item.quantity > 1) {
           return { ...item, quantity: item.quantity - 1 }; // Decrease quantity only for the matching item
         }
@@ -42,11 +46,10 @@ const useQuantity = (
       }
       return item; // Return the item unchanged if it doesn't match
     });
-  
+
     // Filter out null values to remove any items that should be deleted
     setBasket(updatedBasket.filter((item) => item !== null) as BasketItem[]);
   };
-  
 
   return {
     increaseQuantity,
