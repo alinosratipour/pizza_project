@@ -12,6 +12,9 @@ import BasketReview from "../BasketReview/BasketReview";
 import useAddToBasket from "../../Hooks/useAddToBasketHook";
 import SendEmail from "../../SendEmail/SendEmail";
 import Loading from "../../Loading/Loading";
+import useLocalStorage from "../../Hooks/useLocalStorage"; 
+import { BasketItem } from "../../SharedTypes";
+import { LOCAL_STORAGE_KEYS } from "../../Hooks/localStorageKeys";
 
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
@@ -28,16 +31,12 @@ const CheckoutPage: React.FC = () => {
 
   const [loading, setLoading] = useState<boolean>(false); // Loading state
 
-  const getUserIdFromStorage = (): number => {
-    const userIdStr = localStorage.getItem("userId");
-    if (!userIdStr || isNaN(parseInt(userIdStr, 10))) {
-      return 0;
-    }
-    return parseInt(userIdStr, 10);
-  };
-
-  const [userId, setUserId] = useState<number>(getUserIdFromStorage());
-
+  const [userId] = useLocalStorage<number>("userId", 0)
+  const [storedBasket, setStoredBasket] = useLocalStorage<BasketItem[]>(
+    LOCAL_STORAGE_KEYS.BASKET,
+    []
+  );
+  
   const {
     data: userData,
     loading: userLoading,
@@ -73,13 +72,15 @@ const CheckoutPage: React.FC = () => {
   ] = useMutation(CREATE_ORDER);
 
   useEffect(() => {
-    const storedBasket = JSON.parse(localStorage.getItem("basket") || "[]");
-    setBasket(storedBasket);
-  }, [setBasket]);
+    setStoredBasket(basket);
+  }, [basket, setStoredBasket]);
 
+  // Sync basket state when the local storage is loaded
   useEffect(() => {
-    localStorage.setItem("basket", JSON.stringify(basket));
-  }, [basket]);
+    if (storedBasket.length > 0) {
+      setBasket(storedBasket);
+    }
+  }, [storedBasket, setBasket]);
 
   const handlePlaceOrder = async () => {
     try {
