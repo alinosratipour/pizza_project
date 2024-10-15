@@ -12,15 +12,8 @@ const useQuantity = (
 ): UseQuantity => {
   const increaseQuantity = (basketItem: BasketItem) => {
     const updatedBasket = basket.map((item) => {
-      const isSamePizza = item.id_pizza === basketItem.id_pizza;
-      const isSameSize = item.size === basketItem.size;
-      const isSameBase = item.base === basketItem.base;
-      const isSameRemovedToppings =
-        JSON.stringify(item.removedToppings) ===
-        JSON.stringify(basketItem.removedToppings);
-
-      // Check if all properties match
-      if (isSamePizza && isSameSize && isSameBase && isSameRemovedToppings) {
+      // Use uniqueId to ensure only the specific item is affected
+      if (item.uniqueId === basketItem.uniqueId) {
         return { ...item, quantity: item.quantity + 1 }; // Increase quantity only for the matching item
       }
       return item; // Return the item unchanged if it doesn't match
@@ -30,15 +23,8 @@ const useQuantity = (
 
   const decreaseQuantity = (basketItem: BasketItem) => {
     const updatedBasket = basket.map((item) => {
-      const isSamePizza = item.id_pizza === basketItem.id_pizza;
-      const isSameSize = item.size === basketItem.size;
-      const isSameBase = item.base === basketItem.base;
-      const isSameRemovedToppings =
-        JSON.stringify(item.removedToppings) ===
-        JSON.stringify(basketItem.removedToppings);
-
-      // Check if all properties match
-      if (isSamePizza && isSameSize && isSameBase && isSameRemovedToppings) {
+      // Use uniqueId to ensure only the specific item is affected
+      if (item.uniqueId === basketItem.uniqueId) {
         if (item.quantity > 1) {
           return { ...item, quantity: item.quantity - 1 }; // Decrease quantity only for the matching item
         }
