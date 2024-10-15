@@ -55,24 +55,45 @@ function Basket({
     }
   }, [storedBasket, setBasket]);
 
+  // const handleSaveChanges = (updatedItem: BasketItem) => {
+  //   const updatedBasket = basket.map((item) =>
+  //     item.id_pizza === updatedItem.id_pizza
+  //       ? {
+  //           ...updatedItem,
+  //           size: updatedItem.size?.toString(),
+  //           base: updatedItem.base,
+  //           price: updatedItem.price,
+  //           basePrice: updatedItem.basePrice,
+  //           toppingsTotal: updatedItem.extraToppingsCost,
+  //         }
+  //       : item
+  //   );
+
+  //   setBasket(updatedBasket);
+  //   setIsEditModalOpen(false);
+  //   setSelectedBasketItem(null);
+  // };
+
   const handleSaveChanges = (updatedItem: BasketItem) => {
     const updatedBasket = basket.map((item) =>
-      item.id_pizza === updatedItem.id_pizza
+      item.uniqueId === updatedItem.uniqueId // Use uniqueId for matching
         ? {
-            ...updatedItem,
-            size: updatedItem.size?.toString(),
-            base: updatedItem.base,
-            price: updatedItem.price,
-            basePrice: updatedItem.basePrice,
-            toppingsTotal: updatedItem.extraToppingsCost,
+            ...updatedItem, // Keep existing properties
+            size: updatedItem.size?.toString(), // Update size
+            base: updatedItem.base, // Update base
+            price: updatedItem.price, // Update price if needed
+            basePrice: updatedItem.basePrice, // Update basePrice if needed
+            //toppings: updatedItem.toppings, // Update toppings
+            toppingsTotal: updatedItem.extraToppingsCost, // Update toppings total
           }
         : item
     );
 
-    setBasket(updatedBasket);
-    setIsEditModalOpen(false);
-    setSelectedBasketItem(null);
+    setBasket(updatedBasket); // Set the updated basket
+    setIsEditModalOpen(false); // Close the modal
+    setSelectedBasketItem(null); // Clear the selected item
   };
+
   const { handleBasketClick, hidePizzaItems } = useNavbarContext();
   return (
     <div className="BasketContainer">

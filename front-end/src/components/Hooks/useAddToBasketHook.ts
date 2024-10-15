@@ -89,6 +89,7 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
   };
 console.log(basket);
 
+
   return {
     addToBasket,
     calculateTotalPrice,
