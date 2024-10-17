@@ -87,8 +87,6 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
 
     return parseFloat(pizzasTotalPrice.toFixed(2));
   };
-console.log(basket);
-
 
   return {
     addToBasket,
