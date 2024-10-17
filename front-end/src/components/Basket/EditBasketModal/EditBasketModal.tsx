@@ -14,20 +14,6 @@ import Button from "../../UI-Liberary/Button/Button";
 import PizzaToppings from "../../AddPizza/PizzaToppings/PizzaToppings";
 import useAddToBasket from "../../Hooks/useAddToBasketHook";
 
-// interface EditBasketModalProps {
-//   item: BasketItem | null;
-//   onClose: () => void;
-//   onSave: (updatedItem: BasketItem) => void;
-//   onSizeChange?: (newSize: number, sizeName: string) => void;
-//   onBaseChange?: (newBase: string, price: number) => void;
-//   onToppingsChange: (toppings: ToppingType[]) => void;
-//   // onToppingsTotalChange:
-//   //   | React.Dispatch<React.SetStateAction<number>>
-//   //   | ((prevTotal: number) => number)
-//   //   | undefined;
-//   onToppingsTotalChange: (total: number) => void;
-// }
-
 interface EditBasketModalProps {
   item: BasketItem | null;
   onClose: () => void;
@@ -35,7 +21,7 @@ interface EditBasketModalProps {
   onSizeChange?: (newSize: number, sizeName: string) => void;
   onBaseChange?: (newBase: string, price: number) => void;
   onToppingsChange: (toppings: ToppingType[]) => void;
- 
+
   onToppingsTotalChange: (total: number) => void;
 }
 const EditBasketModal: React.FC<EditBasketModalProps> = ({
@@ -44,23 +30,7 @@ const EditBasketModal: React.FC<EditBasketModalProps> = ({
   onSave,
   onBaseChange,
   onSizeChange,
-
 }) => {
-  // const { availableSizes, setSizes, sizesData } = useSizeContext();
-  // const { availableBases, refetchBases } = useBaseContext();
-  // const { availableToppings, refetchToppings } = useAllAvailableToppingsStore();
-
-  // const [editedPizza, setEditedPizza] = useState<BasketItem | null>(item);
-  // const [selectedSize, setSelectedSize] = useState<SizeWithPrice | undefined>();
-  // availableSizes.find((size) => size.p_size === item?.size);
-  // const [selectedBase, setSelectedBase] = useState<string | undefined>(
-  //   editedPizza?.base
-  // );
-
-  // const [selectedBasePrice, setSelectedBasePrice] = useState<
-  //   number | undefined
-  // >(item?.basePrice || 0);
-
   const { availableSizes, setSizes, sizesData } = useSizeContext();
   const { availableBases, refetchBases } = useBaseContext();
   const { availableToppings, refetchToppings } = useAllAvailableToppingsStore();
@@ -114,18 +84,6 @@ const EditBasketModal: React.FC<EditBasketModalProps> = ({
     fetchData();
   }, [item, sizesData, setSizes, refetchToppings, editedPizza, selectedSize]);
 
-  // const handleSizeChange = (newSize: number, sizeName: string) => {
-  //   refetchBases(newSize);
-  //   refetchToppings(newSize);
-  //   setSelectedBase(undefined);
-
-  //   const selectedSize = availableSizes.find(
-  //     (size) => size.p_size === sizeName
-  //   );
-  //   if (selectedSize) {
-  //     setSelectedSize(selectedSize);
-  //   }
-  // };
   const handleSizeChange = (newSize: number, sizeName: string) => {
     refetchBases(newSize);
     refetchToppings(newSize);
@@ -156,37 +114,24 @@ const EditBasketModal: React.FC<EditBasketModalProps> = ({
       const updatedItem: BasketItem = {
         ...editedPizza,
         size: selectedSize?.p_size || "",
-        // size: selectedSize?.p_size || item.size,
+
         base: selectedBase,
         basePrice:
           selectedBasePrice !== undefined
             ? selectedBasePrice
             : editedPizza.basePrice,
-       // basePrice: selectedBasePrice,
+
         price: selectedSize?.price || 0,
-        // price: selectedSize?.price || item.price,
+
         toppings: selectedToppings, // Include selected toppings
         removedToppings: updatedRemovedToppings,
-       // extraToppingsCost: extraToppingsCost,
-       extraToppingsCost: extraToppingsCost,
+
+        extraToppingsCost: extraToppingsCost,
       };
       onSave(updatedItem);
       onClose();
     }
   };
-
-  // const handleBaseChange = (newBase: string, price: number) => {
-  //   setSelectedBase(newBase);
-  //   setSelectedBasePrice(price);
-
-  //   if (onBaseChange && item) {
-  //     onBaseChange(newBase, price);
-  //   }
-  // };
-  // const handleBaseChange = (newBase: string, price: number) => {
-  //   setSelectedBase(newBase);
-  //   setSelectedBasePrice(price);
-  // };
 
   const handleBaseChange = (newBase: string, price: number) => {
     setSelectedBase(newBase);
@@ -232,7 +177,6 @@ const EditBasketModal: React.FC<EditBasketModalProps> = ({
         </div>
         <ToppingsList
           availableToppings={availableToppings}
-          //refetchToppings={refetchToppings}
           onAddTopping={(topping) => {
             addToppingToBasket(topping);
             setSelectedToppings([...selectedToppings, topping]);

@@ -54,26 +54,7 @@ function Basket({
       setBasket(storedBasket);
     }
   }, [storedBasket, setBasket]);
-
-  // const handleSaveChanges = (updatedItem: BasketItem) => {
-  //   const updatedBasket = basket.map((item) =>
-  //     item.id_pizza === updatedItem.id_pizza
-  //       ? {
-  //           ...updatedItem,
-  //           size: updatedItem.size?.toString(),
-  //           base: updatedItem.base,
-  //           price: updatedItem.price,
-  //           basePrice: updatedItem.basePrice,
-  //           toppingsTotal: updatedItem.extraToppingsCost,
-  //         }
-  //       : item
-  //   );
-
-  //   setBasket(updatedBasket);
-  //   setIsEditModalOpen(false);
-  //   setSelectedBasketItem(null);
-  // };
-
+  
   const handleSaveChanges = (updatedItem: BasketItem) => {
     const updatedBasket = basket.map((item) =>
       item.uniqueId === updatedItem.uniqueId // Use uniqueId for matching
