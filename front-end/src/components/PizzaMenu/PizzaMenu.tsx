@@ -9,7 +9,7 @@ import useAddToBasket from "../Hooks/useAddToBasketHook";
 import useSize from "../Hooks/StateHooks/useSize";
 import { useToppings } from "../Context/selectedTopping";
 import { usePizzaContext } from "../Context/PizzaContext";
-import { useToppingsRemovalFromPizza } from "../store/ToppingOnPizzaStore ";
+import { useToppingsRemovalFromPizza } from "../store/ToppingOnPizzaStore";
 import { useNavbarContext } from "../Context/NavbarContext";
 import "./PizzaMenu.scss";
 import Button from "../UI-Liberary/Button/Button";
@@ -37,7 +37,7 @@ const PizzaMenu = () => {
 
   const navigate = useNavigate();
   const handleCheckout = () => {
-    navigate("/checkout", { state: { basket,totalPrice } });
+    navigate("/checkout", { state: { basket, totalPrice } });
   };
   useEffect(() => {
     if (selectedSize) {
@@ -51,8 +51,6 @@ const PizzaMenu = () => {
   const { calculateTotalPrice, basket, setBasket } = useAddToBasket({
     selectedToppings,
   });
-
-
 
   useEffect(() => {
     setTotalPrice(calculateTotalPrice());

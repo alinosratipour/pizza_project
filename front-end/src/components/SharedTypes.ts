@@ -39,6 +39,7 @@ export interface BasketItem {
   toppings?: ToppingType[];
   availableSizes?: SizeType[];
   toppingsTotal?: number;
+  uniqueId?: string; // Add this line
   removedToppings?: ToppingType[];
   extraToppingsCost?: number;
 }

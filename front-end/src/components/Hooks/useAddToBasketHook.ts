@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid"; // Import uuid for generating unique IDs
 import { BasketItem, Pizza, ToppingType } from "../SharedTypes";
 import { calculateToppingsTotal } from "../../utils";
-import { useToppingsRemovalFromPizza } from "../store/ToppingOnPizzaStore ";
+import { useToppingsRemovalFromPizza } from "../store/ToppingOnPizzaStore";
 import { useBasketContext } from "../Context/BasketContext";
 import { useLocalStorageToppings } from "./useLocalStorageToppings";
 
@@ -35,44 +36,7 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
 
   const addToBasket = (pizza: Pizza, size: string, base: string) => {
     if (size === undefined) return;
-    const existingPizzaIndex = findExistingPizzaIndex(pizza, size, base);
-
-    if (existingPizzaIndex !== -1) {
-      handleExistingPizza(existingPizzaIndex, pizza, size, base);
-    } else {
-      addNewPizza(pizza, size, base);
-    }
-  };
-
-  const findExistingPizzaIndex = (pizza: Pizza, size: string, base: string) => {
-    const isSamePizza = (item: BasketItem) =>
-      item.id_pizza === pizza.id_pizza &&
-      item.size === size &&
-      item.base === base;
-
-    return basket.findIndex(isSamePizza);
-  };
-
-  const handleExistingPizza = (
-    index: number,
-    pizza: Pizza,
-    size: string,
-    base: string
-  ) => {
-    const existingPizza = basket[index];
-    const areToppingsSame =
-      JSON.stringify(existingPizza.toppings) ===
-      JSON.stringify(selectedToppings);
-      const hasRemovedToppings = removedToppings.length > 0;
-    if (areToppingsSame && !hasRemovedToppings) {
-      // Update quantity if toppings are the same
-      const updatedBasket = [...basket];
-      updatedBasket[index].quantity += 1;
-      setBasket(updatedBasket);
-    } else {
-      // Add as new item if toppings are different
-      addNewPizzaWithToppings(pizza, size, base);
-    }
+    addNewPizza(pizza, size, base);
   };
 
   const addNewPizza = (pizza: Pizza, size: string, base: string) => {
@@ -88,30 +52,14 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
     setBasket([...basket, pizzaWithPrice]);
   };
 
-  const addNewPizzaWithToppings = (
-    pizza: Pizza,
-    size: string,
-    base: string
-  ) => {
-    const extraToppingsCost = calculateExtraToppingsCost();
-    const newPizzaWithPrice = createPizzaObject(
-      pizza,
-      size,
-      base,
-      extraToppingsCost,
-      1
-    );
-
-    setBasket([...basket, newPizzaWithPrice]);
-  };
-
   const createPizzaObject = (
     pizza: Pizza,
     size: string,
     base: string,
     toppingsCost: number,
     quantity: number
-  ) => ({
+  ): BasketItem => ({
+    uniqueId: uuidv4(), // Assign a unique ID to each pizza item
     id_pizza: pizza.id_pizza,
     name: pizza.name,
     price: selectedSizePrice || 0,
@@ -137,7 +85,7 @@ const useAddToBasket = ({ selectedToppings }: UseAddToBasketProps) => {
       return total + calculatePizzaPrice(item);
     }, 0);
 
-    return parseFloat(pizzasTotalPrice.toFixed(2)); // Use parseFloat for clarity
+    return parseFloat(pizzasTotalPrice.toFixed(2));
   };
 
   return {

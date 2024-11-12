@@ -8,6 +8,9 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { GrSubtractCircle } from "react-icons/gr";
 import { CgCloseO } from "react-icons/cg";
 import { useNavbarContext } from "../Context/NavbarContext";
+import useLocalStorage from "../Hooks/useLocalStorage";
+import { LOCAL_STORAGE_KEYS } from "../Hooks/localStorageKeys";
+
 interface BasketProps {
   basket: BasketItem[];
   setBasket: React.Dispatch<React.SetStateAction<BasketItem[]>>;
@@ -18,7 +21,7 @@ interface BasketProps {
   onBasketToppingsChange: (updatedToppings: ToppingType[]) => void;
   onBasketToppingsTotalChange: (total: number) => void;
 }
-const BASKET_STORAGE_KEY = "basket";
+
 function Basket({
   basket,
   setBasket,
@@ -36,37 +39,42 @@ function Basket({
     setIsEditModalOpen(true);
   };
   const { increaseQuantity, decreaseQuantity } = useQuantity(basket, setBasket);
+  const [storedBasket, setStoredBasket] = useLocalStorage<BasketItem[]>(
+    LOCAL_STORAGE_KEYS.BASKET,
+    []
+  );
+  // Sync local storage with the basket prop whenever it changes
   useEffect(() => {
-    // Load basket from local storage on component mount
-    const storedBasket = localStorage.getItem(BASKET_STORAGE_KEY);
-    if (storedBasket) {
-      setBasket(JSON.parse(storedBasket));
+    setStoredBasket(basket);
+  }, [basket, setStoredBasket]);
+
+  // Sync basket state when the local storage is loaded
+  useEffect(() => {
+    if (storedBasket.length > 0) {
+      setBasket(storedBasket);
     }
-  }, []);
-
-  useEffect(() => {
-    // Save basket to local storage whenever it changes
-    localStorage.setItem(BASKET_STORAGE_KEY, JSON.stringify(basket));
-  }, [basket]);
-
+  }, [storedBasket, setBasket]);
+  
   const handleSaveChanges = (updatedItem: BasketItem) => {
     const updatedBasket = basket.map((item) =>
-      item.id_pizza === updatedItem.id_pizza
+      item.uniqueId === updatedItem.uniqueId // Use uniqueId for matching
         ? {
-            ...updatedItem,
-            size: updatedItem.size?.toString(),
-            base: updatedItem.base,
-            price: updatedItem.price,
-            basePrice: updatedItem.basePrice,
-            toppingsTotal: updatedItem.extraToppingsCost,
+            ...updatedItem, // Keep existing properties
+            size: updatedItem.size?.toString(), // Update size
+            base: updatedItem.base, // Update base
+            price: updatedItem.price, // Update price if needed
+            basePrice: updatedItem.basePrice, // Update basePrice if needed
+            //toppings: updatedItem.toppings, // Update toppings
+            toppingsTotal: updatedItem.extraToppingsCost, // Update toppings total
           }
         : item
     );
 
-    setBasket(updatedBasket);
-    setIsEditModalOpen(false);
-    setSelectedBasketItem(null);
+    setBasket(updatedBasket); // Set the updated basket
+    setIsEditModalOpen(false); // Close the modal
+    setSelectedBasketItem(null); // Clear the selected item
   };
+
   const { handleBasketClick, hidePizzaItems } = useNavbarContext();
   return (
     <div className="BasketContainer">

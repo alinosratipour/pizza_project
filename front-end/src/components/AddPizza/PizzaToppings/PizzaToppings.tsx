@@ -3,7 +3,7 @@ import { GET_TOPPINGS_ON_PIZZA } from "../../../queries/queries";
 import "./PizzaToppings.scss";
 import classNames from "classnames";
 import { ToppingsData, ToppingType } from "../../SharedTypes";
-import { useToppingsRemovalFromPizza } from "../../store/ToppingOnPizzaStore ";
+import { useToppingsRemovalFromPizza } from "../../store/ToppingOnPizzaStore";
 import { useToppings } from "../../Context/selectedTopping";
 
 interface PizzaToppingsProps {
@@ -67,9 +67,8 @@ const PizzaToppings: React.FC<PizzaToppingsProps> = ({ pizzaId }) => {
         <div
           key={extraToppings.id}
           className={classNames("box", {
-            ExtraTopping: selectedToppings.length > 0, 
+            ExtraTopping: selectedToppings.length > 0,
           })}
-        
         >
           <span className="ExtraTopping">{extraToppings.name}</span>
           <span>{extraToppings.quantity}</span>
